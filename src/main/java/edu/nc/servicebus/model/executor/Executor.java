@@ -1,4 +1,4 @@
-package edu.nc.servicebus.model.orchestrator;
+package edu.nc.servicebus.model.executor;
 
 import edu.nc.servicebus.model.response.Response;
 

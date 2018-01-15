@@ -16,13 +16,16 @@ public class HttpAction implements Action {
     private List<ResponseFilter> responseFilters = new LinkedList<>();
     private Request request;
     private Sender sender;
+    private Double rate;
 
     public HttpAction(Request request, Sender sender,
-                      Collection<RequestFilter> requestFilters, Collection<ResponseFilter> responseFilters) {
+                      Collection<RequestFilter> requestFilters, Collection<ResponseFilter> responseFilters,
+                      Double rate) {
         this.request = request;
         this.sender = sender;
         this.requestFilters.addAll(requestFilters);
         this.responseFilters.addAll(responseFilters);
+        this.rate=rate;
     }
 
     @Override
@@ -43,5 +46,10 @@ public class HttpAction implements Action {
     @Override
     public void rollback() {
 
+    }
+
+    @Override
+    public Double getRate() {
+        return rate;
     }
 }
