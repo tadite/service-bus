@@ -1,10 +1,12 @@
 package edu.nc.servicebus.model.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 
 public class JsonPathResponseFilter implements ResponseFilter {
 
+    //@JsonProperty("expression")
     private String expression;
 
     public JsonPathResponseFilter(String jsonPathExpression) {

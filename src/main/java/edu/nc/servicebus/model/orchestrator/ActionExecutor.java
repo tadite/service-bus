@@ -13,6 +13,12 @@ public class ActionExecutor implements Executor {
 
     @Override
     public Response executeAction(String name) {
-        return actionFactory.getAction(name).execute();
+        Response response = null;
+        try {
+            response = actionFactory.getAction(name).execute();
+        } catch (Exception e){
+
+        }
+        return response;
     }
 }

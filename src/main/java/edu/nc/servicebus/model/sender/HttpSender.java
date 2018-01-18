@@ -7,17 +7,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-public class HttpSender implements Sender {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class HttpSender implements Sender{
+
+    private Response resp;
+
     @Override
     public Response send(Request request) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(
-                request.getUrl(),
-                String.class);
+        try {
+            URL url = new URL(request.getUrl());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
 
-        if (response.getStatusCode()== HttpStatus.OK)
-            return new HttpResponse(response.getBody());
-        else
-            return new HttpResponse("");
+            int responseCode = conn.getResponseCode();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            reader.close();
+            resp =  new HttpResponse(response.toString());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return resp;
     }
 }
