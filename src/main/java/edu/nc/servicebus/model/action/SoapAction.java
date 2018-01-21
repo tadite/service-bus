@@ -59,6 +59,11 @@ public class SoapAction implements Action{
     }
 
     @Override
+    public Double getRate() {
+        return null;
+    }
+
+    @Override
     public void setResponseFilter(String responseFilter) {
         if (!responseFilter.trim().equals("") && responseFilter != null) {
             this.filter = new XmlResponseFilter(responseFilter);

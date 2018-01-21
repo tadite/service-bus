@@ -7,6 +7,7 @@ import edu.nc.servicebus.model.response.JsonPathResponseFilter;
 import edu.nc.servicebus.model.response.ResponseFilter;
 import edu.nc.servicebus.model.sender.HttpSender;
 import edu.nc.servicebus.model.source.RestSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -15,9 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class MockActionFactory implements ActionFactory {
+public class MockActionReader implements ActionReader {
 
-    //TODO: implement dao repositories
     private HashMap<String, Action> actionHashMap = new HashMap<>();
     {
         List<RequestFilter> requestFilterList = new LinkedList<>();
@@ -27,7 +27,7 @@ public class MockActionFactory implements ActionFactory {
         responseFilters.add(new JsonPathResponseFilter("$[*].email"));
 
         Action action = new HttpAction(new HttpRequest(new RestSource("https://jsonplaceholder.typicode.com")),
-                new HttpSender(), requestFilterList, responseFilters);
+                new HttpSender(), requestFilterList, responseFilters, Double.valueOf(100));
 
         actionHashMap.put("jsonplaceholder_users_email-list", action);
 
@@ -42,17 +42,16 @@ public class MockActionFactory implements ActionFactory {
         responseFiltersVk.add(new JsonPathResponseFilter("$.response[*]"));
 
         actionHashMap.put("vk_db_countries", new HttpAction(new HttpRequest(new RestSource("https://api.vk.com")),
-                new HttpSender(), requestFilterListVk, responseFiltersVk));
-
+                new HttpSender(), requestFilterListVk, responseFiltersVk, Double.valueOf(1)));
     }
 
     @Override
-    public Action getAction(String name) {
+    public Action createByName(String name) {
         return actionHashMap.get(name);
     }
 
     @Override
-    public Collection<String> getActionNames() {
+    public Collection<String> getAvailableActionNames() {
         return actionHashMap.keySet();
     }
 }

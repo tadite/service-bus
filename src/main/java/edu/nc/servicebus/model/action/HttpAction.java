@@ -20,6 +20,7 @@ public class HttpAction implements Action {
     private List<ResponseFilter> responseFilters;
     private Request request;
     private Sender sender;
+    private Double rate;
 
     public HttpAction(){
         requestFilters = new LinkedList<>();
@@ -28,13 +29,14 @@ public class HttpAction implements Action {
     }
 
     public HttpAction(Request request, Sender sender,
-                      Collection<RequestFilter> requestFilters, Collection<ResponseFilter> responseFilters) {
+                      Collection<RequestFilter> requestFilters, Collection<ResponseFilter> responseFilters, Double rate){
         this.requestFilters = new LinkedList<>();
         this.responseFilters = new LinkedList<>();
         this.request = request;
         this.sender = sender;
         this.requestFilters.addAll(requestFilters);
         this.responseFilters.addAll(responseFilters);
+        this.rate=rate;
     }
 
     @Override
@@ -57,6 +59,11 @@ public class HttpAction implements Action {
     @Override
     public void setParameter(String parameter) {
         requestFilters.add(new AppendRequestFilter(parameter));
+    }
+
+    @Override
+    public Double getRate() {
+        return rate;
     }
 
     @Override

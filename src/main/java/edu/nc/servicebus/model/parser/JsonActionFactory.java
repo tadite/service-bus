@@ -4,7 +4,9 @@ package edu.nc.servicebus.model.parser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.nc.servicebus.model.action.Action;
 import edu.nc.servicebus.model.action.ActionFactory;
+import edu.nc.servicebus.model.action.ActionReader;
 import edu.nc.servicebus.model.action.HttpAction;
+import edu.nc.servicebus.model.limiter.RateLimiterManager;
 import edu.nc.servicebus.model.parser.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,10 @@ public class JsonActionFactory implements ActionFactory{
     private ActionSelector actionSelector;
     @Autowired
     private JsonReader jsonReader;
+    @Autowired
+    RateLimiterManager rateLimiterManager;
+    @Autowired
+    ActionReader actionReader;
 
     public JsonActionFactory(@Autowired JsonReader jsonReader){
         this.jsonReader = jsonReader;
@@ -40,6 +46,8 @@ public class JsonActionFactory implements ActionFactory{
                 jsonAction, ActionJsonEntity.class);
 
         Action action = getActionFromSelector(actionEntity);
+
+        //rateLimiterManager.createRateLimiterIfAbsent(name, action.getRate());
 
         return action;
     }

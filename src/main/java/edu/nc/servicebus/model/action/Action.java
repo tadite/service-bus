@@ -7,5 +7,6 @@ public interface Action {
     Response execute();
     void setParameter(String parameter);
     void setUrl(String url);
+    Double getRate();
     void setResponseFilter(String responseFilter);
 }

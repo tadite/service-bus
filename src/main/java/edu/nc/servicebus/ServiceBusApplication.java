@@ -1,7 +1,6 @@
 package edu.nc.servicebus;
 
 import edu.nc.servicebus.controller.EndpointController;
-import edu.nc.servicebus.model.action.MockActionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

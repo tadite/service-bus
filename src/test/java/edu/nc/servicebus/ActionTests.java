@@ -39,7 +39,7 @@ public class ActionTests {
         List<ResponseFilter> responseFilters = new LinkedList<>();
         responseFilters.add(new JsonPathResponseFilter("$..email"));
 
-        Action action = new HttpAction(request, sender, requestFilterList, responseFilters);
+        Action action = new HttpAction(request, sender, requestFilterList, responseFilters, (double) 5);
 
         String expectedRawData = "[" +
                 "\"Sincere@april.biz\"," +
