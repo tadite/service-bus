@@ -39,7 +39,7 @@ public class ActionJsonEntity {
         return parameters;
     }
 
-    public String getExpression() {
+    public String getExpressions() {
         return expression;
     }
 

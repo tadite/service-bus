@@ -25,7 +25,6 @@ public class HttpSender implements Sender{
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            int responseCode = conn.getResponseCode();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();

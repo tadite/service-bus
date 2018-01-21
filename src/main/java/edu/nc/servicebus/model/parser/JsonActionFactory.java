@@ -46,6 +46,7 @@ public class JsonActionFactory implements ActionFactory{
 
     private Action getActionFromSelector(ActionJsonEntity actionJsonEntity) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+
         Action action = actionSelector.create(actionJsonEntity.getActionType());
 
         setFieldsByReflection(actionJsonEntity, action);
@@ -54,21 +55,24 @@ public class JsonActionFactory implements ActionFactory{
 
     private void setFieldsByReflection(ActionJsonEntity actionEntity, Action action) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+
         Class<? extends Action> actionClass = action.getClass();
         setUrl(actionClass, action, actionEntity.getUrl());
         setParameters(actionClass, action, actionEntity.getParameters());
-        setExpression(actionClass, action, actionEntity.getExpression());
+        setExpression(actionClass, action, actionEntity.getExpressions());
     }
 
     private void setUrl(Class<? extends Action> actionClass, Action action, String url) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+
         Method method = actionClass.getMethod("setUrl", String.class);
         method.invoke(action, url);
     }
 
     private void setParameters(Class<? extends Action> actionClass, Action action, Map<String, Object> params) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
-        Method method = actionClass.getMethod("setRequest", String.class);
+
+        Method method = actionClass.getMethod("setParameter", String.class);
         for (Map.Entry<String, Object> param : params.entrySet()){
             method.invoke(action, param.getValue());
         }
@@ -76,6 +80,7 @@ public class JsonActionFactory implements ActionFactory{
 
     private void setExpression(Class<? extends Action> actionClass, Action action, String expression) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
+
         Method method = actionClass.getMethod("setResponseFilter", String.class);
         method.invoke(action, expression);
     }

@@ -12,9 +12,7 @@ import edu.nc.servicebus.model.sender.Sender;
 import edu.nc.servicebus.model.source.RestSource;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class HttpAction implements Action {
 
@@ -46,10 +44,8 @@ public class HttpAction implements Action {
         }
 
         Response response = null;
-        try {
-            response = sender.send(request);
-        } catch (IOException e){
-        }
+
+        response = sender.send(request);
 
         for (ResponseFilter responseFilter : responseFilters){
             response = responseFilter.filter(response);
@@ -59,8 +55,8 @@ public class HttpAction implements Action {
     }
 
     @Override
-    public void setRequest(String request) {
-        requestFilters.add(new AppendRequestFilter(request));
+    public void setParameter(String parameter) {
+        requestFilters.add(new AppendRequestFilter(parameter));
     }
 
     @Override

@@ -5,7 +5,7 @@ import edu.nc.servicebus.model.response.Response;
 
 public interface Action {
     Response execute();
-    void setRequest(String request);
+    void setParameter(String parameter);
     void setUrl(String url);
     void setResponseFilter(String responseFilter);
 }
