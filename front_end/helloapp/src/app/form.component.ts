@@ -21,7 +21,7 @@ export class Admin{
             </div>
             <div class="form-group">
                 <label>Пароль</label>
-                <input class="form-control" name="password" ngModel required />
+                <input type="password" class="form-control" name="password" ngModel required />
             </div>
             <div class="form-group">
                 <button [disabled]="myForm.invalid" class="btn btn-default">

@@ -2,11 +2,18 @@ import { Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
-    template: `<div>
+    template: `<header>
+        <div>
         <h1>Мониторинг приложения <br> Планировщик путешествий</h1>
         <router-outlet></router-outlet>
-    </div>`,
+    </div>
+    </header>`,
     styles: [`
+        header{
+            width: 100%;
+            height: 100px;
+            background: rgba(28, 54, 85, .9);
+        }
         h1{
             font-size:30px;
             font-family:Verdana;text-align: center;

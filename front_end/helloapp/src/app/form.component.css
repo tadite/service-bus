@@ -25,12 +25,13 @@ h1 {
 }
 .main{border: none;
     padding: 20px;
-    position: relative;}
+    position: relative;
+    }
 input.ng-touched.ng-invalid {border: solid red 2px; }
 input.ng-touched.ng-valid {border: solid blue 2px;}
 label{color: white;
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;}
+    font-size: 14px;  }
 /* и
 button{margin-left: 15px;background-color:gray; color: navy;}
 
