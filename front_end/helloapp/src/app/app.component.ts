@@ -4,9 +4,9 @@ import { Component} from '@angular/core';
     selector: 'my-app',
     template: `<header>
         <div>
-        <h1>Мониторинг приложения <br> Планировщик путешествий</h1>
+          <h1>Мониторинг приложения <br> Планировщик путешествий</h1>
         <router-outlet></router-outlet>
-    </div>
+       </div>
     </header>`,
     styles: [`
         header{
@@ -14,10 +14,12 @@ import { Component} from '@angular/core';
             height: 100px;
             background: rgba(28, 54, 85, .9);
         }
-        h1{
+        div h1{
             font-size:30px;
-            font-family:Verdana;text-align: center;
-            margin-top: 25px;
+            font-family:Verdana;
+            margin-top: 0px;
+            text-align: center;
+            padding-top: 15px;
             line-height: 1.1;
             text-transform: uppercase;
             color: #FFF;
