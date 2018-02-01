@@ -14,7 +14,7 @@ export class HttpService{
 
     postData(form: NgForm){
 
-        const body = {name: form.value.username, password: form.value.password};
+        const body = {name: form.value.name, password: form.value.password};
         console.log (body);
 
         return this.http.post('http://travell/', body);

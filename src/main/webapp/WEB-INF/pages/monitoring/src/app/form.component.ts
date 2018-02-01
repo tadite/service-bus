@@ -17,7 +17,7 @@ export class Admin{
             <h1>АВТОРИЗАЦИЯ</h1>
             <div class="form-group">
                 <label>Имя</label>
-                <input class="form-control" name="username" ngModel required />
+                <input class="form-control" name="name" ngModel required />
             </div>
             <div class="form-group">
                 <label>Пароль</label>

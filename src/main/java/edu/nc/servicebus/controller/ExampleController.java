@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.RequestScope;
 
-@Controller
+//@Controller
 public class ExampleController {
 
     private String error;
 
-    @RequestMapping(value = "/**", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/**", method = RequestMethod.GET)
     public String example(){
 
         return "hello";
@@ -78,5 +78,10 @@ public class ExampleController {
         registration.addUser(user);
 
         return "/hello";
+    }*/
+
+    @RequestMapping(value = "/")
+    public String getLogin(){
+        return "index.html";
     }
 }
