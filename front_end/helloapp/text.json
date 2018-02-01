@@ -1,23 +1,28 @@
 {"list":
   [{
+    "number_requests": 83,
     "number_requests_beach": 29,
     "number_requests_sport": 26,
     "number_requests_excursions": 28,
     "dt":1516827600
   },{
+    "number_requests": 91,
     "number_requests_beach": 30,
     "number_requests_sport": 29,
     "number_requests_excursions": 32,
     "dt":1516914000
   },{
+    "number_requests": 87,
     "number_requests_beach": 41,
     "number_requests_sport": 25,
     "number_requests_excursions": 21,
     "dt":1517000400
   },{
-    "number_requests_beach": 26,
+    "number_requests": 90,
+    "number_requests_beach": 40,
     "number_requests_sport": 20,
-    "number_requests_excursions": 25,
+    "number_requests_excursions": 30,
     "dt":1517086800
   }]
 }
+

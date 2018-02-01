@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
+import 'rxjs/add/operator/map';
 
 
 @Component({
     selector:'monitoring-app',
     templateUrl: './monitoring.component.html',
-    styleUrls: ['./monitoring.component.css'],
     styleUrls: ['./monitoring.component.css']
 })
 
@@ -19,6 +19,7 @@ export class MonitoringComponent {
     ngOnInit() {
         this._monitoring.getOverview()
             .subscribe(res => {
+                let number_requests = res['list'].map(res => res.number_requests);
                 let number_requests_beach = res['list'].map(res => res.number_requests_beach);
                 let number_requests_excursions = res['list'].map(res => res.number_requests_excursions);
                 let number_requests_sport= res['list'].map(res => res.number_requests_sport);
@@ -29,6 +30,39 @@ export class MonitoringComponent {
                     let jsdate = new Date(res * 1000);
                     monitoringTimes.push(jsdate.toLocaleTimeString('ru', { year: 'numeric', month: 'short', day: 'numeric' }))
                     this.chart = new Chart('canvas', {
+                        type: 'line',
+                        data: {
+                            labels: monitoringTimes,
+                            datasets: [
+                                {   label: 'по всем сценариям',
+                                    data: number_requests,
+                                    borderColor: "#3c4aba",
+                                    fill: false,
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Общее количество запросов'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true
+                                }],
+                            }
+                        }
+                    });
+                    this.chart = new Chart('canvas2', {
                         type: 'line',
                         data: {
                             labels: monitoringTimes,
@@ -59,8 +93,7 @@ export class MonitoringComponent {
                             },
                             legend: {
                                 display: true,
-                                position: 'top',
-                                padding: 20,
+                                position: 'top'
                             },
                             scales: {
                                 xAxes: [{
@@ -72,6 +105,7 @@ export class MonitoringComponent {
                             }
                         }
                     });
+
 
                 })
             })
