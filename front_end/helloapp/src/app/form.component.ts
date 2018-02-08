@@ -1,13 +1,12 @@
 import { Component} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpService} from './http.service';
+import { Admin} from './admin';
+
 //import { HttpClient} from '@angular/common/http';
 
 
-export class Admin{
-    name: string;
-    password: string;
-}
+
 
 @Component({
     selector: 'form-app,',
@@ -51,7 +50,7 @@ export class FormComponent {
      );
      }*/
     constructor(private httpService: HttpService){}
-    admin: Admin=new Admin(); // данные вводимого пользователя
+    //admin: Admin=new Admin(); // данные вводимого пользователя
 
     receivedAdmin: Admin; // полученный пользователь
     done: boolean = false;

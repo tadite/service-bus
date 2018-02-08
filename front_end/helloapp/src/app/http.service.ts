@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {NgForm} from "@angular/forms";
 
 
+
 @Injectable()
 export class HttpService{
 
@@ -20,4 +21,7 @@ export class HttpService{
         return this.http.post('http://travell/', body);
 
     }
+
+
+
 }
