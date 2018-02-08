@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="base">
-    <form method="post" action="/login">
+    <form method="post">
         <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden"/>
         <div class="enter-login">Login</div>
         <input type="text" name="username" cssClass="login-field" placeholder="Username"/>

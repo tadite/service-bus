@@ -1,6 +1,9 @@
 import { Component} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpService} from './http.service';
+import { User } from "./model.user";
+import { Router} from "@angular/router";
+import {userInfo} from "os";
 //import { HttpClient} from '@angular/common/http';
 
 
@@ -17,7 +20,7 @@ export class Admin{
             <h1>АВТОРИЗАЦИЯ</h1>
             <div class="form-group">
                 <label>Имя</label>
-                <input class="form-control" name="name" ngModel required />
+                <input class="form-control" name="username" ngModel required />
             </div>
             <div class="form-group">
                 <label>Пароль</label>
@@ -26,7 +29,7 @@ export class Admin{
             <div class="form-group">
                 <button [disabled]="myForm.invalid" class="btn btn-default">
                     <nav>
-                    <a (click)="onSubmit(myForm)" routerLink="/monitoring">Войти</a>
+                        Войти
                     </nav>
                 </button>
             </div>
@@ -50,17 +53,26 @@ export class FormComponent {
      // error => console.log(error)
      );
      }*/
-    constructor(private httpService: HttpService){}
-    admin: Admin=new Admin(); // данные вводимого пользователя
 
-    receivedAdmin: Admin; // полученный пользователь
+    router: Router;
+
+    constructor(private httpService: HttpService){}
+    //admin: Admin=new Admin(); // данные вводимого пользователя
+
+    user: User=new User();
+    receivedAdmin: User; // полученный пользователь
     done: boolean = false;
 
     onSubmit(form: NgForm){
         //console.log(form);
-        this.httpService.postData(form)
-            .subscribe(
-                (data: Admin) => {this.receivedAdmin=data; this.done=true;}
+        this.user.username = form.value.username;
+        this.user.password = form.value.password;
+
+        this.httpService.postData(this.user)
+            .subscribe(data => {
+                localStorage.setItem('current_user', JSON.stringify(data));
+                this.router.navigate(['/monitoring']);
+            }
                 // error => console.log(error)
             );
     }

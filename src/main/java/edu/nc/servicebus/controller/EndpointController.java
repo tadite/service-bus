@@ -19,6 +19,17 @@ public class EndpointController {
     @Autowired
     ActionFactory actionFactory;
 
+    @RequestMapping(value = "/endpoint/{endpoint-name}/{params}", method = RequestMethod.GET)
+    @ResponseBody
+    public String endpoint(@PathVariable("endpoint-name") String endpointName,
+                           @PathVariable("params") String params){
+        //String endpointName = Util.parseEndpointName(request);
+
+        Response response = executor.executeAction(endpointName + "?" + params);
+
+        return response.getRawData();
+    }
+
     @RequestMapping(value = "/endpoint/{endpoint-name}", method = RequestMethod.GET)
     @ResponseBody
     public String endpoint(@PathVariable("endpoint-name") String endpointName){

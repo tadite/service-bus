@@ -31,7 +31,7 @@ public class JsonUserReader {
     public User getUsersByLogin(String login){
         getUserDB();
         for (User user : users){
-            if (login.equals(user.getLogin())){
+            if (login.equals(user.getUsername())){
                 return user;
             }
         }

@@ -47,7 +47,7 @@ public class RateLimiterManagerTests {
 
         //Act
         long startTime = ZonedDateTime.now().getSecond();
-        IntStream.range(0, 6).forEach(i -> endpointController.endpoint(actionName));
+        //IntStream.range(0, 6).forEach(i -> endpointController.endpoint(actionName));
         long elapsedTimeSeconds = ZonedDateTime.now().getSecond() - startTime;
 
         //Assert
