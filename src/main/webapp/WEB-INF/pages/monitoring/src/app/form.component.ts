@@ -1,10 +1,13 @@
 import { Component} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpService} from './http.service';
-import { Admin} from './admin';
-
 //import { HttpClient} from '@angular/common/http';
 
+
+export class Admin{
+    name: string;
+    password: string;
+}
 
 @Component({
     selector: 'form-app,',
@@ -14,7 +17,7 @@ import { Admin} from './admin';
             <h1>АВТОРИЗАЦИЯ</h1>
             <div class="form-group">
                 <label>Имя</label>
-                <input class="form-control" name="username" ngModel required />
+                <input class="form-control" name="name" ngModel required />
             </div>
             <div class="form-group">
                 <label>Пароль</label>
@@ -48,7 +51,7 @@ export class FormComponent {
      );
      }*/
     constructor(private httpService: HttpService){}
-    //admin: Admin=new Admin(); // данные вводимого пользователя
+    admin: Admin=new Admin(); // данные вводимого пользователя
 
     receivedAdmin: Admin; // полученный пользователь
     done: boolean = false;
