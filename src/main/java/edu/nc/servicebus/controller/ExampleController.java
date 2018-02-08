@@ -8,14 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
+<<<<<<< HEAD
 import java.security.Principal;
 
+=======
+>>>>>>> 7b791e41c0945e5ce03b8a38c3e1ed8bef7098ba
 //@Controller
 public class ExampleController {
 
     private String error;
 
+<<<<<<< HEAD
     //@RequestMapping(value = "/", method = RequestMethod.GET)
+=======
+   /* @RequestMapping(value = "/**", method = RequestMethod.GET)
+>>>>>>> 7b791e41c0945e5ce03b8a38c3e1ed8bef7098ba
     public String example(){
 
         return "hello";
@@ -77,5 +84,10 @@ public class ExampleController {
         registration.addUser(user);
 
         return "/hello";
+    }*/
+
+    @RequestMapping(value = "/")
+    public String getLogin(){
+        return "index.html";
     }
 }

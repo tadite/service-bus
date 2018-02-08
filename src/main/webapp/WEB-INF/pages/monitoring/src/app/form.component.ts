@@ -1,17 +1,13 @@
 import { Component} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpService} from './http.service';
-<<<<<<< HEAD
-import { User } from "./model.user";
-import { Router} from "@angular/router";
-import {userInfo} from "os";
-//import { HttpClient} from '@angular/common/http';
-=======
-import { Admin} from './admin';
->>>>>>> 7b791e41c0945e5ce03b8a38c3e1ed8bef7098ba
-
 //import { HttpClient} from '@angular/common/http';
 
+
+export class Admin{
+    name: string;
+    password: string;
+}
 
 @Component({
     selector: 'form-app,',
@@ -21,7 +17,7 @@ import { Admin} from './admin';
             <h1>АВТОРИЗАЦИЯ</h1>
             <div class="form-group">
                 <label>Имя</label>
-                <input class="form-control" name="username" ngModel required />
+                <input class="form-control" name="name" ngModel required />
             </div>
             <div class="form-group">
                 <label>Пароль</label>
@@ -30,7 +26,7 @@ import { Admin} from './admin';
             <div class="form-group">
                 <button [disabled]="myForm.invalid" class="btn btn-default">
                     <nav>
-                        Войти
+                    <a (click)="onSubmit(myForm)" routerLink="/monitoring">Войти</a>
                     </nav>
                 </button>
             </div>
@@ -54,26 +50,17 @@ export class FormComponent {
      // error => console.log(error)
      );
      }*/
-
-    router: Router;
-
     constructor(private httpService: HttpService){}
-    //admin: Admin=new Admin(); // данные вводимого пользователя
+    admin: Admin=new Admin(); // данные вводимого пользователя
 
-    user: User=new User();
-    receivedAdmin: User; // полученный пользователь
+    receivedAdmin: Admin; // полученный пользователь
     done: boolean = false;
 
     onSubmit(form: NgForm){
         //console.log(form);
-        this.user.username = form.value.username;
-        this.user.password = form.value.password;
-
-        this.httpService.postData(this.user)
-            .subscribe(data => {
-                localStorage.setItem('current_user', JSON.stringify(data));
-                this.router.navigate(['/monitoring']);
-            }
+        this.httpService.postData(form)
+            .subscribe(
+                (data: Admin) => {this.receivedAdmin=data; this.done=true;}
                 // error => console.log(error)
             );
     }

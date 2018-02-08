@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class JsonPath {
 
     public String getActionPath(){
-        return "\\json\\";
+        return "/json/";
     }
 
     public String getExtension(){

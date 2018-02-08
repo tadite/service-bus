@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -26,6 +27,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Autowired
     private UserDetailsService userService;
+
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
@@ -47,7 +51,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
                 .antMatchers("/registration").hasRole("ADMIN")
                 .antMatchers("/**").fullyAuthenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin()//.loginPage("/")
                 .permitAll()
                 .and()
                 .logout().permitAll();*/
@@ -55,6 +59,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
                .authorizeRequests()
                .antMatchers("/").permitAll()
                .antMatchers("/monitoring").authenticated()
+               .and()
+               .formLogin()
+               .successHandler(authenticationSuccessHandler)
                .and()
                .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                .csrf().disable();

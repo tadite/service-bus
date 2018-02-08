@@ -1,0 +1,39 @@
+
+form{
+    background: rgba(28, 54, 85, .9);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin: 100px auto;
+    width: 300px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    -webkit-box-shadow:  0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    box-shadow:  0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+}
+h1 {
+    background: rgba(28, 54, 85, .9);
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+.main{border: none;
+    padding: 20px;
+    position: relative;
+}
+
+label{color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;  }
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
