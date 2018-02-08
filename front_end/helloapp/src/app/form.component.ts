@@ -1,14 +1,11 @@
 import { Component} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { HttpService} from './http.service';
-<<<<<<< HEAD
 import { User } from "./model.user";
 import { Router} from "@angular/router";
 import {userInfo} from "os";
 //import { HttpClient} from '@angular/common/http';
-=======
 import { Admin} from './admin';
->>>>>>> 7b791e41c0945e5ce03b8a38c3e1ed8bef7098ba
 
 //import { HttpClient} from '@angular/common/http';
 

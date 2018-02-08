@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
+@Service
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 
-    @Value("${jwt.expires_in}")
+    //@Value("${jwt.expires_in}")
     private int EXPIRES_IN;
 
-    @Value("${jwt.cookie")
+    //@Value("${jwt.cookie")
     private String TOKEN_COOKIE;
 
     @Autowired

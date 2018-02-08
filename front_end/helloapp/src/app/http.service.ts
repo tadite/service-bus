@@ -15,14 +15,8 @@ export class HttpService{
     //http://localhost:8080/angular/setUser.php
     // http://localhost:60820/api/values        ASP NET Wep API 2
 
-<<<<<<< HEAD
-    postData(user: User){
-=======
-    postData(form: NgForm){
 
-        const body = {name: form.value.username, password: form.value.password};
-        console.log (body);
->>>>>>> 7b791e41c0945e5ce03b8a38c3e1ed8bef7098ba
+    postData(user: User){
 
         //const body = {name: form.value.username, password: form.value.password};
         //console.log (body);
