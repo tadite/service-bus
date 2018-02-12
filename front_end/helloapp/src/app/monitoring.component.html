@@ -8,7 +8,7 @@
                     <a class="list-group-item"(click)="showRequest()"><li><span class="glyphicon glyphicon-picture"></span> Запрoсы</li></a>
                     <a class="list-group-item"(click)="showResponse()"><li><span class="glyphicon glyphicon-gift"></span> Ответы</li></a>
                     <a class="list-group-item"(click)="showErrors()"><li><span class="glyphicon glyphicon-alert"></span> Ошибки</li></a>
-                    <a href="/register" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user"></span> Регистрация</li></a>
+                    <a [routerLink]="['/register']" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user"></span> Регистрация</li></a>
                 </ul>
     </div>
 

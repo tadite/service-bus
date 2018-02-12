@@ -1,56 +1,70 @@
 package edu.nc.servicebus.controller;
 
+import edu.nc.servicebus.model.security.JsonUserReader;
 import edu.nc.servicebus.model.security.LoginRequest;
-import edu.nc.servicebus.model.security.ResponseToken;
-import edu.nc.servicebus.model.security.TokenUtil;
+import edu.nc.servicebus.model.security.Registration;
 import edu.nc.servicebus.model.security.User;
+import edu.nc.servicebus.model.security.jwt.TokenProvider;
+import edu.nc.servicebus.model.security.jwt.TokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class AuthenticationController {
 
     @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
-    private TokenUtil tokenUtil;
+    private TokenProvider tokenProvider;
 
     @Bean
     private PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    //@RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseEntity signIn(@RequestBody LoginRequest userData){
-        String username = userData.getUsername();
-        String password = userData.getPassword();
+    @PostMapping("/user")
+    public ResponseEntity signIn(@RequestBody LoginRequest userData,
+                                 HttpServletResponse response){
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(
+                        userData.getUsername(), userData.getPassword()
+                );
 
-        User clientUser;
+        try{
+            this.authenticationManager.authenticate(token);
+            String authToken = this.tokenProvider.createToken(userData.getUsername());
+            return ResponseEntity.ok(new TokenResponse(authToken));
+        } catch (AuthenticationException e){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return null;
+        }
+    }
 
-        clientUser = (User) userDetailsService.loadUserByUsername(username);
+    @PostMapping("/register")
+    public ResponseEntity signUp(@RequestBody User user,
+                                 HttpServletResponse response){
+        JsonUserReader jsonReader = new JsonUserReader();
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (jsonReader.getUserByName(user.getUsername()) == null){
+            return ResponseEntity.ok("NAME_EXIST");
+        }
+        if (jsonReader.getUserByEmail(user.getEmail()) == null){
+            return ResponseEntity.ok("EMAIL_EXIST");
+        }
 
-
-        return ResponseEntity.ok(new ResponseToken(tokenUtil.generateToken(clientUser)));
+        Registration registration = new Registration();
+        registration.addUser(user);
+        return ResponseEntity.ok("ADDED");
     }
 }

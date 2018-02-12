@@ -11,19 +11,26 @@ public class User implements UserDetails{
 
     @JsonProperty("login")
     private String username;
+    @JsonProperty("email")
+    private String email;
     @JsonProperty("password")
     private String password;
 
     public User(){}
 
-    public User(String username, String password){
+    public User(String username, String email, String password){
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail(){
+        return email;
     }
 
     @Override

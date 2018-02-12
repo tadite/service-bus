@@ -21,7 +21,7 @@ export class HttpService{
         //const body = {name: form.value.username, password: form.value.password};
         //console.log (body);
 
-        return this.http.post('/user', user);
+        return this.http.post('/user', user, {responseType: 'json'});
     }
 
 

@@ -6,6 +6,7 @@ import { Router} from "@angular/router";
 import {userInfo} from "os";
 //import { HttpClient} from '@angular/common/http';
 import { Admin} from './admin';
+import {ForkJoinObservable} from "rxjs/observable/ForkJoinObservable";
 
 //import { HttpClient} from '@angular/common/http';
 
@@ -13,9 +14,12 @@ import { Admin} from './admin';
 @Component({
     selector: 'form-app,',
     styleUrls: ['./form.component.css'],
-    template: `<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+    template: `<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" novalidate>
         <div class="main">
             <h1>АВТОРИЗАЦИЯ</h1>
+            <div [hidden]="incorrect == false" class="alert alert-danger" style="font-size: small">
+                Username or password is incorrect
+            </div>
             <div class="form-group">
                 <label>Имя</label>
                 <input class="form-control" name="username" ngModel required />
@@ -52,14 +56,13 @@ export class FormComponent {
      );
      }*/
 
-    router: Router;
-
-    constructor(private httpService: HttpService){}
+    constructor(private httpService: HttpService, private router: Router){}
     //admin: Admin=new Admin(); // данные вводимого пользователя
 
     user: User=new User();
     receivedAdmin: User; // полученный пользователь
     done: boolean = false;
+    incorrect: boolean = false;
 
     onSubmit(form: NgForm){
         //console.log(form);
@@ -70,8 +73,13 @@ export class FormComponent {
             .subscribe(data => {
                 localStorage.setItem('current_user', JSON.stringify(data));
                 this.router.navigate(['/monitoring']);
-            }
-                // error => console.log(error)
+                console.log(localStorage.getItem('current_user'));
+            },
+                error => {
+                    if (error.status == 401){
+                        this.incorrect = true;
+                    }
+                }
             );
     }
 }

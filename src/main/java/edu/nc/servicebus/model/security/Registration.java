@@ -26,6 +26,7 @@ public class Registration {
 
         JSONObject obj = new JSONObject();
         obj.put("login", user.getUsername());
+        obj.put("email", user.getEmail());
         obj.put("password", user.getPassword());
 
         array.add(obj);

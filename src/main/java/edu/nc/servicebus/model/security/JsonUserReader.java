@@ -3,6 +3,7 @@ package edu.nc.servicebus.model.security;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,32 @@ public class JsonUserReader {
         }
     }
 
-    public User getUsersByLogin(String login){
+    public User getUserByName(String name){
         getUserDB();
         for (User user : users){
-            if (login.equals(user.getUsername())){
+            if (name.equals(user.getUsername())){
                 return user;
             }
+        }
+        return null;
+    }
+
+    public User getUserByEmail(String email){
+        getUserDB();
+        for (User user : users){
+            if (email.equals(user.getEmail())){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByLogin(String login){
+        if (getUserByName(login) != null){
+            return getUserByName(login);
+        }
+        if (getUserByEmail(login) != null){
+            return getUserByEmail(login);
         }
         return null;
     }
