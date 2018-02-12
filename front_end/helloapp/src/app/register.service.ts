@@ -20,7 +20,7 @@ export class RegisterService{
         //const myHeaders = new HttpHeaders().set('Authorization', 'my-auth-token');
 
         //return this.http.post('http://localhost:60820/api/values', user, {headers:myHeaders});
-        return this.http.post('http://travell/', body);
+        return this.http.post('/register', body);
     }
 
 

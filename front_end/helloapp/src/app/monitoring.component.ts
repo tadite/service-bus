@@ -18,9 +18,10 @@ export class MonitoringComponent implements OnInit{
 
     constructor(private _monitoring: MonitoringService) {}
 
-
     ngOnInit() {
+
         this.condition=true;
+        console.log(localStorage.getItem('current_user'));
         this._monitoring.getOverview()
         .subscribe(res => {
             let number_requests = res['list'].map(res => res.number_requests);

@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 @Component
 public class JsonReader {
 
+    private String parameters;
+
     @Autowired
     private JsonPath jsonPath;
     {
@@ -18,7 +20,11 @@ public class JsonReader {
     }
 
     public String getJsonAction(String name) throws IOException{
-        return new String(Files.readAllBytes(Paths.get(getPathToJson(name))));
+        String jsonName = name.split("\\?", 2)[0];
+        if (name.matches(".*[?].*")){
+            this.parameters = name.split("(?=\\?)", 2)[1];
+        }
+        return new String(Files.readAllBytes(Paths.get(getPathToJson(jsonName))));
     }
 
     private String getPathToJson(String name){
@@ -32,5 +38,9 @@ public class JsonReader {
         fullPath.append(jsonPath.getExtension());
 
         return fullPath.toString();
+    }
+
+    public String getParameters(){
+        return parameters;
     }
 }

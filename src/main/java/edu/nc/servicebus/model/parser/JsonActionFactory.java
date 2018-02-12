@@ -81,6 +81,10 @@ public class JsonActionFactory implements ActionFactory{
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 
         Method method = actionClass.getMethod("setParameter", String.class);
+        String urlParameter = jsonReader.getParameters();
+        if (urlParameter != null && !urlParameter.equals("")){
+            method.invoke(action, urlParameter);
+        }
         for (Map.Entry<String, Object> param : params.entrySet()){
             method.invoke(action, param.getValue());
         }
@@ -90,7 +94,9 @@ public class JsonActionFactory implements ActionFactory{
             NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 
         Method method = actionClass.getMethod("setResponseFilter", String.class);
-        method.invoke(action, expression);
+        if (expression != null && !expression.equals("")) {
+            method.invoke(action, expression);
+        }
     }
 
     @Override
