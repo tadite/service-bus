@@ -1,21 +1,21 @@
-
 <div class="row" style="margin-top: 30px; margin-left: 50px; margin-right: 50px">
 
     <div class="col-xs-3 col-md-3"  style=" background: rgba(28, 54, 85, .9); height:100%;margin-top: 50px">
                 <ul class="list-group list-unstyled">
-
                     <a class="list-group-item"style="margin-top: 10px"(click)="ngOnInit()"><li><span class="glyphicon glyphicon-dashboard"></span> Обзор</li></a>
                     <a class="list-group-item"(click)="showRequest()"><li><span class="glyphicon glyphicon-picture"></span> Запрoсы</li></a>
                     <a class="list-group-item"(click)="showResponse()"><li><span class="glyphicon glyphicon-gift"></span> Ответы</li></a>
                     <a class="list-group-item"(click)="showErrors()"><li><span class="glyphicon glyphicon-alert"></span> Ошибки</li></a>
                     <a href="/register" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user"></span> Регистрация</li></a>
+                    <a href="/" class="list-group-item"><li><span class="glyphicon glyphicon-log-out"></span> Выход</li></a>
                 </ul>
     </div>
 
     <div class="col-xs-9 col-md-9">
         <div class="row">
-            <div class="btn-group">
-                <ul id="main_nav">
+            <a *ngIf="condition">
+                <div class="btn-group">
+                  <ul id="main_nav">
                     <li>
                     <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-time"></span> Выбрать период
                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -24,16 +24,19 @@
                         </button>
                     </button>
                         <ul>
-                            <li><a href="#">Час</a></li>
-                            <li><a href="#">День</a></li>
-                            <li><a href="#">Месяц</a></li>
+                            <li><a (click)="showOverviewSecond()">Секунда</a></li>
+                            <li><a (click)="showOverviewMinute()">Минута</a></li>
+                            <li><a (click)="showOverviewHour()">Час</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">По умолчанию</a></li>
-                        </ul><!--end sub_nav-->
+                            <li><a (click)="ngOnInit()">День</a></li>
+                        </ul>
                     </li>
-                </ul><!--end main_nav-->
-            </div>
-    </div>
+                  </ul>
+                </div>
+            </a>
+            <p *ngIf="!condition">
+            </p>
+        </div>
 
         <div class="row">
             <div class="col-xs-12 col-md-12" *ngIf="chart" style="margin-left: 20px; margin-top: 20px">

@@ -4,25 +4,156 @@
     "number_requests_beach": 29,
     "number_requests_sport": 26,
     "number_requests_excursions": 28,
+    "time_requests_beach": 3.2,
+    "time_requests_sport": 2.4,
+    "time_requests_excursions": 6.1,
+    "time_responses_beach": 3.2,
+    "time_responses_sport": 2.4,
+    "time_responses_excursions": 6.1,
+    "average_message_size_excursions": 258,
+    "average_message_size_beach": 190,
+    "average_message_size_sport": 96,
+    "number_errors": 1,
+    "number_errors_excursions": 1,
+    "number_errors_beach": 0,
+    "number_errors_sport": 0,
     "dt":1516827600
   },{
     "number_requests": 91,
     "number_requests_beach": 30,
     "number_requests_sport": 29,
     "number_requests_excursions": 32,
+    "time_requests_beach": 4.2,
+    "time_requests_sport": 1.4,
+    "time_requests_excursions": 3.1,
+    "time_responses_beach": 1.2,
+    "time_responses_sport": 7.4,
+    "time_responses_excursions": 4.1,
+    "average_message_size_excursions": 328,
+    "average_message_size_beach": 170,
+    "average_message_size_sport": 120,
+    "number_errors": 0,
+    "number_errors_excursions": 0,
+    "number_errors_beach": 0,
+    "number_errors_sport": 0,
     "dt":1516914000
   },{
     "number_requests": 87,
     "number_requests_beach": 41,
     "number_requests_sport": 25,
     "number_requests_excursions": 21,
+    "time_requests_beach": 4.2,
+    "time_requests_sport": 5.4,
+    "time_requests_excursions": 5.1,
+    "time_responses_beach": 5.2,
+    "time_responses_sport": 4.4,
+    "time_responses_excursions": 7.1,
+    "average_message_size_excursions": 218,
+    "average_message_size_beach": 230,
+    "average_message_size_sport": 150,
+    "number_errors": 2,
+    "number_errors_excursions": 0,
+    "number_errors_beach": 2,
+    "number_errors_sport": 1,
     "dt":1517000400
   },{
     "number_requests": 90,
     "number_requests_beach": 40,
     "number_requests_sport": 20,
     "number_requests_excursions": 30,
+    "time_requests_beach": 2.2,
+    "time_requests_sport": 2.4,
+    "time_requests_excursions": 4.1,
+    "time_responses_beach": 4.2,
+    "time_responses_sport": 1.8,
+    "time_responses_excursions": 5.1,
+    "average_message_size_excursions": 420,
+    "average_message_size_beach": 230,
+    "average_message_size_sport": 150,
+    "number_errors": 0,
+    "number_errors_excursions": 1,
+    "number_errors_beach": 0,
+    "number_errors_sport": 0,
     "dt":1517086800
+  }],
+
+"list_hour":
+[{
+  "number_requests": 8,
+  "number_requests_beach": 3,
+  "number_requests_sport": 1,
+  "number_requests_excursions": 4,
+  "dt":1516827600
+},{
+  "number_requests": 9,
+  "number_requests_beach": 4,
+  "number_requests_sport": 2,
+  "number_requests_excursions": 3,
+  "dt":1516831200
+},{
+  "number_requests": 7,
+  "number_requests_beach": 4,
+  "number_requests_sport": 1,
+  "number_requests_excursions": 2,
+  "dt":1516834800
+},{
+  "number_requests": 10,
+  "number_requests_beach": 5,
+  "number_requests_sport": 2,
+  "number_requests_excursions": 3,
+  "dt":1516838400
+}],
+  "list_minute":
+  [{
+    "number_requests": 1,
+    "number_requests_beach": 1,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 0,
+    "dt":1516827600
+  },{
+    "number_requests": 2,
+    "number_requests_beach": 1,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 1,
+    "dt":1516827660
+  },{
+    "number_requests": 0,
+    "number_requests_beach": 0,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 0,
+    "dt":1516827720
+  },{
+    "number_requests": 3,
+    "number_requests_beach": 2,
+    "number_requests_sport": 1,
+    "number_requests_excursions": 0,
+    "dt":1516827780
+  }],
+  "list_second":
+  [{
+    "number_requests": 1,
+    "number_requests_beach": 1,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 0,
+    "dt":1516827600
+  },{
+    "number_requests": 0,
+    "number_requests_beach": 0,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 0,
+    "dt":1516827601
+  },{
+    "number_requests": 1,
+    "number_requests_beach": 0,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 1,
+    "dt":1516827602
+  },{
+    "number_requests": 0,
+    "number_requests_beach": 0,
+    "number_requests_sport": 0,
+    "number_requests_excursions": 0,
+    "dt":1516827603
   }]
 }
 

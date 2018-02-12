@@ -14,14 +14,8 @@ export class HttpService{
     // http://localhost:60820/api/values        ASP NET Wep API 2
 
     postData(form: NgForm){
-
         const body = {name: form.value.username, password: form.value.password};
         console.log (body);
-
         return this.http.post('http://travell/', body);
-
     }
-
-
-
 }

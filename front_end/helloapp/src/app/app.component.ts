@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 
+
 @Component({
     selector: 'my-app',
     template: `<header>
@@ -7,7 +8,8 @@ import { Component} from '@angular/core';
           <h1>Мониторинг приложения <br> Планировщик путешествий</h1>
         <router-outlet></router-outlet>
        </div>
-    </header>`,
+    </header>`
+    ,
     styles: [`
         header{
             width: 100%;
@@ -29,4 +31,6 @@ import { Component} from '@angular/core';
         }
     `]
 })
-export class AppComponent {}
+
+export class AppComponent{
+}
