@@ -22,7 +22,7 @@ public class JsonReader {
     public String getJsonAction(String name) throws IOException{
         String jsonName = name.split("\\?", 2)[0];
         if (name.matches(".*[?].*")){
-            this.parameters = name.split("(?=\\?)", 2)[1];
+            this.parameters = name.split("\\?", 2)[1];
         }
         return new String(Files.readAllBytes(Paths.get(getPathToJson(jsonName))));
     }

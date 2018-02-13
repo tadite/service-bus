@@ -2,7 +2,7 @@
   "type":"soap",
   "url":"http://www.webservicex.net/airport.asmx/GetAirportInformationByCountry",
   "parameters":{
-    "postBody":"country=Russian Federation"
+    "postBody":""
   },
   "expression":"//AirportCode"
 }

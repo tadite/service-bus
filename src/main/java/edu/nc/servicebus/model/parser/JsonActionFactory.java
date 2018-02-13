@@ -83,7 +83,11 @@ public class JsonActionFactory implements ActionFactory{
         Method method = actionClass.getMethod("setParameter", String.class);
         String urlParameter = jsonReader.getParameters();
         if (urlParameter != null && !urlParameter.equals("")){
-            method.invoke(action, urlParameter);
+            if (action.getClass().equals(HttpAction.class)) {
+                method.invoke(action, "?" + urlParameter);
+            } else{
+                method.invoke(action, urlParameter);
+            }
         }
         for (Map.Entry<String, Object> param : params.entrySet()){
             method.invoke(action, param.getValue());
