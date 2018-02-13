@@ -4,7 +4,7 @@ form{
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin: 150px auto;
+    margin: 100px auto;
     width: 300px;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -26,9 +26,14 @@ h1 {
 .main{border: none;
     padding: 20px;
     position: relative;
-    }
-input.ng-touched.ng-invalid {border: solid red 2px; }
-input.ng-touched.ng-valid {border: solid blue 2px;}
+}
+
 label{color: white;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;  }
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}

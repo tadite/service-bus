@@ -25,9 +25,9 @@ public class Registration {
                 new FileReader(PATH));
 
         JSONObject obj = new JSONObject();
-        obj.put("login", user.getLogin());
+        obj.put("login", user.getUsername());
+        obj.put("email", user.getEmail());
         obj.put("password", user.getPassword());
-        obj.put("role", user.getRole());
 
         array.add(obj);
 

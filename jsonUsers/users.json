@@ -1,1 +1,1 @@
-[{"password":"admin","role":"ADMIN","login":"admin"},{"password":"user","role":"USER","login":"user"}]
+[{"password":"admin","email":"admin@service-bus.com","login":"admin"}]
