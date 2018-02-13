@@ -23,7 +23,4 @@ export class HttpService{
 
         return this.http.post('/user', user, {responseType: 'json'});
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
@@ -10,13 +10,17 @@ import 'rxjs/add/operator/map';
     styleUrls: ['./monitoring.component.css']
 })
 
-export class MonitoringComponent {
+export class MonitoringComponent implements OnInit{
+
+    condition: boolean=true;
 
     chart: any = []; // This will hold our chart info
 
     constructor(private _monitoring: MonitoringService) {}
 
     ngOnInit() {
+
+        this.condition=true;
         console.log(localStorage.getItem('current_user'));
         this._monitoring.getOverview()
         .subscribe(res => {
@@ -29,7 +33,7 @@ export class MonitoringComponent {
             let monitoringTimes = [];
             alltimes.forEach((res) => {
                 let jsdate = new Date(res * 1000);
-                monitoringTimes.push(jsdate.toLocaleTimeString('ru', { year: 'numeric', month: 'short', day: 'numeric' }))
+                monitoringTimes.push(jsdate.toLocaleDateString());
                 this.chart = new Chart('canvas', {
                     type: 'line',
                     data: {
@@ -58,7 +62,10 @@ export class MonitoringComponent {
                                 display: true
                             }],
                             yAxes: [{
-                                display: true
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                labelString: "Запросов в день"}
                             }],
                         }
                     }
@@ -101,18 +108,324 @@ export class MonitoringComponent {
                                 display: true
                             }],
                             yAxes: [{
-                                display: true
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                labelString: "Запросов по сценарию в день"}
                             }],
                         }
                     }
                 });
-
-
             })
         })
-}
+    }
+
+    showOverviewHour() {
+        this.condition=true;
+        this._monitoring.getOverview()
+            .subscribe(res => {
+                let number_requests = res['list_hour'].map(res => res.number_requests);
+                let number_requests_beach = res['list_hour'].map(res => res.number_requests_beach);
+                let number_requests_excursions = res['list_hour'].map(res => res.number_requests_excursions);
+                let number_requests_sport= res['list_hour'].map(res => res.number_requests_sport);
+                let alltimes = res['list_hour'].map(res => res.dt);
+
+                let monitoringTimes = [];
+                alltimes.forEach((res) => {
+                    let jsdate = new Date(res * 1000);
+                    monitoringTimes.push(jsdate.toLocaleTimeString());
+                    this.chart = new Chart('canvas', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'по всем сценариям',
+                                    data: number_requests,
+                                    borderColor: "#3c4aba",
+                                    backgroundColor: "#aab0e0",
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Общее количество запросов'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Запросов в час"}
+                                }],
+                            }
+                            }
+
+                    });
+                    this.chart = new Chart('canvas2', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'пляжный отдых',
+                                    data: number_requests_beach,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {   label: 'спорт',
+                                    data: number_requests_sport,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {   label: 'экскурсии',
+                                    data: number_requests_excursions,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Количество запросов по сценариям'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Запросов по сценарию в час"}
+                                }],
+                            }
+                        }
+                    });
+                })
+            })
+    }
+
+    showOverviewMinute() {
+        this.condition=true;
+        this._monitoring.getOverview()
+            .subscribe(res => {
+                let number_requests = res['list_minute'].map(res => res.number_requests);
+                let number_requests_beach = res['list_minute'].map(res => res.number_requests_beach);
+                let number_requests_excursions = res['list_minute'].map(res => res.number_requests_excursions);
+                let number_requests_sport= res['list_minute'].map(res => res.number_requests_sport);
+                let alltimes = res['list_minute'].map(res => res.dt);
+
+                let monitoringTimes = [];
+                alltimes.forEach((res) => {
+                    let jsdate = new Date(res * 1000);
+                    monitoringTimes.push(jsdate.toLocaleTimeString());
+                    this.chart = new Chart('canvas', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'по всем сценариям',
+                                    data: number_requests,
+                                    borderColor: "#3c4aba",
+                                    backgroundColor: "#aab0e0",
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Общее количество запросов'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Запросов в минуту"}
+                                }],
+                            }
+                        }
+
+                    });
+                    this.chart = new Chart('canvas2', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'пляжный отдых',
+                                    data: number_requests_beach,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {   label: 'спорт',
+                                    data: number_requests_sport,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {   label: 'экскурсии',
+                                    data: number_requests_excursions,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Количество запросов по сценариям'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Запросов по сценарию в минуту"}
+                                }],
+                            }
+                        }
+                    });
+                })
+            })
+    }
+
+    showOverviewSecond() {
+        this.condition=true;
+        this._monitoring.getOverview()
+            .subscribe(res => {
+                let number_requests = res['list_second'].map(res => res.number_requests);
+                let number_requests_beach = res['list_second'].map(res => res.number_requests_beach);
+                let number_requests_excursions = res['list_second'].map(res => res.number_requests_excursions);
+                let number_requests_sport= res['list_second'].map(res => res.number_requests_sport);
+                let alltimes = res['list_second'].map(res => res.dt);
+
+                let monitoringTimes = [];
+                alltimes.forEach((res) => {
+                    let jsdate = new Date(res * 1000);
+                    monitoringTimes.push(jsdate.toLocaleTimeString());
+                    this.chart = new Chart('canvas', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'по всем сценариям',
+                                    data: number_requests,
+                                    borderColor: "#3c4aba",
+                                    backgroundColor: "#aab0e0",
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Общее количество запросов'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                    labelString: "Запросов в секунду"}
+                                }],
+                            }
+                        }
+
+                    });
+                    this.chart = new Chart('canvas2', {
+                        type: 'line',
+                        data: {
+                            labels:  monitoringTimes,
+                            datasets: [
+                                {   label: 'пляжный отдых',
+                                    data: number_requests_beach,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {   label: 'спорт',
+                                    data: number_requests_sport,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {   label: 'экскурсии',
+                                    data: number_requests_excursions,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                padding: 20,
+                                text: 'Количество запросов по сценариям'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                    labelString: "Запросов по сценарию в секунду"}
+                                }],
+                            }
+                        }
+                    });
+                })
+            })
+    }
+
 
     showRequest() {
+        this.condition=false;
         this._monitoring.getOverview()
             .subscribe(res => {
                 let time_requests_beach = res['list'].map(res => res.time_requests_beach);
@@ -126,7 +439,7 @@ export class MonitoringComponent {
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
                     let jsdate = new Date(res * 1000);
-                    monitoringTimes.push(jsdate.toLocaleTimeString('ru', { year: 'numeric', month: 'short', day: 'numeric' }))
+                    monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
                         data: {
@@ -165,7 +478,10 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Среднее время в секундах"}
                                 }],
                             }
                         }
@@ -208,7 +524,10 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Запросов по сценарию"}
                                 }],
                             }
                         }
@@ -218,6 +537,7 @@ export class MonitoringComponent {
     }
 
     showResponse() {
+        this.condition=false;
         this._monitoring.getOverview()
             .subscribe(res => {
                 let time_responses_beach = res['list'].map(res => res.time_responses_beach);
@@ -231,7 +551,7 @@ export class MonitoringComponent {
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
                     let jsdate = new Date(res * 1000);
-                    monitoringTimes.push(jsdate.toLocaleTimeString('ru', { year: 'numeric', month: 'short', day: 'numeric' }))
+                    monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
                         data: {
@@ -270,7 +590,10 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Среднее время ответа в секундах"}
                                 }],
                             }
                         }
@@ -302,7 +625,7 @@ export class MonitoringComponent {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Средний размер сообщений по сценариям, количество знаков'
+                                text: 'Средний размер сообщений по сценариям'
                             },
                             legend: {
                                 display: true,
@@ -313,7 +636,10 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Количество знаков"}
                                 }],
                             }
                         }
@@ -321,7 +647,9 @@ export class MonitoringComponent {
                 })
             })
     }
+
     showErrors() {
+        this.condition=false;
         this._monitoring.getOverview()
             .subscribe(res => {
                 let number_errors = res['list'].map(res => res.number_errors);
@@ -333,7 +661,7 @@ export class MonitoringComponent {
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
                     let jsdate = new Date(res * 1000);
-                    monitoringTimes.push(jsdate.toLocaleTimeString('ru', { year: 'numeric', month: 'short', day: 'numeric' }))
+                    monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
                         data: {
@@ -362,7 +690,10 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Количество ошибок"}
                                 }],
                             }
                         }
@@ -408,13 +739,15 @@ export class MonitoringComponent {
                                     display: true
                                 }],
                                 yAxes: [{
-                                    display: true
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: "Ошибок по сценарию"}
                                 }],
+
                             }
                         }
                     });
-
-
                 })
             })
     }

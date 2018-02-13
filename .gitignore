@@ -2,8 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 
 node_modules
-helloapp/public
-static/public
+public
 
 ### STS ###
 .apt_generated
