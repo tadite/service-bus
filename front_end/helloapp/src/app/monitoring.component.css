@@ -5,3 +5,47 @@
 #canvas2{
     background: white;
 }
+
+#main_nav {
+    position: relative;
+    top: 15px;
+    margin-top: 14px;
+}
+
+#main_nav li{
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+#main_nav li:first-child, #main_nav ul li {
+    border-left: none;
+}
+#main_nav ul {
+    display: none;
+    background: white;
+    position: absolute;
+    margin-top: 10px;
+    top: 19px;
+    left: 0;
+    z-index: 1;
+    width: 155px;
+    border: 1px dotted grey;
+}
+#main_nav li a, #main_nav li ul li a{
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-decoration: none;
+    outline: none;
+    padding-bottom: 17px;
+    padding-left: 10px ;
+}
+#main_nav li a:hover,
+#main_nav li ul a:hover {
+    color: black;
+}
+/*--------------Подменю--------------*/
+#main_nav li:hover ul {
+    display: block;
+}
