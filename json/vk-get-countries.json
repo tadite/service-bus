@@ -1,8 +1,8 @@
 {
   "type":"http",
-  "url":"https://api.vk.com",
+  "url":"https://api.vk.com/method/database.getCountries",
   "parameters":{
-    "method":"/method/database.getCountries?need_all=1&count=250"
+    "method":"%need_all=1&count=250"
   },
-  "expression":"$..title"
+  "expression":"$.response[*]"
 }
