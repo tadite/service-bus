@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
+import { CookieService } from "ngx-cookie-service";
 
 
 @Component({
@@ -16,12 +17,13 @@ export class MonitoringComponent implements OnInit{
 
     chart: any = []; // This will hold our chart info
 
-    constructor(private _monitoring: MonitoringService) {}
+    constructor(private _monitoring: MonitoringService,
+                private cookie: CookieService) {}
 
     ngOnInit() {
 
         this.condition=true;
-        console.log(localStorage.getItem('current_user'));
+        console.log(this.cookie.get('current_user'));
         this._monitoring.getOverview()
         .subscribe(res => {
             let number_requests = res['list'].map(res => res.number_requests);

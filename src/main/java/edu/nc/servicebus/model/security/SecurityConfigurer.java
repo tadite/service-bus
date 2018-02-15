@@ -91,7 +91,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
                .antMatchers("/endpoint/**").permitAll()
                .antMatchers("/", "/user").permitAll()
                .antMatchers("/public/app.js", "/public/polyfills.js").permitAll()
-               .antMatchers("/text.json").permitAll()
+               //.antMatchers("/text.json").permitAll()
                .anyRequest().fullyAuthenticated()
                .and()
                .apply(new TokenConfigurer(this.tokenProvider));
