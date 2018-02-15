@@ -1,9 +1,6 @@
 package edu.nc.servicebus.controller;
 
-import edu.nc.servicebus.model.security.JsonUserReader;
-import edu.nc.servicebus.model.security.LoginRequest;
-import edu.nc.servicebus.model.security.Registration;
-import edu.nc.servicebus.model.security.User;
+import edu.nc.servicebus.model.security.*;
 import edu.nc.servicebus.model.security.jwt.TokenProvider;
 import edu.nc.servicebus.model.security.jwt.TokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +41,7 @@ public class AuthenticationController {
         try{
             this.authenticationManager.authenticate(token);
             String authToken = this.tokenProvider.createToken(userData.getUsername());
-            return ResponseEntity.ok(new TokenResponse(authToken));
+            return ResponseEntity.ok(authToken);   //new TokenResponse(authToken));
         } catch (AuthenticationException e){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return null;
@@ -56,10 +53,10 @@ public class AuthenticationController {
                                  HttpServletResponse response){
         JsonUserReader jsonReader = new JsonUserReader();
 
-        if (jsonReader.getUserByName(user.getUsername()) == null){
+        if (jsonReader.getUserByName(user.getUsername()) != null){
             return ResponseEntity.ok("NAME_EXIST");
         }
-        if (jsonReader.getUserByEmail(user.getEmail()) == null){
+        if (jsonReader.getUserByEmail(user.getEmail()) != null){
             return ResponseEntity.ok("EMAIL_EXIST");
         }
 

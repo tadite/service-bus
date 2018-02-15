@@ -25,7 +25,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
+    imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes, {useHash: true})],
     declarations: [ AppComponent,FormComponent, MonitoringComponent, RegisterComponent ],
     bootstrap:    [ AppComponent ],
     providers: [MonitoringService, HttpService, RegisterService, CookieService, {

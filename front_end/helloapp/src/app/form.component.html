@@ -1,4 +1,4 @@
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" novalidate>
+<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
     <div class="main">
         <h1>АВТОРИЗАЦИЯ</h1>
         <div [hidden]="incorrect == false" class="alert alert-danger" style="font-size: small">
@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <button [disabled]="myForm.invalid" class="btn btn-default">
-                <nav>Войти</nav>
+                Войти
             </button>
         </div>
     </div>

@@ -41,7 +41,7 @@ export class FormComponent{
 
         this.httpService.postData(this.user)
             .subscribe(data => {
-                this.cookie.set('current_user', JSON.stringify(data));
+                this.cookie.set('current_user', data);
                 this.router.navigate(['/monitoring']);
                 //console.log(this.cookie.get('current_user'));
             },

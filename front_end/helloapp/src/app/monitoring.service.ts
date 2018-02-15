@@ -10,7 +10,5 @@ export class MonitoringService {
     getOverview() {
         return this._http.get('text.json')
             .map(result => result);
-
     }
-
 }

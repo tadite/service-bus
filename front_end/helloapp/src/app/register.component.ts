@@ -20,11 +20,11 @@ export class RegisterComponent {
 
     admin: Admin = new  Admin(this.name, this.eMail, this.password);
     receivedAdmin:  Admin;
-    router: Router;
     emailExist: boolean = false;
     nameExist: boolean = false;
 
-    constructor(private httpService: RegisterService){}
+    constructor(private httpService: RegisterService,
+                private router: Router){}
 
     submit(admin: Admin){
         this.httpService.postDataRegister(admin)
