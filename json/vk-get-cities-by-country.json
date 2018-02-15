@@ -1,0 +1,7 @@
+{
+  "type":"http",
+  "url":"https://api.vk.com/method/database.getCities",
+  "parameters":{
+  },
+  "expression":"$.response[*]"
+}

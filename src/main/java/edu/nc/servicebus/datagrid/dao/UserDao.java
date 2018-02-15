@@ -26,7 +26,7 @@ public class UserDao {
 
     public static final String USER_CACHE_NAME = UserDao.class.getSimpleName() + "User";
 
-    public void add(String login, String password,String email) throws IgniteException {
+    public void add(String login, String password, String email) throws IgniteException {
         getCacheCfg();
         IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
         User user = new User(findId(),login, password, new Date(),email);
@@ -35,6 +35,7 @@ public class UserDao {
 
 
     public String getAll() throws IgniteException {
+
         getCacheCfg();
         IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
 
