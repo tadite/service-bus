@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class JsonUserReader {
 
-    private final String PATH = System.getProperty("user.dir") + "\\jsonUsers\\users.json";
+    private final String PATH = System.getProperty("user.dir") + "/jsonUsers/users.json";
 
     private List<User> users;
 
