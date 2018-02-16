@@ -21,6 +21,8 @@ public class User {
     @QuerySqlField
     private Date dateOfRegistration;
 
+    public User(){}
+
     public User(int id,String login, String password, Date dateOfRegistration, String email){
         this.userId = id;
         this.login = login;

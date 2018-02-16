@@ -2,7 +2,6 @@ package edu.nc.servicebus.controller;
 
 import edu.nc.servicebus.form.MainForm;
 import edu.nc.servicebus.model.security.Registration;
-import edu.nc.servicebus.model.security.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

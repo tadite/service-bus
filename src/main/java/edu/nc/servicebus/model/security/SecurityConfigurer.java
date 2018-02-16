@@ -82,14 +82,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
        http
                .csrf().disable()
-               .cors()
-               .and()
                .sessionManagement()
                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                .and()
                .authorizeRequests()
+               .antMatchers("/").permitAll()
                .antMatchers("/endpoint/**").permitAll()
-               .antMatchers("/", "/user").permitAll()
+               .antMatchers("/user").permitAll()
+               .antMatchers("/user/**").permitAll()
                .antMatchers("/public/app.js", "/public/polyfills.js").permitAll()
                //.antMatchers("/text.json").permitAll()
                .anyRequest().fullyAuthenticated()
