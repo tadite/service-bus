@@ -32,7 +32,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <button [disabled]="name.invalid || eMail.invalid || password.invalid " routerLinkActive="active">Создать аккаунт</button>
+                <button [disabled]="name.invalid || eMail.invalid || password.invalid " class="btn">Создать аккаунт</button>
+
+                <app-dialog [(visible)]="showDialog">
+                    <h1>Администратор успешно зарегистрирован</h1>
+                    <button (click)="showDialog = !showDialog" class="btn" routerLinkActive="active" routerLink="/monitoring" style="margin-left: 30%; margin-top:8px " >Вернуться к обзору</button>
+                </app-dialog>
                 <p class="message">Вернуться к обзору?<a routerLink="/monitoring" > Назад</a></p>
             </div>
         </div>

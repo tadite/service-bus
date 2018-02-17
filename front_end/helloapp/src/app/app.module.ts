@@ -13,6 +13,8 @@ import { HttpService} from "./http.service";
 import { RegisterService} from "./register.service";
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptor } from "./token.interceptor";
+import {DialogComponent} from "./dialog.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -25,8 +27,8 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes, {useHash: true})],
-    declarations: [ AppComponent,FormComponent, MonitoringComponent, RegisterComponent ],
+    imports:      [ BrowserModule,  BrowserAnimationsModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes, {useHash: true})],
+    declarations: [ AppComponent,FormComponent, MonitoringComponent, RegisterComponent, DialogComponent ],
     bootstrap:    [ AppComponent ],
     providers: [MonitoringService, HttpService, RegisterService, CookieService, {
         provide: HTTP_INTERCEPTORS,
