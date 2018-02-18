@@ -23,6 +23,8 @@ export class RegisterComponent {
     emailExist: boolean = false;
     nameExist: boolean = false;
 
+    showDialog = false;
+
     constructor(private httpService: RegisterService,
                 private router: Router){}
 
@@ -31,7 +33,8 @@ export class RegisterComponent {
             .subscribe(
                 data => {
                     if (data == "ADDED"){
-                        this.router.navigate(['/monitoring']);
+                        this.showDialog = true;
+                        //this.router.navigate(['/monitoring']);
                     }
                     if (data == "NAME_EXIST"){
                         this.nameExist = true;

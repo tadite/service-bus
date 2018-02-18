@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -17,9 +18,10 @@ export class MonitoringComponent implements OnInit{
     chart: any = []; // This will hold our chart info
 
     constructor(private _monitoring: MonitoringService) {}
+                private cookie: CookieService,
+                private router: Router) {}
 
     ngOnInit() {
-
         this.condition=true;
         this._monitoring.getOverview()
         .subscribe(res => {
@@ -749,6 +751,12 @@ export class MonitoringComponent implements OnInit{
                     });
                 })
             })
+    }
+
+    exitMonitoring(){
+        this.cookie.deleteAll();
+        localStorage.removeItem('current_user');
+        this.router.navigate(['/']);
     }
 
 }
