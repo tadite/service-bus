@@ -3,6 +3,7 @@ import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
 import { CookieService } from "ngx-cookie-service";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -18,10 +19,10 @@ export class MonitoringComponent implements OnInit{
     chart: any = []; // This will hold our chart info
 
     constructor(private _monitoring: MonitoringService,
-                private cookie: CookieService) {}
+                private cookie: CookieService,
+                private router: Router) {}
 
     ngOnInit() {
-
         this.condition=true;
         console.log(this.cookie.get('current_user'));
         this._monitoring.getOverview()
@@ -752,6 +753,12 @@ export class MonitoringComponent implements OnInit{
                     });
                 })
             })
+    }
+
+    exitMonitoring(){
+        this.cookie.deleteAll();
+        localStorage.removeItem('current_user');
+        this.router.navigate(['/']);
     }
 
 }

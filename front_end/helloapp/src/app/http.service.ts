@@ -20,7 +20,7 @@ export class HttpService{
 
         //const body = {name: form.value.username, password: form.value.password};
         //console.log (body);
-        this.cookie.delete('current_user');
+        this.cookie.deleteAll();
         return this.http.post('/user', user, {responseType: 'text'});
     }
 }
