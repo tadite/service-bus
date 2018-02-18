@@ -1,5 +1,7 @@
 package edu.nc.servicebus.controller;
 
+import edu.nc.servicebus.datagrid.dao.RequestDao;
+import edu.nc.servicebus.datagrid.dao.ResponseDao;
 import edu.nc.servicebus.model.action.ActionFactory;
 import edu.nc.servicebus.model.executor.Executor;
 import edu.nc.servicebus.model.response.Response;
@@ -19,6 +21,12 @@ public class EndpointController {
     @Autowired
     ActionFactory actionFactory;
 
+    @Autowired
+    private RequestDao requestDao;
+
+    @Autowired
+    private ResponseDao responseDao;
+
     @RequestMapping(value = "/endpoint/**", method = RequestMethod.GET)
     @ResponseBody
     public String endpoint(HttpServletRequest request){
@@ -26,7 +34,11 @@ public class EndpointController {
         String endpointName = request.getRequestURI().split("endpoint/")[1];
         String endpointUrl = endpointName + "?" + request.getQueryString();
 
+        requestDao.add(endpointUrl);
+
         Response response = executor.executeAction(endpointUrl);
+
+        responseDao.add(response.getRawData());
 
         return response.getRawData();
     }

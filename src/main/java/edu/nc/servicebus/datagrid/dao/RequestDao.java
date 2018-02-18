@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -79,5 +81,21 @@ public class RequestDao {
                 max = request.getValue().getRequestId();
         }
         return ++max;
+    }
+
+    public List<Request> getRequestList(){
+        getCacheCfg();
+        IgniteCache<Integer, Request> requestCache = ignite.getOrCreateCache(requestCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Request>> requests = requestCache.query(new SqlQuery(
+                Request.class,
+                "from \""  + RequestDao.REQUEST_CACHE_NAME + "\".Request "));
+
+        List<Request> requestList = new ArrayList<>();
+        for (Cache.Entry<Integer, Request> request: requests){
+            requestList.add(request.getValue());
+        }
+
+        return requestList;
     }
 }

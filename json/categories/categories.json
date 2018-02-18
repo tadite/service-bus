@@ -1,0 +1,32 @@
+{
+  "beach":[
+    {
+      "name":"coast-of-living"
+    }
+  ],
+  "sport":[
+    {
+      "name":"tripster-excursion"
+    },
+    {
+      "name":"tripster-excursion-details"
+    }
+  ],
+  "excursion":[
+    {
+      "name":"weatlas-get-excursions"
+    },
+    {
+      "name":"weatlas-get-excursion-details"
+    },
+    {
+      "name":"tripster-excursion"
+    },
+    {
+      "name":"tripster-excursion-details"
+    },
+    {
+      "name":"coast-of-living"
+    }
+  ]
+}

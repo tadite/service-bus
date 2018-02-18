@@ -1,6 +1,5 @@
 package edu.nc.servicebus.model.parser;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

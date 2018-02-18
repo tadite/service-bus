@@ -7,17 +7,12 @@ import edu.nc.servicebus.model.action.ActionFactory;
 import edu.nc.servicebus.model.action.ActionReader;
 import edu.nc.servicebus.model.action.HttpAction;
 import edu.nc.servicebus.model.limiter.RateLimiterManager;
-import edu.nc.servicebus.model.parser.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -25,10 +20,13 @@ public class JsonActionFactory implements ActionFactory{
 
     @Autowired
     private ActionSelector actionSelector;
+
     @Autowired
     private JsonReader jsonReader;
+
     @Autowired
     RateLimiterManager rateLimiterManager;
+
     @Autowired
     ActionReader actionReader;
 
