@@ -3,6 +3,7 @@ import { MonitoringService } from './monitoring.service';
 import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 
 @Component({
@@ -17,23 +18,24 @@ export class MonitoringComponent implements OnInit{
 
     chart: any = []; // This will hold our chart info
 
-    constructor(private _monitoring: MonitoringService) {}
+    constructor(private _monitoring: MonitoringService,
                 private cookie: CookieService,
                 private router: Router) {}
 
     ngOnInit() {
         this.condition=true;
-        this._monitoring.getOverview()
+        this._monitoring.getOverviewDay()
         .subscribe(res => {
-            let number_requests = res['list'].map(res => res.number_requests);
-            let number_requests_beach = res['list'].map(res => res.number_requests_beach);
-            let number_requests_excursions = res['list'].map(res => res.number_requests_excursions);
-            let number_requests_sport= res['list'].map(res => res.number_requests_sport);
-            let alltimes = res['list'].map(res => res.dt);
+
+            let number_requests = res.map(res => res.requestCount);
+            let number_requests_beach = res.map(res => res.beachRequestCount);
+            let number_requests_excursions = res.map(res => res.excursionRequestCount);
+            let number_requests_sport = res.map(res => res.sportRequestCount);
+            let alltimes = res.map(res => res.time);
 
             let monitoringTimes = [];
             alltimes.forEach((res) => {
-                let jsdate = new Date(res * 1000);
+                let jsdate = new Date(res);
                 monitoringTimes.push(jsdate.toLocaleDateString());
                 this.chart = new Chart('canvas', {
                     type: 'line',
@@ -123,17 +125,18 @@ export class MonitoringComponent implements OnInit{
 
     showOverviewHour() {
         this.condition=true;
-        this._monitoring.getOverview()
+        this._monitoring.getOverviewHour()
             .subscribe(res => {
-                let number_requests = res['list_hour'].map(res => res.number_requests);
-                let number_requests_beach = res['list_hour'].map(res => res.number_requests_beach);
-                let number_requests_excursions = res['list_hour'].map(res => res.number_requests_excursions);
-                let number_requests_sport= res['list_hour'].map(res => res.number_requests_sport);
-                let alltimes = res['list_hour'].map(res => res.dt);
+
+                let number_requests = res.map(res => res.requestCount);
+                let number_requests_beach = res.map(res => res.beachRequestCount);
+                let number_requests_excursions = res.map(res => res.excursionRequestCount);
+                let number_requests_sport = res.map(res => res.sportRequestCount);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleTimeString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -224,17 +227,18 @@ export class MonitoringComponent implements OnInit{
 
     showOverviewMinute() {
         this.condition=true;
-        this._monitoring.getOverview()
+        this._monitoring.getOverviewMinute()
             .subscribe(res => {
-                let number_requests = res['list_minute'].map(res => res.number_requests);
-                let number_requests_beach = res['list_minute'].map(res => res.number_requests_beach);
-                let number_requests_excursions = res['list_minute'].map(res => res.number_requests_excursions);
-                let number_requests_sport= res['list_minute'].map(res => res.number_requests_sport);
-                let alltimes = res['list_minute'].map(res => res.dt);
+
+                let number_requests = res.map(res => res.requestCount);
+                let number_requests_beach = res.map(res => res.beachRequestCount);
+                let number_requests_excursions = res.map(res => res.excursionRequestCount);
+                let number_requests_sport = res.map(res => res.sportRequestCount);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleTimeString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -325,17 +329,18 @@ export class MonitoringComponent implements OnInit{
 
     showOverviewSecond() {
         this.condition=true;
-        this._monitoring.getOverview()
+        this._monitoring.getOverviewSecond()
             .subscribe(res => {
-                let number_requests = res['list_second'].map(res => res.number_requests);
-                let number_requests_beach = res['list_second'].map(res => res.number_requests_beach);
-                let number_requests_excursions = res['list_second'].map(res => res.number_requests_excursions);
-                let number_requests_sport= res['list_second'].map(res => res.number_requests_sport);
-                let alltimes = res['list_second'].map(res => res.dt);
+
+                let number_requests = res.map(res => res.requestCount);
+                let number_requests_beach = res.map(res => res.beachRequestCount);
+                let number_requests_excursions = res.map(res => res.excursionRequestCount);
+                let number_requests_sport = res.map(res => res.sportRequestCount);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleTimeString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
