@@ -17,9 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/statistics")
@@ -45,7 +44,7 @@ public class ErrorStatsController {
 
     private List<StatsData> getErrorDataList(){
         List<Error> errors = errorDao.getErrorList();
-        Map<Integer, Content> contents = new HashMap<>();
+        List<Content> contents = new ArrayList<>();
 
         Statistic stats = errorStatistic.getObject();
 
@@ -56,17 +55,22 @@ public class ErrorStatsController {
         for (Error error : errors){
             time = error.getTime().getTime() / converter;
 
-            if ((time - prevTime) > 0
-                    || error.getErrorId() == errors.get(errors.size() - 1).getErrorId()){
+            Request req = requestDao.findById(logDao.findByErrorId(error.getErrorId()).getRequestId());
+            Content errorContent = new ErrorContent(req.getContent(), error.getReason());
 
+            boolean last = error.getErrorId() == errors.get(errors.size() - 1).getErrorId();
+
+            if ((time - prevTime) > 0 || last){
+                if (last){
+                    contents.add(errorContent);
+                }
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
+                contents.add(errorContent);
             }
 
-            Request req = requestDao.findById(logDao.findByErrorId(error.getErrorId()).getRequestId());
-            Content errorContent = new ErrorContent(req.getContent(), error.getReason());
-            contents.put(error.getErrorId(), errorContent);
+            contents.add(errorContent);
         }
 
         return stats.getDataList();

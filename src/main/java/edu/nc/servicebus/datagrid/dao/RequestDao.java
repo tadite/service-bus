@@ -13,9 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Repository
 @Transactional
@@ -119,6 +117,8 @@ public class RequestDao {
         for (Cache.Entry<Integer, Request> request: requests){
             requestList.add(request.getValue());
         }
+
+        Collections.sort(requestList);
 
         return requestList;
     }

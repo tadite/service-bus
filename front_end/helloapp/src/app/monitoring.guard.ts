@@ -10,7 +10,7 @@ export class MonitoringGuard implements CanActivate{
                 private cookie: CookieService){}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> | boolean{
-        if (localStorage.getItem('current_user')) {
+        if (this.cookie.get('current_user') != null) {
               // if (this.cookie.get('current_user')) {
                  // console.log(this.cookie.get('current_user'));
             // logged in so return true

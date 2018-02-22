@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
+import {error} from "util";
 
 
 @Component({

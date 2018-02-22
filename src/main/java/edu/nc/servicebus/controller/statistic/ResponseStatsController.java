@@ -17,9 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/statistics")
@@ -45,7 +44,7 @@ public class ResponseStatsController {
 
     private List<StatsData> getResponseDataList(){
         List<Response> responses = responseDao.getResponseList();
-        Map<Integer, Content> contents = new HashMap<>();
+        List<Content> contents = new ArrayList<>();
 
         Statistic stats = responseStatistic.getObject();
 
@@ -56,17 +55,22 @@ public class ResponseStatsController {
         for (Response response : responses){
             time = response.getTime().getTime() / converter;
 
-            if ((time - prevTime) > 0
-                    || response.getResponseId() == responses.get(responses.size() - 1).getResponseId()){
+            Request req = requestDao.findById(logDao.findByResponseId(response.getResponseId()).getRequestId());
+            int responseTime = (int) (response.getEndTime().getTime() - response.getTime().getTime());
+            Content responseContent = new ResponseContent(responseTime, req.getContent(), response.getContent());
+
+            boolean last = response.getResponseId() == responses.get(responses.size() - 1).getResponseId();
+
+            if ((time - prevTime) > 0 || last){
+                if (last){
+                    contents.add(responseContent);
+                }
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
             }
 
-            Request req = requestDao.findById(logDao.findByResponseId(response.getResponseId()).getRequestId());
-            int responseTime = (int) (response.getEndTime().getTime() - response.getTime().getTime());
-            Content responseContent = new ResponseContent(req.getContent(), response.getContent());
-            contents.put(responseTime, responseContent);
+            contents.add(responseContent);
         }
 
         return stats.getDataList();

@@ -14,6 +14,11 @@ public class ErrorContent implements Content{
     }
 
     @Override
+    public int getTime() {
+        return 0;
+    }
+
+    @Override
     public String getEndpoint() {
         return this.endpoint;
     }

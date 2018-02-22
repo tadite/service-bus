@@ -14,9 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/statistics")
@@ -51,7 +50,7 @@ public class RequestStatsController {
 
     private List<StatsData> getRequestDataList(int hour, int minute, int second){
         List<Request> requests = requestDao.getRequestList();
-        Map<Integer, Content> contents = new HashMap<>();
+        List<Content> contents = new ArrayList<>();
 
         Statistic stats = requestStatistic.getObject();
 
@@ -62,15 +61,21 @@ public class RequestStatsController {
         for (Request request: requests){
             time = request.getTime().getTime() / converter;
 
-            if ((time - prevTime) > 0
-                    || request.getRequestId() == requests.get(requests.size() - 1).getRequestId()){
+            int requestTime = (int) (request.getEndTime().getTime() - request.getTime().getTime());
+            Content requestContent = new RequestContent(requestTime, request.getContent());
+
+            boolean last = request.getRequestId() == requests.get(requests.size() - 1).getRequestId();
+
+            if ((time - prevTime) > 0 || last){
+                if (last){
+                    contents.add(requestContent);
+                }
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
             }
-            int requestTime = (int) (request.getEndTime().getTime() - request.getTime().getTime());
-            Content requestContent = new RequestContent(request.getContent());
-            contents.put(requestTime, requestContent);
+
+            contents.add(requestContent);
         }
 
         return stats.getDataList();

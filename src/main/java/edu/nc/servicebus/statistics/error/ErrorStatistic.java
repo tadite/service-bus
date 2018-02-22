@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Component(value = "error")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -27,21 +26,21 @@ public class ErrorStatistic implements Statistic{
     }
 
     @Override
-    public void add(long time, Map<Integer, Content> contents) {
+    public void add(long time, List<Content> contents) {
         double errorCount = contents.size();
 
         double beachErrorCount = 0;
         double sportErrorCount = 0;
         double excursionErrorCount = 0;
 
-        for (Map.Entry<Integer, Content> content : contents.entrySet()){
-            if (jsonCategories.checkEndpoint("beach", content.getValue().getEndpoint())){
+        for (Content content : contents){
+            if (jsonCategories.checkEndpoint("beach", content.getEndpoint())){
                 beachErrorCount++;
             }
-            if (jsonCategories.checkEndpoint("sport", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("sport", content.getEndpoint())){
                 sportErrorCount++;
             }
-            if (jsonCategories.checkEndpoint("excursion", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("excursion", content.getEndpoint())){
                 excursionErrorCount++;
             }
         }

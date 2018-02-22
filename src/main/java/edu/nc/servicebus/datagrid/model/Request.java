@@ -1,10 +1,12 @@
 package edu.nc.servicebus.datagrid.model;
 
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
 import java.util.Date;
 
-public class Request {
+public class Request implements Comparable<Request>{
 
     /** Primary key. */
     @QuerySqlField(index = true)
@@ -47,5 +49,10 @@ public class Request {
                 ", time=" + time +
                 ", endTime=" + endTime +
                 ", content=" + content + ']';
+    }
+
+    @Override
+    public int compareTo(@NotNull Request o) {
+        return getTime().compareTo(o.getTime());
     }
 }

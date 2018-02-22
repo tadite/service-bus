@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -118,6 +119,8 @@ public class ErrorDao {
         for (Cache.Entry<Integer, Error> error : errors){
             errorList.add(error.getValue());
         }
+
+        Collections.sort(errorList);
 
         return errorList;
     }

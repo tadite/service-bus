@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Component(value = "response")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -27,7 +26,7 @@ public class ResponseStatistic implements Statistic{
     }
 
     @Override
-    public void add(long time, Map<Integer, Content> contents) {
+    public void add(long time, List<Content> contents) {
         int beachCount = 0;
         int sportCount = 0;
         int excursionCount = 0;
@@ -40,21 +39,21 @@ public class ResponseStatistic implements Statistic{
         double sportSize = 0;
         double excursionSize = 0;
 
-        for (Map.Entry<Integer, Content> content : contents.entrySet()){
-            if (jsonCategories.checkEndpoint("beach", content.getValue().getEndpoint())){
+        for (Content content : contents){
+            if (jsonCategories.checkEndpoint("beach", content.getEndpoint())){
                 beachCount++;
-                beachTime += content.getKey() / 1000;
-                beachSize += content.getValue().getContent().length();
+                beachTime += content.getTime() / 1000;
+                beachSize += content.getContent().length();
             }
-            if (jsonCategories.checkEndpoint("sport", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("sport", content.getEndpoint())){
                 sportCount++;
-                sportTime += content.getKey() / 1000;
-                sportSize += content.getValue().getContent().length();
+                sportTime += content.getTime() / 1000;
+                sportSize += content.getContent().length();
             }
-            if (jsonCategories.checkEndpoint("excursion", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("excursion", content.getEndpoint())){
                 excursionCount++;
-                excursionTime += content.getKey() / 1000;
-                excursionSize += content.getValue().getContent().length();
+                excursionTime += content.getTime() / 1000;
+                excursionSize += content.getContent().length();
             }
         }
 

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -118,6 +119,8 @@ public class ResponseDao {
         for (Cache.Entry<Integer, Response> response : responses){
             responseList.add(response.getValue());
         }
+
+        Collections.sort(responseList);
 
         return responseList;
     }

@@ -3,18 +3,17 @@ package edu.nc.servicebus.controller;
 import edu.nc.servicebus.datagrid.model.User;
 import edu.nc.servicebus.model.security.*;
 import edu.nc.servicebus.model.security.jwt.TokenProvider;
-import edu.nc.servicebus.model.security.jwt.TokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController

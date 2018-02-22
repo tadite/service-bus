@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Component(value = "request")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -28,7 +27,7 @@ public class RequestStatistic implements Statistic {
     }
 
     @Override
-    public void add(long time, Map<Integer, Content> contents){
+    public void add(long time, List<Content> contents){
         int beachCount = 0;
         int sportCount = 0;
         int excursionCount = 0;
@@ -37,18 +36,18 @@ public class RequestStatistic implements Statistic {
         double sportTime = 0;
         double excursionTime = 0;
 
-        for (Map.Entry<Integer, Content> content : contents.entrySet()){
-            if (jsonCategories.checkEndpoint("beach", content.getValue().getEndpoint())){
+        for (Content content : contents){
+            if (jsonCategories.checkEndpoint("beach", content.getEndpoint())){
                 beachCount++;
-                beachTime += content.getKey() / 1000;
+                beachTime += content.getTime() / 1000;
             }
-            if (jsonCategories.checkEndpoint("sport", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("sport", content.getEndpoint())){
                 sportCount++;
-                sportTime += content.getKey() / 1000;
+                sportTime += content.getTime() / 1000;
             }
-            if (jsonCategories.checkEndpoint("excursion", content.getValue().getEndpoint())){
+            if (jsonCategories.checkEndpoint("excursion", content.getEndpoint())){
                 excursionCount++;
-                excursionTime += content.getKey() / 1000;
+                excursionTime += content.getTime() / 1000;
             }
         }
         requestDataList.add(new RequestData(time, contents.size(),

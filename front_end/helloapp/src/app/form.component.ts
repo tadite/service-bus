@@ -41,13 +41,12 @@ export class FormComponent{
 
         this.httpService.postData(this.user)
             .subscribe(data => {
-                localStorage.setItem('current_user', JSON.stringify(data));
                 this.cookie.set('current_user', data);
                 this.router.navigate(['/monitoring']);
                  //console.log(this.cookie.get('current_user'));
             },
                 error => {
-                    if (error.status == 401){
+                    if (error.status == 401 || error.status == 403){
                         this.incorrect = true;
                     }
                 }
