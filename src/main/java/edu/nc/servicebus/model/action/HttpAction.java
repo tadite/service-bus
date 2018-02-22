@@ -1,5 +1,7 @@
 package edu.nc.servicebus.model.action;
 
+import edu.nc.servicebus.datagrid.dao.ErrorDao;
+import edu.nc.servicebus.datagrid.dao.RequestDao;
 import edu.nc.servicebus.datagrid.dao.ResponseDao;
 import edu.nc.servicebus.model.request.AppendRequestFilter;
 import edu.nc.servicebus.model.request.HttpRequest;
@@ -11,11 +13,25 @@ import edu.nc.servicebus.model.response.ResponseFilter;
 import edu.nc.servicebus.model.sender.HttpSender;
 import edu.nc.servicebus.model.sender.Sender;
 import edu.nc.servicebus.model.source.RestSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.util.*;
 
+@Component(value = "httpAction")
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class HttpAction implements Action {
+
+    @Autowired
+    private ResponseDao responseDao;
+
+    @Autowired
+    private ErrorDao errorDao;
 
     private List<RequestFilter> requestFilters;
     private List<ResponseFilter> responseFilters;
@@ -23,7 +39,12 @@ public class HttpAction implements Action {
     private Sender sender;
     private Double rate;
 
+    private long initTime;
+    private long responseTime;
+    private long responseEndTime;
+
     public HttpAction(){
+        initTime = System.currentTimeMillis();
         requestFilters = new LinkedList<>();
         responseFilters = new LinkedList<>();
         sender = new HttpSender();
@@ -43,15 +64,25 @@ public class HttpAction implements Action {
     @Override
     public Response execute() {
         for (RequestFilter requestFilter : requestFilters){
-            request=requestFilter.filter(request);
+            request = requestFilter.filter(request);
         }
 
         Response response = null;
 
-        response = sender.send(request);
+        try {
+            responseTime = System.currentTimeMillis();
 
-        for (ResponseFilter responseFilter : responseFilters){
-            response = responseFilter.filter(response);
+            response = sender.send(request);
+
+            responseEndTime = System.currentTimeMillis();
+            responseDao.add(this.hashCode(), response.getRawData(),
+                    new Date(responseTime), new Date(responseEndTime));
+
+            for (ResponseFilter responseFilter : responseFilters) {
+                response = responseFilter.filter(response);
+            }
+        } catch (Exception e){
+            errorDao.add(this.hashCode(), e.getMessage());
         }
 
         return response;
@@ -75,5 +106,19 @@ public class HttpAction implements Action {
     @Override
     public void setResponseFilter(String responseFilter) {
         responseFilters.add(new JsonPathResponseFilter(responseFilter));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (initTime ^ (initTime >>> 32));
+        result = 31 * result + Action.class.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((obj instanceof HttpAction) &&
+                (request.getUrl().equals(((HttpAction) obj).request.getUrl())) &&
+                initTime == ((HttpAction) obj).initTime);
     }
 }

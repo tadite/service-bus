@@ -27,4 +27,12 @@ export class MonitoringService {
     getOverviewSecond() {
         return this._http.get<any>('/statistics/requestPerSecond');
     }
+
+    getResponseStats() {
+        return this._http.get<any>('/statistics/responseStats');
+    }
+
+    getErrorStats() {
+        return this._http.get<any>('/statistics/errorStats');
+    }
 }

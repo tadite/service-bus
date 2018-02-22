@@ -432,19 +432,27 @@ export class MonitoringComponent implements OnInit{
 
     showRequest() {
         this.condition=false;
-        this._monitoring.getOverview()
+        this._monitoring.getOverviewDay()
             .subscribe(res => {
-                let time_requests_beach = res['list'].map(res => res.time_requests_beach);
+                /*let time_requests_beach = res['list'].map(res => res.time_requests_beach);
                 let time_requests_excursions = res['list'].map(res => res.time_requests_excursions);
                 let time_requests_sport= res['list'].map(res => res.time_requests_sport);
                 let number_requests_beach = res['list'].map(res => res.number_requests_beach);
                 let number_requests_excursions = res['list'].map(res => res.number_requests_excursions);
                 let number_requests_sport= res['list'].map(res => res.number_requests_sport);
-                let alltimes = res['list'].map(res => res.dt);
+                let alltimes = res['list'].map(res => res.dt);*/
+
+                let time_requests_beach = res.map(res => res.avgTimeBeachRequest);
+                let time_requests_excursions = res.map(res => res.avgTimeExcursionRequest);
+                let time_requests_sport= res.map(res => res.avgTimeSportRequest);
+                let number_requests_beach = res.map(res => res.beachRequestCount);
+                let number_requests_excursions = res.map(res => res.excursionRequestCount);
+                let number_requests_sport= res.map(res => res.sportRequestCount);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -544,19 +552,27 @@ export class MonitoringComponent implements OnInit{
 
     showResponse() {
         this.condition=false;
-        this._monitoring.getOverview()
+        this._monitoring.getResponseStats()
             .subscribe(res => {
-                let time_responses_beach = res['list'].map(res => res.time_responses_beach);
+                /*let time_responses_beach = res['list'].map(res => res.time_responses_beach);
                 let time_responses_excursions = res['list'].map(res => res.time_responses_excursions);
                 let time_responses_sport= res['list'].map(res => res.time_responses_sport);
                 let average_message_size_beach = res['list'].map(res => res.average_message_size_beach);
                 let average_message_size_excursions = res['list'].map(res => res.average_message_size_excursions);
                 let average_message_size_sport= res['list'].map(res => res.average_message_size_sport);
-                let alltimes = res['list'].map(res => res.dt);
+                let alltimes = res['list'].map(res => res.dt);*/
+
+                let time_responses_beach = res.map(res => res.avgTimeBeachResponse);
+                let time_responses_excursions = res.map(res => res.avgTimeExcursionResponse);
+                let time_responses_sport= res.map(res => res.avgTimeSportResponse);
+                let average_message_size_beach = res.map(res => res.avgSizeBeachResponse);
+                let average_message_size_excursions = res.map(res => res.avgSizeExcursionResponse);
+                let average_message_size_sport= res.map(res => res.avgSizeSportResponse);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -656,17 +672,23 @@ export class MonitoringComponent implements OnInit{
 
     showErrors() {
         this.condition=false;
-        this._monitoring.getOverview()
+        this._monitoring.getErrorStats()
             .subscribe(res => {
-                let number_errors = res['list'].map(res => res.number_errors);
+                /*let number_errors = res['list'].map(res => res.number_errors);
                 let number_errors_beach = res['list'].map(res => res.number_errors_beach);
                 let number_errors_excursions = res['list'].map(res => res.number_errors_excursions);
                 let number_errors_sport= res['list'].map(res => res.number_errors_sport);
-                let alltimes = res['list'].map(res => res.dt);
+                let alltimes = res['list'].map(res => res.dt);*/
+
+                let number_errors = res.map(res => res.errorCount);
+                let number_errors_beach = res.map(res => res.beachErrorCount);
+                let number_errors_excursions = res.map(res => res.excursionErrorCount);
+                let number_errors_sport= res.map(res => res.sportErrorCount);
+                let alltimes = res.map(res => res.time);
 
                 let monitoringTimes = [];
                 alltimes.forEach((res) => {
-                    let jsdate = new Date(res * 1000);
+                    let jsdate = new Date(res);
                     monitoringTimes.push(jsdate.toLocaleDateString());
                     this.chart = new Chart('canvas', {
                         type: 'line',

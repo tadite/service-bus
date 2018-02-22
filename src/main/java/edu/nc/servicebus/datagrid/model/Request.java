@@ -16,10 +16,14 @@ public class Request {
     @QuerySqlField
     private Date time;
 
-    public Request(int id, String  content, Date time){
+    @QuerySqlField
+    private Date endTime;
+
+    public Request(int id, String  content, Date time, Date emdTime){
         this.requestId = id;
         this.content = content;
         this.time = time;
+        this.endTime = emdTime;
     }
 
     public int getRequestId() {
@@ -34,9 +38,14 @@ public class Request {
         return time;
     }
 
+    public Date getEndTime() {
+        return endTime;
+    }
+
     @Override public String toString() {
         return "Request [requestId=" + requestId +
                 ", time=" + time +
+                ", endTime=" + endTime +
                 ", content=" + content + ']';
     }
 }

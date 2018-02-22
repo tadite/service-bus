@@ -93,6 +93,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
                .antMatchers("/request/**").permitAll()
                .antMatchers("/response/**").permitAll()
                .antMatchers("/statistics/**").permitAll()
+               .antMatchers("/log/**").permitAll()
+               .antMatchers("/error/**").permitAll()
                .antMatchers("/public/app.js", "/public/polyfills.js").permitAll()
                //.antMatchers("/text.json").permitAll()
                .anyRequest().fullyAuthenticated()

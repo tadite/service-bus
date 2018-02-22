@@ -19,24 +19,20 @@ public class HttpSender implements Sender{
     private Response resp;
 
     @Override
-    public Response send(Request request) {
-        try {
-            URL url = new URL(request.getUrl());
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+    public Response send(Request request) throws Exception {
+        URL url = new URL(request.getUrl());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
 
-            while ((inputLine = reader.readLine()) != null) {
-                response.append(inputLine);
-            }
-            reader.close();
-            resp =  new HttpResponse(response.toString());
-        } catch (IOException e){
-            e.printStackTrace();
+        while ((inputLine = reader.readLine()) != null) {
+            response.append(inputLine);
         }
+        reader.close();
+        resp = new HttpResponse(response.toString());
         return resp;
     }
 }

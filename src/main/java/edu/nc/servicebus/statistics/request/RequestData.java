@@ -1,62 +1,65 @@
-package edu.nc.servicebus.statistics;
+package edu.nc.servicebus.statistics.request;
 
 
-public class RequestData {
+import edu.nc.servicebus.statistics.StatsData;
+
+public class RequestData implements StatsData {
 
     private long time;
     private double requestCount;
     private double beachRequestCount;
     private double sportRequestCount;
     private double excursionRequestCount;
+    private double avgTimeBeachRequest;
+    private double avgTimeSportRequest;
+    private double avgTimeExcursionRequest;
 
     public RequestData(){}
 
     public RequestData(long time, double requestCount, double beachRequestCount,
-                       double sportRequestCount, double excursionRequestCount){
+                       double sportRequestCount, double excursionRequestCount,
+                       double avgTimeBeachRequest, double avgTimeSportRequest,
+                       double avgTimeExcursionRequest){
+
         this.time = time;
         this.requestCount = requestCount;
         this.beachRequestCount = beachRequestCount;
         this.sportRequestCount = sportRequestCount;
         this.excursionRequestCount = excursionRequestCount;
+        this.avgTimeBeachRequest = avgTimeBeachRequest;
+        this.avgTimeSportRequest = avgTimeSportRequest;
+        this.avgTimeExcursionRequest = avgTimeExcursionRequest;
     }
 
     public long getTime() {
         return time;
     }
 
-    public void setTime(long time) {
-        this.time = time;
-    }
-
     public double getRequestCount() {
         return requestCount;
-    }
-
-    public void setRequestCount(double requestCount) {
-        this.requestCount = requestCount;
     }
 
     public double getBeachRequestCount() {
         return beachRequestCount;
     }
 
-    public void setBeachRequestCount(double beachRequestCount) {
-        this.beachRequestCount = beachRequestCount;
-    }
-
     public double getSportRequestCount() {
         return sportRequestCount;
-    }
-
-    public void setSportRequestCount(double sportRequestCount) {
-        this.sportRequestCount = sportRequestCount;
     }
 
     public double getExcursionRequestCount() {
         return excursionRequestCount;
     }
 
-    public void setExcursionRequestCount(double excursionRequestCount) {
-        this.excursionRequestCount = excursionRequestCount;
+    public double getAvgTimeBeachRequest() {
+        return avgTimeBeachRequest;
+    }
+
+    public double getAvgTimeSportRequest() {
+        return avgTimeSportRequest;
+    }
+
+    public double getAvgTimeExcursionRequest() {
+        return avgTimeExcursionRequest;
     }
 }
