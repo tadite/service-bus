@@ -50,6 +50,9 @@ export class MonitoringComponent implements OnInit{
                         ]
                     },
                     options: {
+                        tooltips: {
+                            enabled: false
+                        },
                         title: {
                             display: true,
                             fontSize: 20,
@@ -96,6 +99,9 @@ export class MonitoringComponent implements OnInit{
                         ]
                     },
                     options: {
+                        tooltips: {
+                            enabled: false
+                        },
                         title: {
                             display: true,
                             fontSize: 20,
@@ -150,6 +156,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -197,6 +206,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -251,6 +263,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -298,6 +313,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -352,6 +370,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -399,6 +420,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -466,6 +490,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -512,6 +539,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -578,6 +608,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -624,6 +657,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -678,6 +714,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -727,6 +766,9 @@ export class MonitoringComponent implements OnInit{
                             ]
                         },
                         options: {
+                            tooltips: {
+                                enabled: false
+                            },
                             title: {
                                 display: true,
                                 fontSize: 20,
