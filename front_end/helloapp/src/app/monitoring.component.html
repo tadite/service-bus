@@ -2,12 +2,12 @@
 
     <div class="col-xs-3 col-md-3"  style=" background: rgba(28, 54, 85, .9); height:100%;margin-top: 50px">
                 <ul class="list-group list-unstyled">
-                    <a class="list-group-item"style="margin-top: 10px"(click)="ngOnInit()"><li><span class="glyphicon glyphicon-dashboard"></span> Обзор</li></a>
-                    <a class="list-group-item"(click)="showRequest()"><li><span class="glyphicon glyphicon-picture"></span> Запрoсы</li></a>
-                    <a class="list-group-item"(click)="showResponse()"><li><span class="glyphicon glyphicon-gift"></span> Ответы</li></a>
-                    <a class="list-group-item"(click)="showErrors()"><li><span class="glyphicon glyphicon-alert"></span> Ошибки</li></a>
-                    <a [routerLink]="['/register']" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user"></span> Регистрация</li></a>
-                    <a class="list-group-item"(click)="exitMonitoring()"><li><span class="glyphicon glyphicon-log-out"></span> Выход</li></a>
+                    <a class="list-group-item"style="margin-top: 10px" (click)="ngOnInit()"><li><span class="glyphicon glyphicon-dashboard" style="cursor: pointer;"></span><span style="cursor: pointer"> Обзор</span></li></a>
+                    <a class="list-group-item"(click)="showRequest()"><li><span class="glyphicon glyphicon-picture" style="cursor: pointer"></span><span style="cursor: pointer"> Запрoсы</span></li></a>
+                    <a class="list-group-item"(click)="showResponse()"><li><span class="glyphicon glyphicon-gift" style="cursor: pointer"></span><span style="cursor: pointer"> Ответы</span></li></a>
+                    <a class="list-group-item"(click)="showErrors()"><li><span class="glyphicon glyphicon-alert" style="cursor: pointer"></span><span style="cursor: pointer"> Ошибки</span></li></a>
+                    <a [routerLink]="['/register']" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user" style="cursor: pointer"></span><span style="cursor: pointer"> Регистрация</span></li></a>
+                    <a class="list-group-item"(click)="exitMonitoring()"><li><span class="glyphicon glyphicon-log-out"style="cursor: pointer"></span><span style="cursor: pointer"> Выход</span></li></a>
 
                 </ul>
     </div>
@@ -25,11 +25,11 @@
                         </button>
                     </button>
                         <ul>
-                            <li><a (click)="showOverviewSecond()">Секунда</a></li>
-                            <li><a (click)="showOverviewMinute()">Минута</a></li>
-                            <li><a (click)="showOverviewHour()">Час</a></li>
+                            <li><a (click)="showOverviewSecond()"><span style="cursor: pointer">Секунда</span></a></li>
+                            <li><a (click)="showOverviewMinute()"><span style="cursor: pointer">Минута</span></a></li>
+                            <li><a (click)="showOverviewHour()"><span style="cursor: pointer">Час</span></a></li>
                             <li class="divider"></li>
-                            <li><a (click)="ngOnInit()">День</a></li>
+                            <li><a (click)="ngOnInit()"><span style="cursor: pointer">День</span></a></li>
                         </ul>
                     </li>
                   </ul>

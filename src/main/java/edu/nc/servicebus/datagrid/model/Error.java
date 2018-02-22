@@ -1,10 +1,11 @@
 package edu.nc.servicebus.datagrid.model;
 
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-public class Error {
+public class Error implements Comparable<Error>{
     /** Primary key. */
     @QuerySqlField(index = true)
     private int errorId;
@@ -51,5 +52,10 @@ public class Error {
         return "Error [errorId=" + errorId +
                 ", time=" + time +
                 ", reason=" + reason + ']';
+    }
+
+    @Override
+    public int compareTo(@NotNull Error o) {
+        return getTime().compareTo(o.getTime());
     }
 }

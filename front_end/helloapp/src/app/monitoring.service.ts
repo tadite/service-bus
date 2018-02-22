@@ -11,4 +11,28 @@ export class MonitoringService {
         return this._http.get('text.json')
             .map(result => result);
     }
+
+    getOverviewDay() {
+        return this._http.get<any>('/statistics/requestPerDay');
+    }
+
+    getOverviewHour() {
+        return this._http.get<any>('/statistics/requestPerHour');
+    }
+
+    getOverviewMinute() {
+        return this._http.get<any>('/statistics/requestPerMinute');
+    }
+
+    getOverviewSecond() {
+        return this._http.get<any>('/statistics/requestPerSecond');
+    }
+
+    getResponseStats() {
+        return this._http.get<any>('/statistics/responseStats');
+    }
+
+    getErrorStats() {
+        return this._http.get<any>('/statistics/errorStats');
+    }
 }

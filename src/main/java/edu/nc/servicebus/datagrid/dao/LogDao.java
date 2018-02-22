@@ -56,6 +56,12 @@ public class LogDao {
         logCache.getAndRemove(id);
     }
 
+    public void clear(){
+        getCacheCfg();
+        IgniteCache<Integer, Log> logCache = ignite.getOrCreateCache(logCacheCfg);
+        logCache.clear();
+    }
+
     private void  getCacheCfg(){
         if(logCacheCfg == null) {
             logCacheCfg = new CacheConfiguration<>(LogDao.LOG_CACHE_NAME);
@@ -78,5 +84,53 @@ public class LogDao {
                 max = log.getValue().getLogId();
         }
         return ++max;
+    }
+
+    public Log findByRequestId(int requestId){
+        getCacheCfg();
+        IgniteCache<Integer, Log> logCache = ignite.getOrCreateCache(logCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Log>> logs = logCache.query(new SqlQuery(
+                Log.class,
+                "from \""  + LogDao.LOG_CACHE_NAME + "\".Log "));
+
+        for (Cache.Entry<Integer, Log> log : logs){
+            if (requestId == log.getValue().getRequestId()){
+                return log.getValue();
+            }
+        }
+        return null;
+    }
+
+    public Log findByResponseId(int responseId){
+        getCacheCfg();
+        IgniteCache<Integer, Log> logCache = ignite.getOrCreateCache(logCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Log>> logs = logCache.query(new SqlQuery(
+                Log.class,
+                "from \""  + LogDao.LOG_CACHE_NAME + "\".Log "));
+
+        for (Cache.Entry<Integer, Log> log : logs){
+            if (responseId == log.getValue().getResponseId()){
+                return log.getValue();
+            }
+        }
+        return null;
+    }
+
+    public Log findByErrorId(int errorId){
+        getCacheCfg();
+        IgniteCache<Integer, Log> logCache = ignite.getOrCreateCache(logCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Log>> logs = logCache.query(new SqlQuery(
+                Log.class,
+                "from \""  + LogDao.LOG_CACHE_NAME + "\".Log "));
+
+        for (Cache.Entry<Integer, Log> log : logs){
+            if (errorId == log.getValue().getErrorId()){
+                return log.getValue();
+            }
+        }
+        return null;
     }
 }

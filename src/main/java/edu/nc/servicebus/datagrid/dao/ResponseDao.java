@@ -13,7 +13,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -25,10 +28,10 @@ public class ResponseDao {
 
     public static final String RESPONSE_CACHE_NAME = ResponseDao.class.getSimpleName() + "Response";
 
-    public void add(String  reason) throws IgniteException {
+    public void add(int id, String reason, Date time, Date endTime) throws IgniteException {
         getCacheCfg();
         IgniteCache<Integer, Response> responseCache = ignite.getOrCreateCache(responseCacheCfg);
-        Response response = new Response(findId(),reason,new Date());
+        Response response = new Response(id, reason, time, endTime);
         responseCache.put(response.getResponseId(), response);
     }
 
@@ -57,6 +60,12 @@ public class ResponseDao {
         responseCache.getAndRemove(id);
     }
 
+    public void clear(){
+        getCacheCfg();
+        IgniteCache<Integer, Response> responseCache = ignite.getOrCreateCache(responseCacheCfg);
+        responseCache.clear();
+    }
+
     private  void  getCacheCfg(){
         if(responseCacheCfg == null) {
             responseCacheCfg = new CacheConfiguration<>(ResponseDao.RESPONSE_CACHE_NAME);
@@ -78,5 +87,41 @@ public class ResponseDao {
                 max = response.getValue().getResponseId();
         }
         return ++max;
+    }
+
+    public Response findById(int id){
+        getCacheCfg();
+        IgniteCache<Integer, Response> responseCache = ignite.getOrCreateCache(responseCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Response>> responses = responseCache.query(new SqlQuery(
+                Response.class,
+                "from \""  + ResponseDao.RESPONSE_CACHE_NAME + "\".Response "));
+
+        Response result = null;
+        for (Cache.Entry<Integer, Response> response : responses){
+            if (response.getValue().getResponseId() == id){
+                result = response.getValue();
+            }
+        }
+
+        return result;
+    }
+
+    public List<Response> getResponseList(){
+        getCacheCfg();
+        IgniteCache<Integer, Response> responseCache = ignite.getOrCreateCache(responseCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Response>> responses = responseCache.query(new SqlQuery(
+                Response.class,
+                "from \""  + ResponseDao.RESPONSE_CACHE_NAME + "\".Response "));
+
+        List<Response> responseList = new ArrayList<>();
+        for (Cache.Entry<Integer, Response> response : responses){
+            responseList.add(response.getValue());
+        }
+
+        Collections.sort(responseList);
+
+        return responseList;
     }
 }

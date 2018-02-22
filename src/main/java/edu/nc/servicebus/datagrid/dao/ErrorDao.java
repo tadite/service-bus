@@ -13,7 +13,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.cache.Cache;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -26,11 +29,11 @@ public class ErrorDao {
 
     public static final String ERROR_CACHE_NAME = ErrorDao.class.getSimpleName() + "Error";
 
-    public void add(String  reason) throws IgniteException {
+    public void add(int id, String reason) throws IgniteException {
         getCacheCfg();
         IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
 
-        Error error = new Error(findId(),reason,new Date());
+        Error error = new Error(id, reason, new Date());
         errorCache.put(error.getErrorId(), error);
     }
 
@@ -53,9 +56,15 @@ public class ErrorDao {
     }
 
     public void delete(int id) {
-            getCacheCfg();
-            IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
-            errorCache.getAndRemove(id);
+        getCacheCfg();
+        IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
+        errorCache.getAndRemove(id);
+    }
+
+    public void clear(){
+        getCacheCfg();
+        IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
+        errorCache.clear();
     }
 
     private void  getCacheCfg(){
@@ -78,5 +87,41 @@ public class ErrorDao {
                 max = error.getValue().getErrorId();
         }
         return ++max;
+    }
+
+    public Error findById(int id){
+        getCacheCfg();
+        IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Error>> errors = errorCache.query(new SqlQuery(
+                Error.class,
+                "from \""  + ErrorDao.ERROR_CACHE_NAME + "\".Error "));
+
+        Error result = null;
+        for (Cache.Entry<Integer, Error> error : errors){
+            if (error.getValue().getErrorId() == id){
+                result = error.getValue();
+            }
+        }
+
+        return result;
+    }
+
+    public List<Error> getErrorList(){
+        getCacheCfg();
+        IgniteCache<Integer, Error> errorCache = ignite.getOrCreateCache(errorCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, Error>> errors = errorCache.query(new SqlQuery(
+                Error.class,
+                "from \""  + ErrorDao.ERROR_CACHE_NAME + "\".Error "));
+
+        List<Error> errorList = new ArrayList<>();
+        for (Cache.Entry<Integer, Error> error : errors){
+            errorList.add(error.getValue());
+        }
+
+        Collections.sort(errorList);
+
+        return errorList;
     }
 }

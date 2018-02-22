@@ -25,7 +25,7 @@ public class LogController {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        return "Log succesfully deleted!";
+        return "Log successfully deleted!";
     }
 
     @RequestMapping(value = "/save")
@@ -38,7 +38,7 @@ public class LogController {
             return ex.getMessage();
         }
 
-        return "Log succesfully saved!";
+        return "Log successfully saved!";
     }
     @RequestMapping(value = "/allLogs")
     @ResponseBody
@@ -51,5 +51,17 @@ public class LogController {
             e.printStackTrace(System.out);
             return e.toString();
         }
+    }
+
+    @RequestMapping(value = "/clear")
+    @ResponseBody
+    @Transactional
+    public String clear(){
+        try{
+            logDao.clear();
+        } catch (Exception e){
+            return e.getMessage();
+        }
+        return "Log table successfully cleared";
     }
 }

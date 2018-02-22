@@ -25,19 +25,19 @@ public class ErrorController {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        return "Error succesfully deleted!";
+        return "Error successfully deleted!";
     }
 
     @RequestMapping(value = "/save")
     @ResponseBody
     public String create(String  reason) {
         try {
-            errorDao.add(reason);
+            //errorDao.add(reason);
 
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        return "Error succesfully saved!";
+        return "Error successfully saved!";
 
     }
     @RequestMapping(value = "/allErrors")
@@ -51,5 +51,17 @@ public class ErrorController {
             e.printStackTrace(System.out);
             return e.toString();
         }
+    }
+
+    @RequestMapping(value = "/clear")
+    @ResponseBody
+    @Transactional
+    public String clear(){
+        try{
+            errorDao.clear();
+        } catch (Exception e){
+            return e.getMessage();
+        }
+        return "Error table successfully cleared";
     }
 }

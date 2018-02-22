@@ -25,7 +25,7 @@ import java.util.List;
 public class ActionTests {
 
 
-    @Test
+    //@Test
     public void canExecuteHttpActionFromRestApi(){
         //Array
         Source source = new RestSource("https://jsonplaceholder.typicode.com");

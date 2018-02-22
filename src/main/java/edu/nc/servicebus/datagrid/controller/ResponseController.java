@@ -24,20 +24,20 @@ public class ResponseController {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        return "Response succesfully deleted!";
+        return "Response successfully deleted!";
     }
 
     @RequestMapping(value = "/save")
     @ResponseBody
     public String create(String  reason) {
         try {
-            responseDao.add(reason);
+            //responseDao.add(reason);
 
         } catch (Exception ex) {
             return ex.getMessage();
         }
 
-        return "Response succesfully saved!";
+        return "Response successfully saved!";
 
     }
     @RequestMapping(value = "/allResponses")
@@ -53,4 +53,15 @@ public class ResponseController {
         }
     }
 
+    @RequestMapping(value = "/clear")
+    @ResponseBody
+    @Transactional
+    public String clear(){
+        try{
+            responseDao.clear();
+        } catch (Exception e){
+            return e.getMessage();
+        }
+        return "Response table successfully cleared";
+    }
 }
