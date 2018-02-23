@@ -61,16 +61,17 @@ public class ResponseStatsController {
 
             boolean last = response.getResponseId() == responses.get(responses.size() - 1).getResponseId();
 
-            if ((time - prevTime) > 0 || last){
-                if (last){
-                    contents.add(responseContent);
-                }
+            if ((time - prevTime) > 0){
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
             }
 
             contents.add(responseContent);
+
+            if (last){
+                stats.add(prevTime * converter, contents);
+            }
         }
 
         return stats.getDataList();
