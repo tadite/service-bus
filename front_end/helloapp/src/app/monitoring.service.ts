@@ -13,26 +13,33 @@ export class MonitoringService {
     }
 
     getOverviewDay() {
-        return this._http.get<any>('/statistics/requestPerDay');
+        return this._http.get<any>('/statistics/requestPerDay')
+            .map(result => result);
     }
 
     getOverviewHour() {
-        return this._http.get<any>('/statistics/requestPerHour');
+          return this._http.get<any>('/statistics/requestPerHour')
+              .map(result => result);
+
     }
 
     getOverviewMinute() {
-        return this._http.get<any>('/statistics/requestPerMinute');
+        return this._http.get<any>('/statistics/requestPerMinute')
+            .map(result => result);
     }
 
     getOverviewSecond() {
-        return this._http.get<any>('/statistics/requestPerSecond');
+        return this._http.get<any>('/statistics/requestPerSecond')
+            .map(result => result);
     }
 
     getResponseStats() {
-        return this._http.get<any>('/statistics/responseStats');
+        return this._http.get<any>('/statistics/responseStats')
+            .map(result => result);
     }
 
     getErrorStats() {
-        return this._http.get<any>('/statistics/errorStats');
+        return this._http.get<any>('/statistics/errorStats')
+            .map(result => result);
     }
 }
