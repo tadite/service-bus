@@ -66,16 +66,17 @@ public class RequestStatsController {
 
             boolean last = request.getRequestId() == requests.get(requests.size() - 1).getRequestId();
 
-            if ((time - prevTime) > 0 || last){
-                if (last){
-                    contents.add(requestContent);
-                }
+            if ((time - prevTime) > 0){
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
             }
 
             contents.add(requestContent);
+
+            if (last){
+                stats.add(prevTime * converter, contents);
+            }
         }
 
         return stats.getDataList();

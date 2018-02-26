@@ -45,10 +45,17 @@ public class ResponseDao {
         QueryCursor<Cache.Entry<Integer, Response>> responses = responseCache.query(new SqlQuery(
                 Response.class,
                 "from \""  + ResponseDao.RESPONSE_CACHE_NAME + "\".Response "));
-        for(Cache.Entry<Integer, Response> response : responses){
 
+        List<Response> responseList = new ArrayList<>();
+        for(Cache.Entry<Integer, Response> response : responses){
+            responseList.add(response.getValue());
+        }
+        Collections.sort(responseList);
+
+        for (Response response : responseList){
             result +=  response.toString();
         }
+
         result += "]";
 
         return result;

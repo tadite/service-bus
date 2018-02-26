@@ -43,10 +43,17 @@ public class RequestDao {
         QueryCursor<Cache.Entry<Integer, Request>> requests = requestCache.query(new SqlQuery(
                 Request.class,
                 "from \""  + RequestDao.REQUEST_CACHE_NAME + "\".Request "));
-        for(Cache.Entry<Integer, Request> request : requests){
 
+        List<Request> requestList = new ArrayList<>();
+        for(Cache.Entry<Integer, Request> request : requests){
+            requestList.add(request.getValue());
+        }
+        Collections.sort(requestList);
+
+        for (Request request : requestList){
             result +=  request.toString();
         }
+
         result += "]";
 
         return result;

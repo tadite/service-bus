@@ -10,7 +10,7 @@ import java.io.FileReader;
 @Component
 public class JsonCategories {
 
-    private final String PATH = System.getProperty("user.dir") + "\\json\\categories\\categories.json";
+    private final String PATH = System.getProperty("user.dir") + "/json/categories/categories.json";
 
     private JSONParser parser;
     private JSONObject type;

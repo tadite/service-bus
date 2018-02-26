@@ -60,17 +60,17 @@ public class ErrorStatsController {
 
             boolean last = error.getErrorId() == errors.get(errors.size() - 1).getErrorId();
 
-            if ((time - prevTime) > 0 || last){
-                if (last){
-                    contents.add(errorContent);
-                }
+            if ((time - prevTime) > 0){
                 stats.add(prevTime * converter, contents);
                 prevTime = time;
                 contents.clear();
-                contents.add(errorContent);
             }
 
             contents.add(errorContent);
+
+            if (last){
+                stats.add(prevTime * converter, contents);
+            }
         }
 
         return stats.getDataList();

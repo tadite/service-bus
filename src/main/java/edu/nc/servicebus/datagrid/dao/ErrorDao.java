@@ -46,10 +46,17 @@ public class ErrorDao {
         QueryCursor<Cache.Entry<Integer, Error>> errors = errorCache.query(new SqlQuery(
                 Error.class,
                 "from \""  + ErrorDao.ERROR_CACHE_NAME + "\".Error "));
-        for(Cache.Entry<Integer, Error> error : errors){
 
+        List<Error> errorList = new ArrayList<>();
+        for(Cache.Entry<Integer, Error> error : errors){
+            errorList.add(error.getValue());
+        }
+        Collections.sort(errorList);
+
+        for (Error error : errorList){
             result +=  error.toString();
         }
+
         result += "]";
 
         return result;
