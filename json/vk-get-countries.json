@@ -2,7 +2,7 @@
   "type":"http",
   "url":"https://api.vk.com/method/database.getCountries",
   "parameters":{
-    "method":"&need_all=1&count=250&v=5.73"
+    "method":"&need_all=1&count=250&v=3.0"
   },
   "expression":"$.response[*]"
 }
