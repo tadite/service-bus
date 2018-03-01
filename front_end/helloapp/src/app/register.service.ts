@@ -14,13 +14,13 @@ export class RegisterService{
 
 
     postDataRegister(admin: Admin){
-        const body = {name: admin.name, password: admin.password, eMail:admin.eMail};
+        const body = {login: admin.name, email: admin.eMail, password: admin.password};
         console.log (body);
 
         //const myHeaders = new HttpHeaders().set('Authorization', 'my-auth-token');
 
         //return this.http.post('http://localhost:60820/api/values', user, {headers:myHeaders});
-        return this.http.post('/register', body);
+        return this.http.post('/register', body, {responseType: 'text'});
     }
 
 

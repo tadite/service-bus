@@ -30,9 +30,9 @@ public class UserController  {
 
     @RequestMapping(value = "/save")
     @ResponseBody
-    public String create(String login, String password) {
+    public String create(String login, String password,String email) {
         try {
-            userDao.add(login, password);
+            userDao.add(login, password, email);
 
         } catch (Exception ex) {
             return ex.getMessage();

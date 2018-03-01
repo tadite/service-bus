@@ -2,22 +2,19 @@ package edu.nc.servicebus.model.parser;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.nc.servicebus.datagrid.dao.RequestDao;
 import edu.nc.servicebus.model.action.Action;
 import edu.nc.servicebus.model.action.ActionFactory;
 import edu.nc.servicebus.model.action.ActionReader;
 import edu.nc.servicebus.model.action.HttpAction;
 import edu.nc.servicebus.model.limiter.RateLimiterManager;
-import edu.nc.servicebus.model.parser.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 @Component
@@ -25,12 +22,18 @@ public class JsonActionFactory implements ActionFactory{
 
     @Autowired
     private ActionSelector actionSelector;
+
     @Autowired
     private JsonReader jsonReader;
+
     @Autowired
     RateLimiterManager rateLimiterManager;
+
     @Autowired
     ActionReader actionReader;
+
+    @Autowired
+    private RequestDao requestDao;
 
     public JsonActionFactory(@Autowired JsonReader jsonReader){
         this.jsonReader = jsonReader;
@@ -39,6 +42,9 @@ public class JsonActionFactory implements ActionFactory{
 
     @Override
     public Action getAction(String name) throws Exception{
+
+        long requestTime = System.currentTimeMillis();
+
         String jsonAction = jsonReader.getJsonAction(name);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -48,6 +54,9 @@ public class JsonActionFactory implements ActionFactory{
         Action action = getActionFromSelector(actionEntity);
 
         //rateLimiterManager.createRateLimiterIfAbsent(name, action.getRate());
+
+        long requestEndTime = System.currentTimeMillis();
+        requestDao.add(action.hashCode(), name, new Date(requestTime), new Date(requestEndTime));
 
         return action;
     }
@@ -83,7 +92,7 @@ public class JsonActionFactory implements ActionFactory{
         Method method = actionClass.getMethod("setParameter", String.class);
         String urlParameter = jsonReader.getParameters();
         if (urlParameter != null && !urlParameter.equals("")){
-            if (action.getClass().equals(HttpAction.class)) {
+            if (action instanceof HttpAction) {
                 method.invoke(action, "?" + urlParameter);
             } else{
                 method.invoke(action, urlParameter);

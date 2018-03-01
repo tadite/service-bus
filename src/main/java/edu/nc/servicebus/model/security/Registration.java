@@ -1,38 +1,33 @@
 package edu.nc.servicebus.model.security;
 
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
+import edu.nc.servicebus.datagrid.dao.UserDao;
+import edu.nc.servicebus.datagrid.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-
+@Component
 public class Registration {
 
-    private final String PATH = System.getProperty("user.dir") + "\\jsonUsers\\users.json";
+    @Autowired
+    private UserDao userDao;
+
+    public Registration(){}
 
     public void addUser(User user){
-        try{
-            addToJson(user);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        userDao.add(user.getLogin(), user.getPassword(), user.getEmail());
     }
 
-    private void addToJson(User user) throws Exception{
-        JSONParser parser = new JSONParser();
-        JSONArray array = (JSONArray) parser.parse(
-                new FileReader(PATH));
+    public boolean checkUsername(String username){
+        if (userDao.getUserByUsername(username) != null){
+            return false;
+        }
+        return true;
+    }
 
-        JSONObject obj = new JSONObject();
-        obj.put("login", user.getUsername());
-        obj.put("email", user.getEmail());
-        obj.put("password", user.getPassword());
-
-        array.add(obj);
-
-        FileWriter jsonFile = new FileWriter(PATH);
-        jsonFile.write(array.toJSONString());
-        jsonFile.close();
+    public boolean checkEmail(String email){
+        if (userDao.getUserByEmail(email) != null){
+            return false;
+        }
+        return true;
     }
 }

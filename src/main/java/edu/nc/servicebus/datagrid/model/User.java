@@ -16,13 +16,19 @@ public class User {
     private String password;
 
     @QuerySqlField
+    private String email;
+
+    @QuerySqlField
     private Date dateOfRegistration;
 
-    public User(int id,String login, String password, Date dateOfRegistration){
+    public User(){}
+
+    public User(int id,String login, String password, Date dateOfRegistration, String email){
         this.userId = id;
         this.login = login;
         this.password = password;
         this.dateOfRegistration = dateOfRegistration;
+        this.email = email;
     }
 
     public int getUserId() {
@@ -41,8 +47,13 @@ public class User {
         return dateOfRegistration;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     @Override public String toString() {
         return "User [userId=" + userId +
+                ", email=" + email +
                 ", login=" + login +
                 ", password=" + password +
                 ",dateOfRegistration=" + dateOfRegistration + ']';

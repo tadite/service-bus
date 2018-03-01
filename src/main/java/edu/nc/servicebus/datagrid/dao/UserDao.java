@@ -26,15 +26,16 @@ public class UserDao {
 
     public static final String USER_CACHE_NAME = UserDao.class.getSimpleName() + "User";
 
-    public void add(String login, String password) throws IgniteException {
+    public void add(String login, String password, String email) throws IgniteException {
         getCacheCfg();
         IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
-        User user = new User(findId(),login, password, new Date());
+        User user = new User(findId(),login, password, new Date(),email);
         userCache.put(user.getUserId(), user);
     }
 
 
     public String getAll() throws IgniteException {
+
         getCacheCfg();
         IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
 
@@ -79,5 +80,48 @@ public class UserDao {
         }
 
         return ++max;
+    }
+
+    public User getUserByUsername(String username){
+        getCacheCfg();
+        IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, User>> users = userCache.query(new SqlQuery(
+                User.class,
+                "from \""  + UserDao.USER_CACHE_NAME + "\".User "));
+        for (Cache.Entry<Integer, User> user : users){
+            if (username.equals(user.getValue().getLogin())){
+                return user.getValue();
+            }
+        }
+        return null;
+    }
+
+    public User getUserByEmail(String email){
+        getCacheCfg();
+        IgniteCache<Integer, User> userCache = ignite.getOrCreateCache(userCacheCfg);
+
+        QueryCursor<Cache.Entry<Integer, User>> users = userCache.query(new SqlQuery(
+                User.class,
+                "from \""  + UserDao.USER_CACHE_NAME + "\".User "));
+        for (Cache.Entry<Integer, User> user : users){
+            if (email.equals(user.getValue().getEmail())){
+                return user.getValue();
+            }
+        }
+        return null;
+    }
+
+    public User getUserByLogin(String login){
+        User userByName = getUserByUsername(login);
+        User userByEmail = getUserByEmail(login);
+
+        if (userByName != null){
+            return userByName;
+        }
+        if (userByEmail != null){
+            return userByEmail;
+        }
+        return null;
     }
 }

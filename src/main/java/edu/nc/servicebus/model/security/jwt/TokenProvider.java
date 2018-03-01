@@ -1,5 +1,6 @@
 package edu.nc.servicebus.model.security.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,5 +42,17 @@ public class TokenProvider {
                 .getBody().getSubject();
         UserDetails userDetails = this.userService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public Boolean validateToken(String token){
+        if (token != null){
+            Claims claim = Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
+            Date expiration = claim.getExpiration();
+            Date currentDate = new Date();
+            if (expiration.getTime() > currentDate.getTime()){
+                return true;
+            }
+        }
+        return false;
     }
 }

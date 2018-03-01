@@ -20,18 +20,21 @@ export class RegisterComponent {
 
     admin: Admin = new  Admin(this.name, this.eMail, this.password);
     receivedAdmin:  Admin;
-    router: Router;
     emailExist: boolean = false;
     nameExist: boolean = false;
 
-    constructor(private httpService: RegisterService){}
+    showDialog = false;
+
+    constructor(private httpService: RegisterService,
+                private router: Router){}
 
     submit(admin: Admin){
         this.httpService.postDataRegister(admin)
             .subscribe(
                 data => {
                     if (data == "ADDED"){
-                        this.router.navigate(['/monitoring']);
+                        this.showDialog = true;
+                        //this.router.navigate(['/monitoring']);
                     }
                     if (data == "NAME_EXIST"){
                         this.nameExist = true;

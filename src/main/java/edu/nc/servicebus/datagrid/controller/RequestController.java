@@ -24,20 +24,20 @@ public class RequestController {
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        return "Request succesfully deleted!";
+        return "Request successfully deleted!";
     }
 
     @RequestMapping(value = "/save")
     @ResponseBody
     public String create(String  reason) {
         try {
-            requestDao.add(reason);
+            //requestDao.add(reason);
 
         } catch (Exception ex) {
             return ex.getMessage();
         }
 
-        return "Request succesfully saved!";
+        return "Request successfully saved!";
 
     }
     @RequestMapping(value = "/allRequests")
@@ -51,5 +51,17 @@ public class RequestController {
             e.printStackTrace(System.out);
             return e.toString();
         }
+    }
+
+    @RequestMapping(value = "/clear")
+    @ResponseBody
+    @Transactional
+    public String clear(){
+        try{
+            requestDao.clear();
+        } catch (Exception e){
+            return e.getMessage();
+        }
+        return "Request table successfully cleared";
     }
 }
