@@ -1,0 +1,8 @@
+{
+  "type": "http",
+  "url": "http://engine.hotellook.com/api/v2/cache.json",
+  "parameters": {
+    "token": "&token=d1334c91fb5beb0566b3e9ccf57c8ac2"
+  },
+  "expression": ""
+}
