@@ -103,4 +103,49 @@ mvn clean install spring-boot:run.
 
     Пример: /hotellook-find-hotels?lang=ru_RU&currency=RUB&location=MOW&checkIn=2018-04-10&checkOut=2018-04-16&adults=1&limit=10
 
+10) air-tickets-search-one-way. Поиск авиабилетов в одну сторону.
+    Принимает в качестве параметров:
+    - session_id - обязательный параметр. Возвращается в результате запроса по air-tickets-get-id-one-way.
+
+    Пример: /air-tickets-search-one-way?session_id=2b1dee09ac9ab55892679ba9d173745e
+
+    air-tickets-get-id-one-way.
+    Принимает в качестве параметров:
+    - origin_city (город отправления) - обязательный параметр;
+    - origin_code (код города, например, LON) - обязательный параметр;
+    - dest_city (город прибытия) - обязательный параметр;
+    - dest_code (код города) - обязательный параметр;
+    - origin_date (дата отправления) - обязательный параметр;
+    - class - обязательный параметр.
+        - E - эконом класс;
+        - B - бизнес класс;
+    - adults (количество взрослых людей) - обязательный параметр;
+    - childrens (количество детей от 2 до 12 лет) - необязательный параметр;
+    - infants (количество детей от 0 до 2 лет) - необязательный параметр.
+
+    Пример: /air-tickets-get-id-one-way?origin_city=Москва&origin_code=MOW&dest_city=Лондон&dest_code=LON&origin_date=20.04.2018&class=E&adults=1&childrens=1&infants=1
+
+11) air-tickets-search. Поиск авиабилетов с возвратом.
+    Принимает в качестве параметров:
+    - session_id - обязательный параметр. Возвращается в результате запроса по air-tickets-get-id.
+
+    Пример: /air-tickets-search?session_id=ceadb65552e9671c21bfa3816f8b2e2f
+
+    air-tickets-get-id.
+        Принимает в качестве параметров:
+        - origin_city (город отправления) - обязательный параметр;
+        - origin_code (код города, например, LON) - обязательный параметр;
+        - dest_city (город прибытия) - обязательный параметр;
+        - dest_code (код города) - обязательный параметр;
+        - origin_date (дата отправления) - обязательный параметр;
+        - return_date (дата возвращения) - обязательный параметр;
+        - class - обязательный параметр.
+            - E - эконом класс;
+            - B - бизнес класс;
+        - adults (количество взрослых людей) - обязательный параметр;
+        - childrens (количество детей от 2 до 12 лет) - необязательный параметр;
+        - infants (количество детей от 0 до 2 лет) - необязательный параметр.
+
+    Пример: /air-tickets-get-id?origin_city=Лондон&origin_code=LON&origin_date=15.04.2018&return_date=22.04.2018&class=B&adults=1&dest_city=Москва&dest_code=MOW
+
 Продолжение следует...
