@@ -105,7 +105,7 @@ public class SoapAction implements Action{
     @Override
     public int hashCode() {
         int result = (int) (initTime ^ (initTime >>> 32));
-        result = 31 * result + Action.class.hashCode();
+        //result = 31 * result + Action.class.hashCode();
         return result;
     }
 
