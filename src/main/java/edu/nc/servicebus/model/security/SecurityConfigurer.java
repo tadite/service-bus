@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -53,33 +51,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /*http
-               .authorizeRequests()
-               .antMatchers("/").permitAll()
-               .antMatchers("/monitoring").authenticated()
-               .antMatchers("/error/allErrors").permitAll()
-                .antMatchers("/error/save").permitAll()
-                .antMatchers("/error/delete").permitAll()
-                .antMatchers("/log/allLogs").permitAll()
-                .antMatchers("/log/save").permitAll()
-                .antMatchers("/log/delete").permitAll()
-                .antMatchers("/user/allUsers").permitAll()
-                .antMatchers("/user/save").permitAll()
-                .antMatchers("/user/delete").permitAll()
-                .antMatchers("/request/allRequests").permitAll()
-                .antMatchers("/request/save").permitAll()
-                .antMatchers("/request/delete").permitAll()
-                .antMatchers("/response/allResponses").permitAll()
-                .antMatchers("/response/save").permitAll()
-                .antMatchers("/response/delete").permitAll().and()
-               
-               .and()
-               .formLogin()
-               .successHandler(authenticationSuccessHandler)
-               .and()
-               //.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-               .csrf().disable();*/
-
        http
                .csrf().disable()
                .sessionManagement()

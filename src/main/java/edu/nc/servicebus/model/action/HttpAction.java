@@ -44,10 +44,12 @@ public class HttpAction implements Action {
     private long responseEndTime;
 
     public HttpAction(){
-        initTime = System.currentTimeMillis();
-        requestFilters = new LinkedList<>();
-        responseFilters = new LinkedList<>();
-        sender = new HttpSender();
+        this.initTime = System.currentTimeMillis();
+        this.requestFilters = new LinkedList<>();
+        this.responseFilters = new LinkedList<>();
+        this.sender = new HttpSender();
+        this.rate = Double.valueOf(100);
+
     }
 
     public HttpAction(Request request, Sender sender,

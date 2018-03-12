@@ -1,8 +1,8 @@
 {
   "type":"http",
-  "url":"https://jsonplaceholder.typicode.com",
+  "url":"https://jsonplaceholder.typicode.com/users",
   "parameters":{
-    "method":"/users"
+    "method":""
   },
   "expression":"$..email"
 }

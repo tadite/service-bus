@@ -35,6 +35,7 @@ public class SoapAction implements Action{
     private ResponseFilter filter;
     private Request request;
     private Sender sender;
+    private Double rate;
 
     private long initTime;
     private long responseTime;
@@ -43,6 +44,7 @@ public class SoapAction implements Action{
     public SoapAction(){
         initTime = System.currentTimeMillis();
         requestParams = new LinkedList<>();
+        this.rate = Double.valueOf(100);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class SoapAction implements Action{
 
     @Override
     public Double getRate() {
-        return null;
+        return this.rate;
     }
 
     @Override

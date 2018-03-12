@@ -1,0 +1,8 @@
+{
+  "type": "http",
+  "url": "https://wrapapi.com/use/edu-nc/tripsterexcursions/find-excursions-type/0.0.4",
+  "parameters": {
+    "key": "&wrapAPIKey=2tyFAvn04iUHwACpomShUXgU2LXYaCwq"
+  },
+  "expression": ""
+}

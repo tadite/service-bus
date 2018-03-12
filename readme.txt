@@ -16,9 +16,15 @@ mvn clean install spring-boot:run.
 2) tripster-excursion.
     Принимаетв качестве параметров:
     - city (город) - обязательный параметр;
-    - type (тип экскурсии) - необязательный параметр.
+    - type (тип экскурсии) - необязательный параметр. Можно получить в ответе при запросе tripster-excursion-types.
 
     Пример: /tripster-excursion?city=Tbilisi&type=284-obzorniye
+
+    tripster-excursion-types.
+    Принимает в качестве параметров:
+    - city (город) - обязательный параметр.
+
+    Пример: /tripster-excursion-types?city=Paris
 
 3) tripster-excursion-details. Возвращает детальную информацию по выбранной экскурсии.
     Принимает в качестве параметров:
