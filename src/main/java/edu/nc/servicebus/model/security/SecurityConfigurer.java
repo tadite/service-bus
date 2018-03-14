@@ -47,16 +47,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
         return super.authenticationManagerBean();
     }
 
-    @Lazy
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    }*/
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService);
     }
 
     @Override
