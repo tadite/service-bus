@@ -37,6 +37,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private TokenProvider tokenProvider;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public SecurityConfigurer(TokenProvider tokenProvider){
         this.tokenProvider = tokenProvider;
     }
@@ -47,15 +50,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
         return super.authenticationManagerBean();
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }*/
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
     @Override

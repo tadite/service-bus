@@ -28,6 +28,11 @@ public class AuthenticationController {
     @Autowired
     private Registration registration;
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     @PostMapping("/user")
     public ResponseEntity signIn(@RequestBody LoginRequest userData,
                                  HttpServletResponse response){
