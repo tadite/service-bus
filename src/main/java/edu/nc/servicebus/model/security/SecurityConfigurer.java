@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -31,11 +33,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userService;
 
+    @Autowired
     private TokenProvider tokenProvider;
 
-    public SecurityConfigurer(TokenProvider tokenProvider){
+    /*public SecurityConfigurer(TokenProvider tokenProvider){
         this.tokenProvider = tokenProvider;
-    }
+    }*/
 
     @Bean
     @Override
@@ -43,10 +46,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
