@@ -36,9 +36,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private TokenProvider tokenProvider;
 
-    /*public SecurityConfigurer(TokenProvider tokenProvider){
+    public SecurityConfigurer(TokenProvider tokenProvider){
         this.tokenProvider = tokenProvider;
-    }*/
+    }
 
     @Bean
     @Override
