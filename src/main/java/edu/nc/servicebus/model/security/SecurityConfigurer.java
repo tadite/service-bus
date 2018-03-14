@@ -37,9 +37,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private TokenProvider tokenProvider;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public SecurityConfigurer(TokenProvider tokenProvider){
         this.tokenProvider = tokenProvider;
     }
@@ -52,7 +49,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userService);
     }
 
     @Override
