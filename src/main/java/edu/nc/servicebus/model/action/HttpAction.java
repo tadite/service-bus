@@ -76,15 +76,15 @@ public class HttpAction implements Action {
 
             response = sender.send(request);
 
-            responseEndTime = System.currentTimeMillis();
-            responseDao.add(this.hashCode(), response.getRawData(),
-                    new Date(responseTime), new Date(responseEndTime));
-
             for (ResponseFilter responseFilter : responseFilters) {
                 response = responseFilter.filter(response);
             }
         } catch (Exception e){
             errorDao.add(this.hashCode(), e.getMessage());
+        } finally {
+            responseEndTime = System.currentTimeMillis();
+            responseDao.add(this.hashCode(), response.getRawData(),
+                    new Date(responseTime), new Date(responseEndTime));
         }
 
         return response;

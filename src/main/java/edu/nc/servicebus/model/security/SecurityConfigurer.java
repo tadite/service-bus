@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -37,8 +39,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private TokenProvider tokenProvider;
 
-    public SecurityConfigurer(TokenProvider tokenProvider){
+    /*public SecurityConfigurer(TokenProvider tokenProvider){
         this.tokenProvider = tokenProvider;
+    }*/
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -49,7 +56,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -69,8 +76,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
                .antMatchers("/log/**").permitAll()
                .antMatchers("/error/**").permitAll()
                .antMatchers("/validate").permitAll()
-               .antMatchers("/public/app.js", "/public/polyfills.js").permitAll()
-               //.antMatchers("/text.json").permitAll()
+               .antMatchers("/**/*.js").permitAll()
+               .antMatchers("/**/*.css", "/**/*.{png,jpeg,jpg,svg,ico}").permitAll()
                .anyRequest().fullyAuthenticated()
                .and()
                .apply(new TokenConfigurer(this.tokenProvider));
