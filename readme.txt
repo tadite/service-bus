@@ -460,7 +460,8 @@ mvn clean install spring-boot:run.
                 "RUB": "16 812 RUR",
                 "USD": "295 USD",
                 "EUR": "238 EUR"
-              }
+              },
+              "booking": "ссылка на страницу бронирования"
             }
           },
           ...
@@ -569,7 +570,8 @@ mvn clean install spring-boot:run.
                 "RUB": "27 072 RUR",
                 "USD": "475 USD",
                 "EUR": "384 EUR"
-              }
+              },
+              "booking": "ссылка на страницу бронирования"
             },
             ...
           ]
@@ -601,6 +603,56 @@ mvn clean install spring-boot:run.
       },
       "code": false,
       "count": 155,
+      "action": "results"
+    }
+
+12) auto-tickets-find-cars.
+    Принимает в качестве параметров:
+    - session_id - обязательный параметр. Возвращается в результате запроса по auto-tickets-get-id.
+
+    Пример: /auto-tickets-find-cars?session_id=5ab044903499750bb6000007
+
+    Пример ответа:
+    {
+      "cars": [
+        {
+          "image": "https://cdn.rcstatic.com/images/car_images/new_images/ford/ka_lrg.jpg",
+          "name": "Ford Ka",
+          "price-period": "Аренда на 6 суток",
+          "price": "12 470.93 RUR",
+          "seats": "Пассажиры 4",
+          "doors": "Двери 2",
+          "climate": "Кондиционер",
+          "transmission": "Механическая",
+          "class": "Мини",
+          "mileage": "Безлимитный пробег",
+          "rating": "7.0",
+          "company_icon": "https://xml.rentalcars.com:443/images/suppliers/flat/enterprise_logo_lrg.gif",
+          "booking": "https://car.tickets.ru/search/booking_v2?session_id=5ab044903499750bb6000007&car_id=5ab044923499750bb600000a"
+        }
+      ]
+    }
+
+    auto-tickets-get-id.
+    Принимет в качестве параметров:
+        - start_date (дата начала проката) - обязательный параметр;
+        - start_time (время начала проката) - обязательный параметр;
+        - end_date (дата окончания проката) - обязательный параметр:
+        - end_time (время окончания проката) - обязательный параметр;
+        - location_id (код места) - обязательный параметр. Находится в places.json;
+        - country_id (код страны) - обязательный параметр. Находится в places.json;
+        - city_id (код города) - обязательный параметр. Находится в places.json;
+        - location (название места) - обязательный параметр. Находится в places.json.
+
+    Пример: /auto-tickets-get-id??start_date=23.03.2018&start_time=10:00&end_date=28.03.2018&end_time=18:00&location_id=8001&country_id=63&city_id=4275&location=Мадрид - Алькобендас, Мадрид
+
+    Пример ответа:
+    {
+      "params": {
+        "session_id": "5ab045924900181dd7000003"
+      },
+      "count": 20,
+      "code": false,
       "action": "results"
     }
 

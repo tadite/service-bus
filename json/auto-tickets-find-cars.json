@@ -1,6 +1,6 @@
 {
   "type": "http",
-  "url": "https://wrapapi.com/use/edu-nc/tickets/find-tickets/0.0.6",
+  "url": "https://wrapapi.com/use/edu-nc/auto-tickets/find-cars/0.0.2",
   "parameters": {
     "key": "&wrapAPIKey=2tyFAvn04iUHwACpomShUXgU2LXYaCwq"
   },

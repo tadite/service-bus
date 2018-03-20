@@ -1,7 +1,7 @@
 {
   "type": "http",
-  "url": "https://wrapapi.com/use/edu-nc/tickets/find-tickets/0.0.6",
-  "parameters": {
+  "url": "https://wrapapi.com/use/edu-nc/auto-tickets/generate-id/0.0.1",
+  "parameters":{
     "key": "&wrapAPIKey=2tyFAvn04iUHwACpomShUXgU2LXYaCwq"
   },
   "expression": ""
