@@ -101,16 +101,18 @@ mvn clean install spring-boot:run.
         "description": "Обзорная пешеходная экскурсия по улицам города",
         "price": "от € 18 за экскурсию",
         "time": "2.5 часа",
-        "experience_id": "8695",
-        "screen": "https://experience-ireland.s3.amazonaws.com/thumbs2/0ae5240e-77c3-11e7-8366-6e714efd800d.384x289.jpg"
+        "experience_id": "https://experience.tripster.ru/experience/8695/",
+        "screen": "https://experience-ireland.s3.amazonaws.com/thumbs2/0ae5240e-77c3-11e7-8366-6e714efd800d.384x289.jpg",
+        "booking": "https://experience.tripster.ru/experience/booking/8695/"
       },
       {
         "title": "Как понять Тбилиси и получить от него удовольствие",
         "description": "Ежедневная экскурсия Трипстера для первого знакомства с городом",
         "price": "€ 18 за человека",
         "time": "3 часа",
-        "experience_id": "8843",
-        "screen": "https://experience-ireland.s3.amazonaws.com/thumbs2/29aa6afe-963f-11e6-8308-6e714efd800d.384x289.jpg"
+        "experience_id": "https://experience.tripster.ru/experience/8843/",
+        "screen": "https://experience-ireland.s3.amazonaws.com/thumbs2/29aa6afe-963f-11e6-8308-6e714efd800d.384x289.jpg",
+        "booking": "https://experience.tripster.ru/experience/booking/8843/"
       }
     ]
 
@@ -187,14 +189,14 @@ mvn clean install spring-boot:run.
         "type": "Пешая",
         "time": "2 часа",
         "price": "20€ за человека",
-        "excursion_id": "11203"
+        "excursion_id": "https://weatlas.com/excursions/11203"
       },
       {
         "title": "Прогулка по Древнему Риму",
         "type": "Пешая",
         "time": "2,5 часа",
         "price": "25€ за человека",
-        "excursion_id": "11188"
+        "excursion_id": "https://weatlas.com/excursions/11188"
       },
       ...
     ]
