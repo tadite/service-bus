@@ -658,4 +658,37 @@ mvn clean install spring-boot:run.
       "action": "results"
     }
 
+13) hotels-find-hotels.
+    Принимает в качестве параметров:
+    - city (название города) - обязательный параметр;
+    - in_date_slash (дата заселения в формате dd/mm/yyyy) - обязательный параметр;
+    - in_date (дата заселения в формате yyyy-mm-dd) - обязательный параметр;
+    - out_date_slash (дата отъезда в формате dd/mm/yyyy) - обязательный параметр;
+    - out_date (дата отъезда в формате yyyy-mm-dd) - обязательный параметр;
+    - adults (количество человек, максимум - 8) - обязательный параметр.
+
+    Пример: /hotels-find-hotels?city=Воронеж&in_date_slash=27/03/2018&in_date=2018-03-27&out_date_slash=03/04/2018&out_date=2018-04-03&adults=3
+
+    Пример:
+    {
+      "hotels": [
+        {
+          "image": "https://thumbnails.trvl-media.com/65QWHgiyTB-F8zkVv2Ar82HDOGI=/250x140/smart/filters:quality(60)/images.trvl-media.com/hotels/20000000/19500000/19494500/19494409/b822a6f3_z.jpg",
+          "name": "Премьер-отель",
+          "address": "Бакунинский пер., 13, Воронеж, 394030 Россия",
+          "loc_info": "Воронеж",
+          "distance": [
+            "1,4 км-Центр города",
+            "6,0 км-Станция Придача, Воронеж"
+          ],
+          "rating": null,
+          "price": "18,900 RUB",
+          "price_discount": null,
+          "price_period": "за 7 ночей",
+          "price_info": "включая налоги и сборы.",
+          "booking": "https://ru.hotels.com/ho624821088/?pa=1&q-check-out=2018-04-03&tab=description&q-room-0-adults=3&YGF=7&q-check-in=2018-03-27&MGT=7&WOE=2&WOD=2&ZSX=0&SYE=3&q-room-0-children=0"
+        }
+      ]
+    }
+
 Продолжение следует...
