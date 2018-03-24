@@ -8,10 +8,10 @@ import { Component} from '@angular/core';
             
             <div class="col-xs-5 col-md-5">
               <img style="position:absolute;left:20px;top:15px; width: 44px; height: 40px; border-radius: 20px; " src="../../css/log4.jpg">
-              <h1>планировщик  <br> путешествий   </h1>
+              <h1>Service   <br> Bus   </h1>
             </div>
             <div class="col-xs-7 col-md-7">
-                <h2> мониторинг</h2>
+                <h2> Monitoring </h2>
             </div>
         
        </div>
