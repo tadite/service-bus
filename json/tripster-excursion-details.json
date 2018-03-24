@@ -1,6 +1,6 @@
 {
   "type":"http",
-  "url":"https://wrapapi.com/use/edu-nc/tripsterexcursions/show-details/0.0.1",
+  "url":"https://wrapapi.com/use/edu-nc/tripsterexcursions/show-details/0.0.2",
   "parameters":{
     "key":"&wrapAPIKey=2tyFAvn04iUHwACpomShUXgU2LXYaCwq"
    },

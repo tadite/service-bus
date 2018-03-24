@@ -23,6 +23,7 @@ public class HttpSender implements Sender{
         URL url = new URL(request.getUrl());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setConnectTimeout(100000);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String inputLine;

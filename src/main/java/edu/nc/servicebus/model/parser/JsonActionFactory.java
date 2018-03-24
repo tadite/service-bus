@@ -53,7 +53,7 @@ public class JsonActionFactory implements ActionFactory{
 
         Action action = getActionFromSelector(actionEntity);
 
-        //rateLimiterManager.createRateLimiterIfAbsent(name, action.getRate());
+        rateLimiterManager.createRateLimiterIfAbsent(name, action.getRate());
 
         long requestEndTime = System.currentTimeMillis();
         requestDao.add(action.hashCode(), name, new Date(requestTime), new Date(requestEndTime));

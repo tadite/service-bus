@@ -2,12 +2,12 @@
 
     <div class="col-xs-3 col-md-3"  style=" background: rgba(28, 54, 85, .9); height:100%;margin-top: 30px">
         <ul class="list-group list-unstyled">
-            <a class="list-group-item"style="margin-top: 10px" (click)="ngOnInit()"><li><span class="glyphicon glyphicon-dashboard" style="cursor: pointer;"></span><span style="cursor: pointer"> Обзор</span></li></a>
-            <a class="list-group-item"(click)="showRequest()"><li><span class="glyphicon glyphicon-picture" style="cursor: pointer"></span><span style="cursor: pointer"> Запрoсы</span></li></a>
-            <a class="list-group-item"(click)="showResponse()"><li><span class="glyphicon glyphicon-gift" style="cursor: pointer"></span><span style="cursor: pointer"> Ответы</span></li></a>
-            <a class="list-group-item"(click)="showErrors()"><li><span class="glyphicon glyphicon-alert" style="cursor: pointer"></span><span style="cursor: pointer"> Ошибки</span></li></a>
-            <a [routerLink]="['/register']" class="list-group-item"style="margin-top: 20px"><li><span class="glyphicon glyphicon-user" style="cursor: pointer"></span><span style="cursor: pointer"> Регистрация</span></li></a>
-            <a class="list-group-item"(click)="exitMonitoring()"><li><span class="glyphicon glyphicon-log-out"style="cursor: pointer"></span><span style="cursor: pointer"> Выход</span></li></a>
+            <a class="list-group-item"style="margin-top: 10px; cursor: pointer" (click)="ngOnInit()"><li><span class="glyphicon glyphicon-dashboard" style="cursor: pointer;"></span><span style="cursor: pointer"> Обзор</span></li></a>
+            <a class="list-group-item"(click)="showRequest()" style="cursor: pointer"><li><span class="glyphicon glyphicon-picture" style="cursor: pointer"></span><span style="cursor: pointer"> Запрoсы</span></li></a>
+            <a class="list-group-item"(click)="showResponse()" style="cursor: pointer"><li><span class="glyphicon glyphicon-gift" style="cursor: pointer"></span><span style="cursor: pointer"> Ответы</span></li></a>
+            <a class="list-group-item"(click)="showErrors()" style="cursor: pointer"><li><span class="glyphicon glyphicon-alert" style="cursor: pointer"></span><span style="cursor: pointer"> Ошибки</span></li></a>
+            <a [routerLink]="['/register']" class="list-group-item"style="margin-top: 20px; cursor: pointer"><li><span class="glyphicon glyphicon-user" style="cursor: pointer"></span><span style="cursor: pointer"> Регистрация</span></li></a>
+            <a class="list-group-item"(click)="exitMonitoring()" style="cursor: pointer"><li><span class="glyphicon glyphicon-log-out"style="cursor: pointer"></span><span style="cursor: pointer"> Выход</span></li></a>
 
         </ul>
     </div>
@@ -18,18 +18,17 @@
                 <div class="btn-group">
                     <ul id="main_nav">
                         <li>
-                            <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-time"></span> Выбрать период
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Меню с переключением</span>
-                                </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenu" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-time"></span> Выбрать период
+                                <span class="caret"></span>
+                                <!-- <span class="sr-only">Меню с переключением</span>-->
                             </button>
-                            <ul>
-                                <li><a (click)="showOverviewSecond()"><span style="cursor: pointer">Секунда</span></a></li>
-                                <li><a (click)="showOverviewMinute()"><span style="cursor: pointer">Минута</span></a></li>
-                                <li><a (click)="showOverviewHour()"><span style="cursor: pointer">Час</span></a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <li><a (click)="showOverviewSecond()" style="cursor: pointer; text-align: center">Секунда</a></li>
+                                <li><a (click)="showOverviewMinute()" style="cursor: pointer; text-align: center">Минута</a></li>
+                                <li><a (click)="showOverviewHour()" style="cursor: pointer; text-align: center">Час</a></li>
                                 <li class="divider"></li>
-                                <li><a (click)="ngOnInit()"><span style="cursor: pointer">День</span></a></li>
+                                <li><a (click)="ngOnInit()" style="cursor: pointer; text-align: center">День</a></li>
                             </ul>
                         </li>
                     </ul>

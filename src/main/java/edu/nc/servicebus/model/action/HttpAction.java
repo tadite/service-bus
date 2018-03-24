@@ -44,10 +44,12 @@ public class HttpAction implements Action {
     private long responseEndTime;
 
     public HttpAction(){
-        initTime = System.currentTimeMillis();
-        requestFilters = new LinkedList<>();
-        responseFilters = new LinkedList<>();
-        sender = new HttpSender();
+        this.initTime = System.currentTimeMillis();
+        this.requestFilters = new LinkedList<>();
+        this.responseFilters = new LinkedList<>();
+        this.sender = new HttpSender();
+        this.rate = Double.valueOf(100);
+
     }
 
     public HttpAction(Request request, Sender sender,
@@ -74,15 +76,15 @@ public class HttpAction implements Action {
 
             response = sender.send(request);
 
-            responseEndTime = System.currentTimeMillis();
-            responseDao.add(this.hashCode(), response.getRawData(),
-                    new Date(responseTime), new Date(responseEndTime));
-
             for (ResponseFilter responseFilter : responseFilters) {
                 response = responseFilter.filter(response);
             }
         } catch (Exception e){
             errorDao.add(this.hashCode(), e.getMessage());
+        } finally {
+            responseEndTime = System.currentTimeMillis();
+            responseDao.add(this.hashCode(), response.getRawData(),
+                    new Date(responseTime), new Date(responseEndTime));
         }
 
         return response;
@@ -111,7 +113,7 @@ public class HttpAction implements Action {
     @Override
     public int hashCode() {
         int result = (int) (initTime ^ (initTime >>> 32));
-        result = 31 * result + Action.class.hashCode();
+        //result = 31 * result + Action.class.hashCode();
         return result;
     }
 

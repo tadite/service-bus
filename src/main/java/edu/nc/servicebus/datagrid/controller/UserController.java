@@ -2,6 +2,7 @@ package edu.nc.servicebus.datagrid.controller;
 
 import edu.nc.servicebus.datagrid.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ public class UserController  {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/delete")
     @ResponseBody
@@ -32,7 +36,7 @@ public class UserController  {
     @ResponseBody
     public String create(String login, String password,String email) {
         try {
-            userDao.add(login, password, email);
+            userDao.add(login, passwordEncoder.encode(password), email);
 
         } catch (Exception ex) {
             return ex.getMessage();

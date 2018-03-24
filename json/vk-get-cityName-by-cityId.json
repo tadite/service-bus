@@ -1,0 +1,8 @@
+{
+  "type":"http",
+  "url":"https://api.vk.com/method/database.getCitiesById",
+  "parameters":{
+    "method":"&v=3.0"
+  },
+  "expression":"$.response[*][name]"
+}

@@ -45,9 +45,9 @@ public class ActionExecutor implements Executor {
 
         addToLog(action);
 
-        /*while (!rateLimiterManager.tryAcquire(name)){
+        while (!rateLimiterManager.tryAcquire(name)){
 
-        }*/
+        }
         return response;
     }
 

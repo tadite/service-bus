@@ -26,7 +26,7 @@ import static org.mockito.BDDMockito.*;
 //@Import(ServiceBusApplication.class)
 public class RateLimiterManagerTests {
 
-    @MockBean
+    @Autowired
     ActionReader actionReader;
 
     @Autowired
