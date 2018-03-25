@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,13 @@ public class ResponseStatsController {
         for (Response response : responses){
             time = response.getTime().getTime() / converter;
 
-            Request req = requestDao.findById(logDao.findByResponseId(response.getResponseId()).getRequestId());
+            Request req = null;
+            try {
+                req = requestDao.findById(logDao.findByResponseId(response.getResponseId()).getRequestId());
+            } catch (NullPointerException e){
+                continue;
+            }
+
             int responseTime = (int) (response.getEndTime().getTime() - response.getTime().getTime());
             Content responseContent = new ResponseContent(responseTime, req.getContent(), response.getContent());
 
