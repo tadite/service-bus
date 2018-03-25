@@ -38,18 +38,28 @@ public class ResponseStatsController {
     @Qualifier("response")
     private ObjectFactory<ResponseStatistic> responseStatistic;
 
-    @RequestMapping("/responseStats")
-    public ResponseEntity responseStats(){
-        return ResponseEntity.ok(getResponseDataList());
+    @RequestMapping("/responsePerDay")
+    public ResponseEntity responsePerDay(){
+        return ResponseEntity.ok(getResponseDataList(24, 60));
     }
 
-    private List<StatsData> getResponseDataList(){
+    @RequestMapping("/responsePerHour")
+    public ResponseEntity responsePerHour(){
+        return ResponseEntity.ok(getResponseDataList(1, 60));
+    }
+
+    @RequestMapping("/responsePerMinute")
+    public ResponseEntity responsePerMinute(){
+        return ResponseEntity.ok(getResponseDataList(1, 1));
+    }
+
+    private List<StatsData> getResponseDataList(int hour, int minute){
         List<Response> responses = responseDao.getResponseList();
         List<Content> contents = new ArrayList<>();
 
         Statistic stats = responseStatistic.getObject();
 
-        long converter = 1000 * 24 * 60 * 60;
+        long converter = 1000 * hour * minute * 60;
         long prevTime  = responses.get(0).getTime().getTime() / converter;
         long time = 0;
 

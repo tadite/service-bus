@@ -6,52 +6,105 @@ import edu.nc.servicebus.statistics.StatsData;
 public class ResponseData implements StatsData {
 
     private long time;
-    private double avgTimeBeachResponse;
-    private double avgTimeSportResponse;
-    private double avgTimeExcursionResponse;
-    private double avgSizeBeachResponse;
-    private double avgSizeSportResponse;
-    private double avgSizeExcursionResponse;
+    private double avgTimeHotelResponse;
+    private double avgTimeExcursionsTripsterResponse;
+    private double avgTimeExcursionsWeatlasResponse;
+    private double avgTimeTicketResponse;
+    private double avgTimeAutoResponse;
+    private double avgTimCountryResponse;
+    private double avgTimeCoastLivingResponse;
+    private double avgSizeHotelResponse;
+    private double avgSizeExcursionsTripsterResponse;
+    private double avgSizeExcursionsWeatlasResponse;
+    private double avgSizeTicketResponse;
+    private double avgSizeAutoResponse;
+    private double avgSizeCountryResponse;
+    private double avgSizeCoastLivingResponse;
 
-    public ResponseData(long time, double avgTimeBeachResponse,
-                        double avgTimeSportResponse, double avgTimeExcursionResponse,
-                        double avgSizeBeachResponse, double avgSizeSportResponse,
-                        double avgSizeExcursionResponse){
+    public ResponseData(){}
+
+    public ResponseData(long time, double avgTimeHotelResponse, double avgTimeExcursionsTripsterResponse,
+                        double avgTimeExcursionsWeatlasResponse, double avgTimeTicketResponse,
+                        double avgTimeAutoResponse, double avgTimCountryResponse, double avgTimeCoastLivingResponse,
+                        double avgSizeHotelResponse, double avgSizeExcursionsTripsterResponse,
+                        double avgSizeExcursionsWeatlasResponse, double avgSizeTicketResponse,
+                        double avgSizeAutoResponse, double avgSizeCountryResponse,
+                        double avgSizeCoastLivingResponse) {
 
         this.time = time;
-        this.avgTimeBeachResponse = avgTimeBeachResponse;
-        this.avgTimeSportResponse = avgTimeSportResponse;
-        this.avgTimeExcursionResponse = avgTimeExcursionResponse;
-        this.avgSizeBeachResponse = avgSizeBeachResponse;
-        this.avgSizeSportResponse = avgSizeSportResponse;
-        this.avgSizeExcursionResponse = avgSizeExcursionResponse;
+        this.avgTimeHotelResponse = avgTimeHotelResponse;
+        this.avgTimeExcursionsTripsterResponse = avgTimeExcursionsTripsterResponse;
+        this.avgTimeExcursionsWeatlasResponse = avgTimeExcursionsWeatlasResponse;
+        this.avgTimeTicketResponse = avgTimeTicketResponse;
+        this.avgTimeAutoResponse = avgTimeAutoResponse;
+        this.avgTimCountryResponse = avgTimCountryResponse;
+        this.avgTimeCoastLivingResponse = avgTimeCoastLivingResponse;
+        this.avgSizeHotelResponse = avgSizeHotelResponse;
+        this.avgSizeExcursionsTripsterResponse = avgSizeExcursionsTripsterResponse;
+        this.avgSizeExcursionsWeatlasResponse = avgSizeExcursionsWeatlasResponse;
+        this.avgSizeTicketResponse = avgSizeTicketResponse;
+        this.avgSizeAutoResponse = avgSizeAutoResponse;
+        this.avgSizeCountryResponse = avgSizeCountryResponse;
+        this.avgSizeCoastLivingResponse = avgSizeCoastLivingResponse;
     }
 
     public long getTime() {
         return time;
     }
 
-    public double getAvgTimeBeachResponse() {
-        return avgTimeBeachResponse;
+    public double getAvgTimeHotelResponse() {
+        return avgTimeHotelResponse;
     }
 
-    public double getAvgTimeSportResponse() {
-        return avgTimeSportResponse;
+    public double getAvgTimeExcursionsTripsterResponse() {
+        return avgTimeExcursionsTripsterResponse;
     }
 
-    public double getAvgTimeExcursionResponse() {
-        return avgTimeExcursionResponse;
+    public double getAvgTimeExcursionsWeatlasResponse() {
+        return avgTimeExcursionsWeatlasResponse;
     }
 
-    public double getAvgSizeBeachResponse() {
-        return avgSizeBeachResponse;
+    public double getAvgTimeTicketResponse() {
+        return avgTimeTicketResponse;
     }
 
-    public double getAvgSizeSportResponse() {
-        return avgSizeSportResponse;
+    public double getAvgTimeAutoResponse() {
+        return avgTimeAutoResponse;
     }
 
-    public double getAvgSizeExcursionResponse() {
-        return avgSizeExcursionResponse;
+    public double getAvgTimCountryResponse() {
+        return avgTimCountryResponse;
+    }
+
+    public double getAvgTimeCoastLivingResponse() {
+        return avgTimeCoastLivingResponse;
+    }
+
+    public double getAvgSizeHotelResponse() {
+        return avgSizeHotelResponse;
+    }
+
+    public double getAvgSizeExcursionsTripsterResponse() {
+        return avgSizeExcursionsTripsterResponse;
+    }
+
+    public double getAvgSizeExcursionsWeatlasResponse() {
+        return avgSizeExcursionsWeatlasResponse;
+    }
+
+    public double getAvgSizeTicketResponse() {
+        return avgSizeTicketResponse;
+    }
+
+    public double getAvgSizeAutoResponse() {
+        return avgSizeAutoResponse;
+    }
+
+    public double getAvgSizeCountryResponse() {
+        return avgSizeCountryResponse;
+    }
+
+    public double getAvgSizeCoastLivingResponse() {
+        return avgSizeCoastLivingResponse;
     }
 }

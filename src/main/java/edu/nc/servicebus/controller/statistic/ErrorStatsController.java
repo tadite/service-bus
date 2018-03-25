@@ -38,18 +38,28 @@ public class ErrorStatsController {
     @Qualifier("error")
     private ObjectFactory<ErrorStatistic> errorStatistic;
 
-    @RequestMapping("/errorStats")
-    public ResponseEntity errorStats(){
-        return ResponseEntity.ok(getErrorDataList());
+    @RequestMapping("/errorPerDay")
+    public ResponseEntity errorPerDay(){
+        return ResponseEntity.ok(getErrorDataList(24, 60));
     }
 
-    private List<StatsData> getErrorDataList(){
+    @RequestMapping("/errorPerHour")
+    public ResponseEntity errorPerHour(){
+        return ResponseEntity.ok(getErrorDataList(1, 60));
+    }
+
+    @RequestMapping("/errorPerMinute")
+    public ResponseEntity errorPerMinute(){
+        return ResponseEntity.ok(getErrorDataList(1, 1));
+    }
+
+    private List<StatsData> getErrorDataList(int hour, int minute){
         List<Error> errors = errorDao.getErrorList();
         List<Content> contents = new ArrayList<>();
 
         Statistic stats = errorStatistic.getObject();
 
-        long converter = 1000 * 24 * 60 * 60;
+        long converter = 1000 * hour * minute * 60;
         long prevTime = errors.get(0).getTime().getTime() / converter;
         long time = 0;
 

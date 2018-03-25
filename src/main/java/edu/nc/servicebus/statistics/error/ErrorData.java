@@ -7,18 +7,30 @@ public class ErrorData implements StatsData{
 
     private long time;
     private double errorCount;
-    private double beachErrorCount;
-    private double sportErrorCount;
-    private double excursionErrorCount;
+    private double hotelErrorCount;
+    private double excursionsTripsterErrorCount;
+    private double excursionsWeatlasErrorCount;
+    private double ticketErrorCount;
+    private double autoErrorCount;
+    private double countryErrorCount;
+    private double coastLivingErrorCount;
 
-    public ErrorData(long time, double errorCount,
-                     double beachErrorCount, double sportErrorCount, double excursionErrorCount){
+    public ErrorData(){}
+
+    public ErrorData(long time, double errorCount, double hotelErrorCount,
+                     double excursionsTripsterErrorCount, double excursionsWeatlasErrorCount,
+                     double ticketErrorCount, double autoErrorCount, double countryErrorCount,
+                     double coastLivingErrorCount) {
 
         this.time = time;
         this.errorCount = errorCount;
-        this.beachErrorCount = beachErrorCount;
-        this.sportErrorCount = sportErrorCount;
-        this.excursionErrorCount = excursionErrorCount;
+        this.hotelErrorCount = hotelErrorCount;
+        this.excursionsTripsterErrorCount = excursionsTripsterErrorCount;
+        this.excursionsWeatlasErrorCount = excursionsWeatlasErrorCount;
+        this.ticketErrorCount = ticketErrorCount;
+        this.autoErrorCount = autoErrorCount;
+        this.countryErrorCount = countryErrorCount;
+        this.coastLivingErrorCount = coastLivingErrorCount;
     }
 
     public long getTime() {
@@ -29,15 +41,31 @@ public class ErrorData implements StatsData{
         return errorCount;
     }
 
-    public double getBeachErrorCount() {
-        return beachErrorCount;
+    public double getHotelErrorCount() {
+        return hotelErrorCount;
     }
 
-    public double getSportErrorCount() {
-        return sportErrorCount;
+    public double getExcursionsTripsterErrorCount() {
+        return excursionsTripsterErrorCount;
     }
 
-    public double getExcursionErrorCount() {
-        return excursionErrorCount;
+    public double getExcursionsWeatlasErrorCount() {
+        return excursionsWeatlasErrorCount;
+    }
+
+    public double getTicketErrorCount() {
+        return ticketErrorCount;
+    }
+
+    public double getAutoErrorCount() {
+        return autoErrorCount;
+    }
+
+    public double getCountryErrorCount() {
+        return countryErrorCount;
+    }
+
+    public double getCoastLivingErrorCount() {
+        return coastLivingErrorCount;
     }
 }

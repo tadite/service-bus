@@ -29,23 +29,42 @@ public class ErrorStatistic implements Statistic{
     public void add(long time, List<Content> contents) {
         double errorCount = contents.size();
 
-        double beachErrorCount = 0;
-        double sportErrorCount = 0;
-        double excursionErrorCount = 0;
+        double hotelErrorCount = 0;
+        double tripsterErrorCount = 0;
+        double weatlasErrorCount = 0;
+        double ticketErrorCount = 0;
+        double autoErrorCount = 0;
+        double countryErrorCount = 0;
+        double costLivingErrorCount = 0;
 
         for (Content content : contents){
-            if (jsonCategories.checkEndpoint("beach", content.getEndpoint())){
-                beachErrorCount++;
+            if (jsonCategories.checkEndpoint("hotel", content.getEndpoint())){
+                hotelErrorCount++;
             }
-            if (jsonCategories.checkEndpoint("sport", content.getEndpoint())){
-                sportErrorCount++;
+            if (jsonCategories.checkEndpoint("tripster", content.getEndpoint())){
+                tripsterErrorCount++;
             }
-            if (jsonCategories.checkEndpoint("excursion", content.getEndpoint())){
-                excursionErrorCount++;
+            if (jsonCategories.checkEndpoint("weatlas", content.getEndpoint())){
+                weatlasErrorCount++;
+            }
+            if (jsonCategories.checkEndpoint("ticket", content.getEndpoint())){
+                ticketErrorCount++;
+            }
+            if (jsonCategories.checkEndpoint("auto", content.getEndpoint())){
+                autoErrorCount++;
+            }
+            if (jsonCategories.checkEndpoint("country", content.getEndpoint())){
+                countryErrorCount++;
+            }
+            if (jsonCategories.checkEndpoint("costOfLiving", content.getEndpoint())){
+                costLivingErrorCount++;
             }
         }
 
-        errorDataList.add(new ErrorData(time, errorCount, beachErrorCount, sportErrorCount, excursionErrorCount));
+        errorDataList.add(new ErrorData(time, errorCount,
+                hotelErrorCount, tripsterErrorCount, weatlasErrorCount,
+                ticketErrorCount, autoErrorCount, countryErrorCount,
+                costLivingErrorCount));
     }
 
     @Override

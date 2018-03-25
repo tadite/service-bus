@@ -28,33 +28,59 @@ public class RequestStatistic implements Statistic {
 
     @Override
     public void add(long time, List<Content> contents){
-        int beachCount = 0;
-        int sportCount = 0;
-        int excursionCount = 0;
+        int hotelCount = 0;
+        int tripsterCount = 0;
+        int weatlasCount = 0;
+        int ticketCount = 0;
+        int autoCount = 0;
+        int countryCount = 0;
+        int costLivingCount = 0;
 
-        double beachTime = 0;
-        double sportTime = 0;
-        double excursionTime = 0;
+        double hotelTime = 0;
+        double tripsterTime = 0;
+        double weatlasTime = 0;
+        double ticketTime = 0;
+        double autoTime = 0;
+        double countryTime = 0;
+        double costLivingTime = 0;
 
         for (Content content : contents){
-            if (jsonCategories.checkEndpoint("beach", content.getEndpoint())){
-                beachCount++;
-                beachTime += content.getTime() / 1000;
+            if (jsonCategories.checkEndpoint("hotel", content.getEndpoint())){
+                hotelCount++;
+                hotelCount += content.getTime() / 1000;
             }
-            if (jsonCategories.checkEndpoint("sport", content.getEndpoint())){
-                sportCount++;
-                sportTime += content.getTime() / 1000;
+            if (jsonCategories.checkEndpoint("tripster", content.getEndpoint())){
+                tripsterCount++;
+                tripsterTime += content.getTime() / 1000;
             }
-            if (jsonCategories.checkEndpoint("excursion", content.getEndpoint())){
-                excursionCount++;
-                excursionTime += content.getTime() / 1000;
+            if (jsonCategories.checkEndpoint("weatlas", content.getEndpoint())){
+                weatlasCount++;
+                weatlasTime += content.getTime() / 1000;
+            }
+            if (jsonCategories.checkEndpoint("ticket", content.getEndpoint())){
+                ticketCount++;
+                ticketTime += content.getTime() / 1000;
+            }
+            if (jsonCategories.checkEndpoint("auto", content.getEndpoint())){
+                autoCount++;
+                autoTime += content.getTime() / 1000;
+            }
+            if (jsonCategories.checkEndpoint("country", content.getEndpoint())){
+                countryCount++;
+                countryTime += content.getTime() / 1000;
+            }
+            if (jsonCategories.checkEndpoint("costOfLiving", content.getEndpoint())){
+                costLivingCount++;
+                costLivingTime += content.getTime() / 1000;
             }
         }
+
         requestDataList.add(new RequestData(time, contents.size(),
-                beachCount, sportCount, excursionCount,
-                beachTime / beachCount,
-                sportTime / sportCount,
-                excursionTime / excursionCount));
+                hotelCount, tripsterCount, weatlasCount, ticketCount, autoCount, countryCount, costLivingCount,
+                hotelTime / hotelCount, tripsterTime / tripsterCount,
+                weatlasTime / weatlasCount, ticketTime / ticketCount,
+                autoTime / autoCount, countryTime / countryCount,
+                costLivingTime / costLivingCount));
     }
 
     @Override
