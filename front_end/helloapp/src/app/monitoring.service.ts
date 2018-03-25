@@ -33,13 +33,35 @@ export class MonitoringService {
             .map(result => result);
     }
 
-    getResponseStats() {
-        return this._http.get<any>('/statistics/responseStats')
+    getResponseDay() {
+        return this._http.get<any>('/statistics/responsePerDay')
             .map(result => result);
     }
 
-    getErrorStats() {
-        return this._http.get<any>('/statistics/errorStats')
+    getResponseHour() {
+        return this._http.get<any>('/statistics/responsePerHour')
             .map(result => result);
     }
+
+    getResponseMinute() {
+        return this._http.get<any>('/statistics/responsePerMinute')
+            .map(result => result);
+    }
+
+
+
+    getErrorDay() {
+        return this._http.get<any>('/statistics/errorPerDay')
+            .map(result => result);
+    }
+    getErrorHour() {
+        return this._http.get<any>('/statistics/errorPerHour')
+            .map(result => result);
+    }
+
+    getErrorMinute() {
+        return this._http.get<any>('/statistics/errorPerMinute')
+            .map(result => result);
+    }
+
 }

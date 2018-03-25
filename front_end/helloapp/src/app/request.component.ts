@@ -8,15 +8,13 @@ import {error} from "util";
 
 
 @Component({
-    selector:'monitoring-app',
-    templateUrl: './monitoring.component.html',
-    styleUrls: ['./monitoring.component.css']
+    selector:'request-app',
+    templateUrl: './request.component.html',
+    styleUrls: ['./request.component.css']
 })
 
-export class MonitoringComponent implements OnInit {
-
+export class RequestComponent implements OnInit {
     public loading = false;
-
     condition: boolean = true;
 
     chart: any = []; // This will hold our chart info
@@ -32,7 +30,14 @@ export class MonitoringComponent implements OnInit {
         this._monitoring.getOverviewDay()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
+                    let time_requests_hotel = res.map(res => res.avgTimeHotelRequest);
+                    let time_requests_excursionsTripster = res.map(res => res.avgTimeExcursionTripsterRequest);
+                    let time_requests_excursionsWeatlas= res.map(res => res.avgTimeExcursionsWeatlasRequest);
+                    let time_requests_ticket = res.map(res => res.avgTimeTicketRequest);
+                    let time_requests_auto = res.map(res => res.avgTimeAutoRequest);
+                    let time_requests_country= res.map(res => res.avgTimeCountryRequest);
+                    let time_requests_coastLiving = res.map(res => res.avgTimeCoastLivingRequest);
+
                     let number_requests_hotel = res.map(res => res.hotelRequestCount);
                     let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
                     let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
@@ -46,17 +51,52 @@ export class MonitoringComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleDateString());
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'по всем интеграциям',
-                                        data: number_requests,
+                                        label: 'отели',
+                                        data: time_requests_hotel,
+                                        borderColor: "#3cba9f",
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'экскурсии Tripster',
+                                        data: time_requests_excursionsTripster,
+                                        borderColor: "#7cef8b",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'экскурсии Weatlas',
+                                        data: time_requests_excursionsWeatlas,
+                                        borderColor: "#ffcc00",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'билеты',
+                                        data: time_requests_ticket,
+                                        borderColor: "#fcfa7e",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'аренда авто',
+                                        data: time_requests_auto,
+                                        borderColor: "#7efcce",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'страны, города',
+                                        data: time_requests_country,
                                         borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'стоимость жизни',
+                                        data: time_requests_coastLiving,
+                                        borderColor: "#5bb5bf",
+                                        fill: false
                                     },
                                 ]
                             },
@@ -68,7 +108,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Среднее время запросов по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -82,8 +122,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в день"
-                                        }
+                                            labelString: "Среднее время в секундах"}
                                     }],
                                 }
                             }
@@ -159,8 +198,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в день"
-                                        }
+                                            labelString: "Запросов по интеграции в день"}
                                     }],
                                 }
                             }
@@ -168,7 +206,14 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
+                    let time_requests_hotel = null;
+                    let time_requests_excursionsTripster = null;
+                    let time_requests_excursionsWeatlas= null;
+                    let time_requests_ticket = null;
+                    let time_requests_auto = null;
+                    let time_requests_country= null;
+                    let time_requests_coastLiving = null;
+
                     let number_requests_hotel = null;
                     let number_requests_excursionsTripster = null;
                     let number_requests_excursionsWeatlas = null;
@@ -176,6 +221,7 @@ export class MonitoringComponent implements OnInit {
                     let number_requests_auto = null;
                     let number_requests_country = null;
                     let number_requests_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -183,10 +229,46 @@ export class MonitoringComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'по всем интеграциям',
-                                    data: number_requests,
+                                    label: 'отели',
+                                    data: time_requests_hotel,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {
+                                    label: 'экскурсии Tripster',
+                                    data: time_requests_excursionsTripster,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {
+                                    label: 'экскурсии Weatlas',
+                                    data: time_requests_excursionsWeatlas,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                                {
+                                    label: 'билеты',
+                                    data: time_requests_ticket,
+                                    borderColor: "#fcfa7e",
+                                    fill: false
+                                },
+                                {
+                                    label: 'аренда авто',
+                                    data: time_requests_auto,
+                                    borderColor: "#7efcce",
+                                    fill: false
+                                },
+                                {
+                                    label: 'страны, города',
+                                    data: time_requests_country,
                                     borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    fill: false
+                                },
+                                {
+                                    label: 'стоимость жизни',
+                                    data: time_requests_coastLiving,
+                                    borderColor: "#5bb5bf",
+                                    fill: false
                                 },
                             ]
                         },
@@ -198,7 +280,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Среднее время запросов по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -207,17 +289,12 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в день"
-                                    }
+                                        labelString: "Среднее время в секундах"}
                                 }],
                             }
                         }
@@ -291,19 +368,16 @@ export class MonitoringComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в день"
-                                    }
+                                        labelString: "Запросов по интеграции в день"}
                                 }]
                             }
                         }
                     });
                 })
     }
+
 
     showOverviewHour() {
         this.loading = true;
@@ -311,7 +385,14 @@ export class MonitoringComponent implements OnInit {
         this._monitoring.getOverviewHour()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
+                    let time_requests_hotel = res.map(res => res.avgTimeHotelRequest);
+                    let time_requests_excursionsTripster = res.map(res => res.avgTimeExcursionTripsterRequest);
+                    let time_requests_excursionsWeatlas= res.map(res => res.avgTimeExcursionsWeatlasRequest);
+                    let time_requests_ticket = res.map(res => res.avgTimeTicketRequest);
+                    let time_requests_auto = res.map(res => res.avgTimeAutoRequest);
+                    let time_requests_country= res.map(res => res.avgTimeCountryRequest);
+                    let time_requests_coastLiving = res.map(res => res.avgTimeCoastLivingRequest);
+
                     let number_requests_hotel = res.map(res => res.hotelRequestCount);
                     let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
                     let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
@@ -328,17 +409,52 @@ export class MonitoringComponent implements OnInit {
                         if(typeof this.chart !== "undefined") {
                             this.chart.destroy();
                         }
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'по всем интеграциям',
-                                        data: number_requests,
+                                        label: 'отели',
+                                        data: time_requests_hotel,
+                                        borderColor: "#3cba9f",
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'экскурсии Tripster',
+                                        data: time_requests_excursionsTripster,
+                                        borderColor: "#7cef8b",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'экскурсии Weatlas',
+                                        data: time_requests_excursionsWeatlas,
+                                        borderColor: "#ffcc00",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'билеты',
+                                        data: time_requests_ticket,
+                                        borderColor: "#fcfa7e",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'аренда авто',
+                                        data: time_requests_auto,
+                                        borderColor: "#7efcce",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'страны, города',
+                                        data: time_requests_country,
                                         borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'стоимость жизни',
+                                        data: time_requests_coastLiving,
+                                        borderColor: "#5bb5bf",
+                                        fill: false
                                     },
                                 ]
                             },
@@ -350,7 +466,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Среднее время запросов по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -364,8 +480,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в час"
-                                        }
+                                            labelString: "Среднее время в секундах"}
                                     }],
                                 }
                             }
@@ -441,8 +556,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в час"
-                                        }
+                                            labelString: "Запросов по интеграции в час"}
                                     }],
                                 }
                             }
@@ -450,7 +564,14 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
+                    let time_requests_hotel = null;
+                    let time_requests_excursionsTripster = null;
+                    let time_requests_excursionsWeatlas= null;
+                    let time_requests_ticket = null;
+                    let time_requests_auto = null;
+                    let time_requests_country= null;
+                    let time_requests_coastLiving = null;
+
                     let number_requests_hotel = null;
                     let number_requests_excursionsTripster = null;
                     let number_requests_excursionsWeatlas = null;
@@ -458,6 +579,7 @@ export class MonitoringComponent implements OnInit {
                     let number_requests_auto = null;
                     let number_requests_country = null;
                     let number_requests_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -465,10 +587,46 @@ export class MonitoringComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'по всем интеграциям',
-                                    data: number_requests,
+                                    label: 'отели',
+                                    data: time_requests_hotel,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {
+                                    label: 'экскурсии Tripster',
+                                    data: time_requests_excursionsTripster,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {
+                                    label: 'экскурсии Weatlas',
+                                    data: time_requests_excursionsWeatlas,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                                {
+                                    label: 'билеты',
+                                    data: time_requests_ticket,
+                                    borderColor: "#fcfa7e",
+                                    fill: false
+                                },
+                                {
+                                    label: 'аренда авто',
+                                    data: time_requests_auto,
+                                    borderColor: "#7efcce",
+                                    fill: false
+                                },
+                                {
+                                    label: 'страны, города',
+                                    data: time_requests_country,
                                     borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    fill: false
+                                },
+                                {
+                                    label: 'стоимость жизни',
+                                    data: time_requests_coastLiving,
+                                    borderColor: "#5bb5bf",
+                                    fill: false
                                 },
                             ]
                         },
@@ -480,7 +638,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Среднее время запросов по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -489,17 +647,12 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в час"
-                                    }
+                                        labelString: "Среднее время в секундах"}
                                 }],
                             }
                         }
@@ -573,27 +726,31 @@ export class MonitoringComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в час"
-                                    }
+                                        labelString: "Запросов по интеграции в час"}
                                 }]
                             }
                         }
                     });
                 })
     }
+
 
     showOverviewMinute() {
         this.loading = true;
-        this.condition=true;
+        this.condition = true;
         this._monitoring.getOverviewMinute()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
+                    let time_requests_hotel = res.map(res => res.avgTimeHotelRequest);
+                    let time_requests_excursionsTripster = res.map(res => res.avgTimeExcursionTripsterRequest);
+                    let time_requests_excursionsWeatlas= res.map(res => res.avgTimeExcursionsWeatlasRequest);
+                    let time_requests_ticket = res.map(res => res.avgTimeTicketRequest);
+                    let time_requests_auto = res.map(res => res.avgTimeAutoRequest);
+                    let time_requests_country= res.map(res => res.avgTimeCountryRequest);
+                    let time_requests_coastLiving = res.map(res => res.avgTimeCoastLivingRequest);
+
                     let number_requests_hotel = res.map(res => res.hotelRequestCount);
                     let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
                     let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
@@ -610,17 +767,52 @@ export class MonitoringComponent implements OnInit {
                         if(typeof this.chart !== "undefined") {
                             this.chart.destroy();
                         }
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'по всем интеграциям',
-                                        data: number_requests,
+                                        label: 'отели',
+                                        data: time_requests_hotel,
+                                        borderColor: "#3cba9f",
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'экскурсии Tripster',
+                                        data: time_requests_excursionsTripster,
+                                        borderColor: "#7cef8b",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'экскурсии Weatlas',
+                                        data: time_requests_excursionsWeatlas,
+                                        borderColor: "#ffcc00",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'билеты',
+                                        data: time_requests_ticket,
+                                        borderColor: "#fcfa7e",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'аренда авто',
+                                        data: time_requests_auto,
+                                        borderColor: "#7efcce",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'страны, города',
+                                        data: time_requests_country,
                                         borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'стоимость жизни',
+                                        data: time_requests_coastLiving,
+                                        borderColor: "#5bb5bf",
+                                        fill: false
                                     },
                                 ]
                             },
@@ -632,7 +824,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Среднее время запросов по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -646,8 +838,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в минуту"
-                                        }
+                                            labelString: "Среднее время в секундах"}
                                     }],
                                 }
                             }
@@ -723,8 +914,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в минуту"
-                                        }
+                                            labelString: "Запросов по интеграции в минуту"}
                                     }],
                                 }
                             }
@@ -732,7 +922,14 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
+                    let time_requests_hotel = null;
+                    let time_requests_excursionsTripster = null;
+                    let time_requests_excursionsWeatlas= null;
+                    let time_requests_ticket = null;
+                    let time_requests_auto = null;
+                    let time_requests_country= null;
+                    let time_requests_coastLiving = null;
+
                     let number_requests_hotel = null;
                     let number_requests_excursionsTripster = null;
                     let number_requests_excursionsWeatlas = null;
@@ -740,6 +937,7 @@ export class MonitoringComponent implements OnInit {
                     let number_requests_auto = null;
                     let number_requests_country = null;
                     let number_requests_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -747,10 +945,46 @@ export class MonitoringComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'по всем интеграциям',
-                                    data: number_requests,
+                                    label: 'отели',
+                                    data: time_requests_hotel,
+                                    borderColor: "#3cba9f",
+                                    fill: false,
+                                },
+                                {
+                                    label: 'экскурсии Tripster',
+                                    data: time_requests_excursionsTripster,
+                                    borderColor: "#7cef8b",
+                                    fill: false
+                                },
+                                {
+                                    label: 'экскурсии Weatlas',
+                                    data: time_requests_excursionsWeatlas,
+                                    borderColor: "#ffcc00",
+                                    fill: false
+                                },
+                                {
+                                    label: 'билеты',
+                                    data: time_requests_ticket,
+                                    borderColor: "#fcfa7e",
+                                    fill: false
+                                },
+                                {
+                                    label: 'аренда авто',
+                                    data: time_requests_auto,
+                                    borderColor: "#7efcce",
+                                    fill: false
+                                },
+                                {
+                                    label: 'страны, города',
+                                    data: time_requests_country,
                                     borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    fill: false
+                                },
+                                {
+                                    label: 'стоимость жизни',
+                                    data: time_requests_coastLiving,
+                                    borderColor: "#5bb5bf",
+                                    fill: false
                                 },
                             ]
                         },
@@ -762,7 +996,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Среднее время запросов по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -771,17 +1005,12 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в минуту"
-                                    }
+                                        labelString: "Среднее время в секундах"}
                                 }],
                             }
                         }
@@ -855,13 +1084,9 @@ export class MonitoringComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в минуту"
-                                    }
+                                        labelString: "Запросов по интеграции в минуту"}
                                 }]
                             }
                         }
@@ -869,289 +1094,8 @@ export class MonitoringComponent implements OnInit {
                 })
     }
 
-    showOverviewSecond() {
-        this.loading = true;
-        this.condition=true;
-        this._monitoring.getOverviewSecond()
-            .subscribe(res => {
-                    this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
-                    let number_requests_hotel = res.map(res => res.hotelRequestCount);
-                    let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
-                    let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
-                    let number_requests_ticket = res.map(res => res.ticketRequestCount);
-                    let number_requests_auto = res.map(res => res.autoRequestCount);
-                    let number_requests_country = res.map(res => res.countryRequestCount);
-                    let number_requests_coastLiving = res.map(res => res.coastLivingRequestCount);
-                    let alltimes = res.map(res => res.time);
 
-                    let monitoringTimes = [];
-                    alltimes.forEach((res) => {
-                        let jsdate = new Date(res);
-                        monitoringTimes.push(jsdate.toLocaleTimeString());
-                        if(typeof this.chart !== "undefined") {
-                            this.chart.destroy();
-                        }
-
-                        this.chart = new Chart('canvas', {
-                            type: 'line',
-                            data: {
-                                labels: monitoringTimes,
-                                datasets: [
-                                    {
-                                        label: 'по всем интеграциям',
-                                        data: number_requests,
-                                        borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
-                                    },
-                                ]
-                            },
-                            options: {
-                                tooltips: {
-                                    enabled: false
-                                },
-                                title: {
-                                    display: true,
-                                    fontSize: 20,
-                                    padding: 20,
-                                    text: 'Общее количество запросов'
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        display: true
-                                    }],
-                                    yAxes: [{
-                                        display: true,
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: "Запросов в секунду"
-                                        }
-                                    }],
-                                }
-                            }
-                        });
-                        this.chart = new Chart('canvas2', {
-                            type: 'line',
-                            data: {
-                                labels: monitoringTimes,
-                                datasets: [
-                                    {
-                                        label: 'отели',
-                                        data: number_requests_hotel,
-                                        borderColor: "#3cba9f",
-                                        fill: false,
-                                    },
-                                    {
-                                        label: 'экскурсии Tripster',
-                                        data: number_requests_excursionsTripster,
-                                        borderColor: "#7cef8b",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'экскурсии Weatlas',
-                                        data: number_requests_excursionsWeatlas,
-                                        borderColor: "#ffcc00",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'билеты',
-                                        data: number_requests_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'аренда авто',
-                                        data: number_requests_auto,
-                                        borderColor: "#7efcce",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'страны, города',
-                                        data: number_requests_country,
-                                        borderColor: "#3c4aba",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'стоимость жизни',
-                                        data: number_requests_coastLiving,
-                                        borderColor: "#5bb5bf",
-                                        fill: false
-                                    },
-                                ]
-                            },
-                            options: {
-                                tooltips: {
-                                    enabled: false
-                                },
-                                title: {
-                                    display: true,
-                                    fontSize: 20,
-                                    padding: 20,
-                                    text: 'Количество запросов по интеграциям'
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        display: true
-                                    }],
-                                    yAxes: [{
-                                        display: true,
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: "Запросов по интеграции в секунду"
-                                        }
-                                    }],
-                                }
-                            }
-                        });
-                    })
-                },
-                error => {
-                    let number_requests = null;
-                    let number_requests_hotel = null;
-                    let number_requests_excursionsTripster = null;
-                    let number_requests_excursionsWeatlas = null;
-                    let number_requests_ticket = null;
-                    let number_requests_auto = null;
-                    let number_requests_country = null;
-                    let number_requests_coastLiving = null;
-                    let monitoringTimes = [];
-                    this.chart = new Chart('canvas', {
-                        type: 'line',
-                        data: {
-                            labels: monitoringTimes,
-                            datasets: [
-                                {
-                                    label: 'по всем интеграциям',
-                                    data: number_requests,
-                                    borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
-                                },
-                            ]
-                        },
-                        options: {
-                            tooltips: {
-                                enabled: false
-                            },
-                            title: {
-                                display: true,
-                                fontSize: 20,
-                                padding: 20,
-                                text: 'Общее количество запросов'
-                            },
-                            legend: {
-                                display: true,
-                                position: 'top'
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true
-
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: "Запросов в секунду"
-                                    }
-                                }],
-                            }
-                        }
-                    });
-                    this.chart = new Chart('canvas2', {
-                        type: 'line',
-                        data: {
-                            labels: monitoringTimes,
-                            datasets: [
-                                {
-                                    label: 'отели',
-                                    data: number_requests_hotel,
-                                    borderColor: "#3cba9f",
-                                    fill: false,
-                                },
-                                {
-                                    label: 'экскурсии Tripster',
-                                    data: number_requests_excursionsTripster,
-                                    borderColor: "#7cef8b",
-                                    fill: false
-                                },
-                                {
-                                    label: 'экскурсии Weatlas',
-                                    data: number_requests_excursionsWeatlas,
-                                    borderColor: "#ffcc00",
-                                    fill: false
-                                },
-                                {
-                                    label: 'билеты',
-                                    data: number_requests_ticket,
-                                    borderColor: "#fcfa7e",
-                                    fill: false
-                                },
-                                {
-                                    label: 'аренда авто',
-                                    data: number_requests_auto,
-                                    borderColor: "#7efcce",
-                                    fill: false
-                                },
-                                {
-                                    label: 'страны, города',
-                                    data: number_requests_country,
-                                    borderColor: "#3c4aba",
-                                    fill: false
-                                },
-                                {
-                                    label: 'стоимость жизни',
-                                    data: number_requests_coastLiving,
-                                    borderColor: "#5bb5bf",
-                                    fill: false
-                                },
-                            ]
-                        },
-                        options: {
-                            tooltips: {
-                                enabled: false
-                            },
-                            title: {
-                                display: true,
-                                fontSize: 20,
-                                padding: 20,
-                                text: 'Количество запросов по интеграциям'
-                            },
-                            legend: {
-                                display: true,
-                                position: 'top'
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: "Запросов по интеграции в секунду"
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                })
-    }
-
-    exitMonitoring(){
+    exitMonitoring() {
         this.cookie.deleteAll();
         this.router.navigate(['/']);
     }

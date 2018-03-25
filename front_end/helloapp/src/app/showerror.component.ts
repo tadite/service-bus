@@ -8,15 +8,13 @@ import {error} from "util";
 
 
 @Component({
-    selector:'monitoring-app',
-    templateUrl: './monitoring.component.html',
-    styleUrls: ['./monitoring.component.css']
+    selector:'showerror-app',
+    templateUrl: './showerror.component.html',
+    styleUrls: ['./showerror.component.css']
 })
 
-export class MonitoringComponent implements OnInit {
-
+export class ShowErrorComponent implements OnInit {
     public loading = false;
-
     condition: boolean = true;
 
     chart: any = []; // This will hold our chart info
@@ -29,24 +27,24 @@ export class MonitoringComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
         this.condition = true;
-        this._monitoring.getOverviewDay()
+        this._monitoring.getErrorDay()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
-                    let number_requests_hotel = res.map(res => res.hotelRequestCount);
-                    let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
-                    let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
-                    let number_requests_ticket = res.map(res => res.ticketRequestCount);
-                    let number_requests_auto = res.map(res => res.autoRequestCount);
-                    let number_requests_country = res.map(res => res.countryRequestCount);
-                    let number_requests_coastLiving = res.map(res => res.coastLivingRequestCount);
+                    let number_errors = res.map(res => res.errorCount);
+                    let number_errors_hotel = res.map(res => res.hotelErrorCount);
+                    let number_errors_excursionsTripster = res.map(res => res.excursionsTripsterErrorCount);
+                    let number_errors_excursionsWeatlas = res.map(res => res.excursionsWeatlasErrorCount);
+                    let number_errors_ticket = res.map(res => res.ticketErrorCount);
+                    let number_errors_auto = res.map(res => res.autoErrorCount);
+                    let number_errors_country = res.map(res => res.countryErrorCount);
+                    let number_errors_coastLiving = res.map(res => res.coastLivingErrorCount);
+
                     let alltimes = res.map(res => res.time);
 
                     let monitoringTimes = [];
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleDateString());
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
@@ -54,9 +52,9 @@ export class MonitoringComponent implements OnInit {
                                 datasets: [
                                     {
                                         label: 'по всем интеграциям',
-                                        data: number_requests,
-                                        borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        data: number_errors,
+                                        borderColor: "#a8171c",
+                                        backgroundColor: "#e26161",
                                     },
                                 ]
                             },
@@ -68,7 +66,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Ошибки'
                                 },
                                 legend: {
                                     display: true,
@@ -82,56 +80,56 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в день"
+                                            labelString: "Количество ошибок"
                                         }
                                     }],
                                 }
                             }
                         });
                         this.chart = new Chart('canvas2', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'отели',
-                                        data: number_requests_hotel,
+                                        data: number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
                                         label: 'экскурсии Tripster',
-                                        data: number_requests_excursionsTripster,
+                                        data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
                                         label: 'экскурсии Weatlas',
-                                        data: number_requests_excursionsWeatlas,
+                                        data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
                                         label: 'билеты',
-                                        data: number_requests_ticket,
+                                        data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
                                         label: 'аренда авто',
-                                        data: number_requests_auto,
+                                        data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
                                         label: 'страны, города',
-                                        data: number_requests_country,
+                                        data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
                                         label: 'стоимость жизни',
-                                        data: number_requests_coastLiving,
+                                        data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
                                     },
@@ -145,7 +143,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Количество запросов по интеграциям'
+                                    text: 'Ошибки по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -159,7 +157,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в день"
+                                            labelString: "Ошибок по интеграции"
                                         }
                                     }],
                                 }
@@ -168,14 +166,15 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
-                    let number_requests_hotel = null;
-                    let number_requests_excursionsTripster = null;
-                    let number_requests_excursionsWeatlas = null;
-                    let number_requests_ticket = null;
-                    let number_requests_auto = null;
-                    let number_requests_country = null;
-                    let number_requests_coastLiving = null;
+                    let number_errors = null;
+                    let number_errors_hotel = null;
+                    let number_errors_excursionsTripster = null;
+                    let number_errors_excursionsWeatlas = null;
+                    let number_errors_ticket = null;
+                    let number_errors_auto = null;
+                    let number_errors_country = null;
+                    let number_errors_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -184,9 +183,9 @@ export class MonitoringComponent implements OnInit {
                             datasets: [
                                 {
                                     label: 'по всем интеграциям',
-                                    data: number_requests,
-                                    borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    data: number_errors,
+                                    borderColor: "#a8171c",
+                                    backgroundColor: "#e26161",
                                 },
                             ]
                         },
@@ -198,7 +197,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Ошибки'
                             },
                             legend: {
                                 display: true,
@@ -207,7 +206,6 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
@@ -216,56 +214,56 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в день"
+                                        labelString: "Количество ошибок"
                                     }
                                 }],
                             }
                         }
                     });
                     this.chart = new Chart('canvas2', {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: monitoringTimes,
                             datasets: [
                                 {
                                     label: 'отели',
-                                    data: number_requests_hotel,
+                                    data: number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
                                     label: 'экскурсии Tripster',
-                                    data: number_requests_excursionsTripster,
+                                    data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
                                     label: 'экскурсии Weatlas',
-                                    data: number_requests_excursionsWeatlas,
+                                    data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
                                     label: 'билеты',
-                                    data: number_requests_ticket,
+                                    data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
                                     label: 'аренда авто',
-                                    data: number_requests_auto,
+                                    data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
                                     label: 'страны, города',
-                                    data: number_requests_country,
+                                    data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
                                     label: 'стоимость жизни',
-                                    data: number_requests_coastLiving,
+                                    data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
                                 },
@@ -279,7 +277,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Количество запросов по интеграциям'
+                                text: 'Ошибки по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -296,7 +294,7 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в день"
+                                        labelString: "Ошибок по интеграции"
                                     }
                                 }]
                             }
@@ -308,17 +306,18 @@ export class MonitoringComponent implements OnInit {
     showOverviewHour() {
         this.loading = true;
         this.condition = true;
-        this._monitoring.getOverviewHour()
+        this._monitoring.getErrorHour()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
-                    let number_requests_hotel = res.map(res => res.hotelRequestCount);
-                    let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
-                    let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
-                    let number_requests_ticket = res.map(res => res.ticketRequestCount);
-                    let number_requests_auto = res.map(res => res.autoRequestCount);
-                    let number_requests_country = res.map(res => res.countryRequestCount);
-                    let number_requests_coastLiving = res.map(res => res.coastLivingRequestCount);
+                    let number_errors = res.map(res => res.errorCount);
+                    let number_errors_hotel = res.map(res => res.hotelErrorCount);
+                    let number_errors_excursionsTripster = res.map(res => res.excursionsTripsterErrorCount);
+                    let number_errors_excursionsWeatlas = res.map(res => res.excursionsWeatlasErrorCount);
+                    let number_errors_ticket = res.map(res => res.ticketErrorCount);
+                    let number_errors_auto = res.map(res => res.autoErrorCount);
+                    let number_errors_country = res.map(res => res.countryErrorCount);
+                    let number_errors_coastLiving = res.map(res => res.coastLivingErrorCount);
+
                     let alltimes = res.map(res => res.time);
 
                     let monitoringTimes = [];
@@ -328,7 +327,6 @@ export class MonitoringComponent implements OnInit {
                         if(typeof this.chart !== "undefined") {
                             this.chart.destroy();
                         }
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
@@ -336,9 +334,9 @@ export class MonitoringComponent implements OnInit {
                                 datasets: [
                                     {
                                         label: 'по всем интеграциям',
-                                        data: number_requests,
-                                        borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        data: number_errors,
+                                        borderColor: "#a8171c",
+                                        backgroundColor: "#e26161",
                                     },
                                 ]
                             },
@@ -350,7 +348,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Ошибки'
                                 },
                                 legend: {
                                     display: true,
@@ -364,56 +362,56 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в час"
+                                            labelString: "Количество ошибок"
                                         }
                                     }],
                                 }
                             }
                         });
                         this.chart = new Chart('canvas2', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'отели',
-                                        data: number_requests_hotel,
+                                        data: number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
                                         label: 'экскурсии Tripster',
-                                        data: number_requests_excursionsTripster,
+                                        data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
                                         label: 'экскурсии Weatlas',
-                                        data: number_requests_excursionsWeatlas,
+                                        data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
                                         label: 'билеты',
-                                        data: number_requests_ticket,
+                                        data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
                                         label: 'аренда авто',
-                                        data: number_requests_auto,
+                                        data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
                                         label: 'страны, города',
-                                        data: number_requests_country,
+                                        data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
                                         label: 'стоимость жизни',
-                                        data: number_requests_coastLiving,
+                                        data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
                                     },
@@ -427,7 +425,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Количество запросов по интеграциям'
+                                    text: 'Ошибки по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -441,7 +439,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в час"
+                                            labelString: "Ошибок по интеграции"
                                         }
                                     }],
                                 }
@@ -450,14 +448,15 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
-                    let number_requests_hotel = null;
-                    let number_requests_excursionsTripster = null;
-                    let number_requests_excursionsWeatlas = null;
-                    let number_requests_ticket = null;
-                    let number_requests_auto = null;
-                    let number_requests_country = null;
-                    let number_requests_coastLiving = null;
+                    let number_errors = null;
+                    let number_errors_hotel = null;
+                    let number_errors_excursionsTripster = null;
+                    let number_errors_excursionsWeatlas = null;
+                    let number_errors_ticket = null;
+                    let number_errors_auto = null;
+                    let number_errors_country = null;
+                    let number_errors_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -466,9 +465,9 @@ export class MonitoringComponent implements OnInit {
                             datasets: [
                                 {
                                     label: 'по всем интеграциям',
-                                    data: number_requests,
-                                    borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    data: number_errors,
+                                    borderColor: "#a8171c",
+                                    backgroundColor: "#e26161",
                                 },
                             ]
                         },
@@ -480,7 +479,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Ошибки'
                             },
                             legend: {
                                 display: true,
@@ -489,7 +488,6 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
@@ -498,56 +496,56 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в час"
+                                        labelString: "Количество ошибок"
                                     }
                                 }],
                             }
                         }
                     });
                     this.chart = new Chart('canvas2', {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: monitoringTimes,
                             datasets: [
                                 {
                                     label: 'отели',
-                                    data: number_requests_hotel,
+                                    data: number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
                                     label: 'экскурсии Tripster',
-                                    data: number_requests_excursionsTripster,
+                                    data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
                                     label: 'экскурсии Weatlas',
-                                    data: number_requests_excursionsWeatlas,
+                                    data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
                                     label: 'билеты',
-                                    data: number_requests_ticket,
+                                    data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
                                     label: 'аренда авто',
-                                    data: number_requests_auto,
+                                    data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
                                     label: 'страны, города',
-                                    data: number_requests_country,
+                                    data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
                                     label: 'стоимость жизни',
-                                    data: number_requests_coastLiving,
+                                    data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
                                 },
@@ -561,7 +559,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Количество запросов по интеграциям'
+                                text: 'Ошибки по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -578,7 +576,7 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в час"
+                                        labelString: "Ошибок по интеграции"
                                     }
                                 }]
                             }
@@ -589,18 +587,19 @@ export class MonitoringComponent implements OnInit {
 
     showOverviewMinute() {
         this.loading = true;
-        this.condition=true;
-        this._monitoring.getOverviewMinute()
+        this.condition = true;
+        this._monitoring.getErrorMinute()
             .subscribe(res => {
                     this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
-                    let number_requests_hotel = res.map(res => res.hotelRequestCount);
-                    let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
-                    let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
-                    let number_requests_ticket = res.map(res => res.ticketRequestCount);
-                    let number_requests_auto = res.map(res => res.autoRequestCount);
-                    let number_requests_country = res.map(res => res.countryRequestCount);
-                    let number_requests_coastLiving = res.map(res => res.coastLivingRequestCount);
+                    let number_errors = res.map(res => res.errorCount);
+                    let number_errors_hotel = res.map(res => res.hotelErrorCount);
+                    let number_errors_excursionsTripster = res.map(res => res.excursionsTripsterErrorCount);
+                    let number_errors_excursionsWeatlas = res.map(res => res.excursionsWeatlasErrorCount);
+                    let number_errors_ticket = res.map(res => res.ticketErrorCount);
+                    let number_errors_auto = res.map(res => res.autoErrorCount);
+                    let number_errors_country = res.map(res => res.countryErrorCount);
+                    let number_errors_coastLiving = res.map(res => res.coastLivingErrorCount);
+
                     let alltimes = res.map(res => res.time);
 
                     let monitoringTimes = [];
@@ -610,7 +609,6 @@ export class MonitoringComponent implements OnInit {
                         if(typeof this.chart !== "undefined") {
                             this.chart.destroy();
                         }
-
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
@@ -618,9 +616,9 @@ export class MonitoringComponent implements OnInit {
                                 datasets: [
                                     {
                                         label: 'по всем интеграциям',
-                                        data: number_requests,
-                                        borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
+                                        data: number_errors,
+                                        borderColor: "#a8171c",
+                                        backgroundColor: "#e26161",
                                     },
                                 ]
                             },
@@ -632,7 +630,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Общее количество запросов'
+                                    text: 'Ошибки'
                                 },
                                 legend: {
                                     display: true,
@@ -646,56 +644,56 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов в минуту"
+                                            labelString: "Количество ошибок"
                                         }
                                     }],
                                 }
                             }
                         });
                         this.chart = new Chart('canvas2', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'отели',
-                                        data: number_requests_hotel,
+                                        data: number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
                                         label: 'экскурсии Tripster',
-                                        data: number_requests_excursionsTripster,
+                                        data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
                                         label: 'экскурсии Weatlas',
-                                        data: number_requests_excursionsWeatlas,
+                                        data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
                                         label: 'билеты',
-                                        data: number_requests_ticket,
+                                        data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
                                         label: 'аренда авто',
-                                        data: number_requests_auto,
+                                        data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
                                         label: 'страны, города',
-                                        data: number_requests_country,
+                                        data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
                                         label: 'стоимость жизни',
-                                        data: number_requests_coastLiving,
+                                        data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
                                     },
@@ -709,7 +707,7 @@ export class MonitoringComponent implements OnInit {
                                     display: true,
                                     fontSize: 20,
                                     padding: 20,
-                                    text: 'Количество запросов по интеграциям'
+                                    text: 'Ошибки по интеграциям'
                                 },
                                 legend: {
                                     display: true,
@@ -723,7 +721,7 @@ export class MonitoringComponent implements OnInit {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Запросов по интеграции в минуту"
+                                            labelString: "Ошибок по интеграции"
                                         }
                                     }],
                                 }
@@ -732,14 +730,15 @@ export class MonitoringComponent implements OnInit {
                     })
                 },
                 error => {
-                    let number_requests = null;
-                    let number_requests_hotel = null;
-                    let number_requests_excursionsTripster = null;
-                    let number_requests_excursionsWeatlas = null;
-                    let number_requests_ticket = null;
-                    let number_requests_auto = null;
-                    let number_requests_country = null;
-                    let number_requests_coastLiving = null;
+                    let number_errors = null;
+                    let number_errors_hotel = null;
+                    let number_errors_excursionsTripster = null;
+                    let number_errors_excursionsWeatlas = null;
+                    let number_errors_ticket = null;
+                    let number_errors_auto = null;
+                    let number_errors_country = null;
+                    let number_errors_coastLiving = null;
+
                     let monitoringTimes = [];
                     this.chart = new Chart('canvas', {
                         type: 'line',
@@ -748,9 +747,9 @@ export class MonitoringComponent implements OnInit {
                             datasets: [
                                 {
                                     label: 'по всем интеграциям',
-                                    data: number_requests,
-                                    borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
+                                    data: number_errors,
+                                    borderColor: "#a8171c",
+                                    backgroundColor: "#e26161",
                                 },
                             ]
                         },
@@ -762,7 +761,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Общее количество запросов'
+                                text: 'Ошибки'
                             },
                             legend: {
                                 display: true,
@@ -771,7 +770,6 @@ export class MonitoringComponent implements OnInit {
                             scales: {
                                 xAxes: [{
                                     display: true
-
                                 }],
                                 yAxes: [{
                                     display: true,
@@ -780,56 +778,56 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов в минуту"
+                                        labelString: "Количество ошибок"
                                     }
                                 }],
                             }
                         }
                     });
                     this.chart = new Chart('canvas2', {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: monitoringTimes,
                             datasets: [
                                 {
                                     label: 'отели',
-                                    data: number_requests_hotel,
+                                    data: number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
                                     label: 'экскурсии Tripster',
-                                    data: number_requests_excursionsTripster,
+                                    data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
                                     label: 'экскурсии Weatlas',
-                                    data: number_requests_excursionsWeatlas,
+                                    data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
                                     label: 'билеты',
-                                    data: number_requests_ticket,
+                                    data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
                                     label: 'аренда авто',
-                                    data: number_requests_auto,
+                                    data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
                                     label: 'страны, города',
-                                    data: number_requests_country,
+                                    data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
                                     label: 'стоимость жизни',
-                                    data: number_requests_coastLiving,
+                                    data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
                                 },
@@ -843,7 +841,7 @@ export class MonitoringComponent implements OnInit {
                                 display: true,
                                 fontSize: 20,
                                 padding: 20,
-                                text: 'Количество запросов по интеграциям'
+                                text: 'Ошибки по интеграциям'
                             },
                             legend: {
                                 display: true,
@@ -860,7 +858,7 @@ export class MonitoringComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Запросов по интеграции в минуту"
+                                        labelString: "Ошибок по интеграции"
                                     }
                                 }]
                             }
@@ -869,289 +867,8 @@ export class MonitoringComponent implements OnInit {
                 })
     }
 
-    showOverviewSecond() {
-        this.loading = true;
-        this.condition=true;
-        this._monitoring.getOverviewSecond()
-            .subscribe(res => {
-                    this.loading = false;
-                    let number_requests = res.map(res => res.requestCount);
-                    let number_requests_hotel = res.map(res => res.hotelRequestCount);
-                    let number_requests_excursionsTripster = res.map(res => res.excursionTripsterRequestCount);
-                    let number_requests_excursionsWeatlas = res.map(res => res.excursionWeatlasRequestCount);
-                    let number_requests_ticket = res.map(res => res.ticketRequestCount);
-                    let number_requests_auto = res.map(res => res.autoRequestCount);
-                    let number_requests_country = res.map(res => res.countryRequestCount);
-                    let number_requests_coastLiving = res.map(res => res.coastLivingRequestCount);
-                    let alltimes = res.map(res => res.time);
 
-                    let monitoringTimes = [];
-                    alltimes.forEach((res) => {
-                        let jsdate = new Date(res);
-                        monitoringTimes.push(jsdate.toLocaleTimeString());
-                        if(typeof this.chart !== "undefined") {
-                            this.chart.destroy();
-                        }
-
-                        this.chart = new Chart('canvas', {
-                            type: 'line',
-                            data: {
-                                labels: monitoringTimes,
-                                datasets: [
-                                    {
-                                        label: 'по всем интеграциям',
-                                        data: number_requests,
-                                        borderColor: "#3c4aba",
-                                        backgroundColor: "#aab0e0",
-                                    },
-                                ]
-                            },
-                            options: {
-                                tooltips: {
-                                    enabled: false
-                                },
-                                title: {
-                                    display: true,
-                                    fontSize: 20,
-                                    padding: 20,
-                                    text: 'Общее количество запросов'
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        display: true
-                                    }],
-                                    yAxes: [{
-                                        display: true,
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: "Запросов в секунду"
-                                        }
-                                    }],
-                                }
-                            }
-                        });
-                        this.chart = new Chart('canvas2', {
-                            type: 'line',
-                            data: {
-                                labels: monitoringTimes,
-                                datasets: [
-                                    {
-                                        label: 'отели',
-                                        data: number_requests_hotel,
-                                        borderColor: "#3cba9f",
-                                        fill: false,
-                                    },
-                                    {
-                                        label: 'экскурсии Tripster',
-                                        data: number_requests_excursionsTripster,
-                                        borderColor: "#7cef8b",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'экскурсии Weatlas',
-                                        data: number_requests_excursionsWeatlas,
-                                        borderColor: "#ffcc00",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'билеты',
-                                        data: number_requests_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'аренда авто',
-                                        data: number_requests_auto,
-                                        borderColor: "#7efcce",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'страны, города',
-                                        data: number_requests_country,
-                                        borderColor: "#3c4aba",
-                                        fill: false
-                                    },
-                                    {
-                                        label: 'стоимость жизни',
-                                        data: number_requests_coastLiving,
-                                        borderColor: "#5bb5bf",
-                                        fill: false
-                                    },
-                                ]
-                            },
-                            options: {
-                                tooltips: {
-                                    enabled: false
-                                },
-                                title: {
-                                    display: true,
-                                    fontSize: 20,
-                                    padding: 20,
-                                    text: 'Количество запросов по интеграциям'
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        display: true
-                                    }],
-                                    yAxes: [{
-                                        display: true,
-                                        scaleLabel: {
-                                            display: true,
-                                            labelString: "Запросов по интеграции в секунду"
-                                        }
-                                    }],
-                                }
-                            }
-                        });
-                    })
-                },
-                error => {
-                    let number_requests = null;
-                    let number_requests_hotel = null;
-                    let number_requests_excursionsTripster = null;
-                    let number_requests_excursionsWeatlas = null;
-                    let number_requests_ticket = null;
-                    let number_requests_auto = null;
-                    let number_requests_country = null;
-                    let number_requests_coastLiving = null;
-                    let monitoringTimes = [];
-                    this.chart = new Chart('canvas', {
-                        type: 'line',
-                        data: {
-                            labels: monitoringTimes,
-                            datasets: [
-                                {
-                                    label: 'по всем интеграциям',
-                                    data: number_requests,
-                                    borderColor: "#3c4aba",
-                                    backgroundColor: "#aab0e0",
-                                },
-                            ]
-                        },
-                        options: {
-                            tooltips: {
-                                enabled: false
-                            },
-                            title: {
-                                display: true,
-                                fontSize: 20,
-                                padding: 20,
-                                text: 'Общее количество запросов'
-                            },
-                            legend: {
-                                display: true,
-                                position: 'top'
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true
-
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: "Запросов в секунду"
-                                    }
-                                }],
-                            }
-                        }
-                    });
-                    this.chart = new Chart('canvas2', {
-                        type: 'line',
-                        data: {
-                            labels: monitoringTimes,
-                            datasets: [
-                                {
-                                    label: 'отели',
-                                    data: number_requests_hotel,
-                                    borderColor: "#3cba9f",
-                                    fill: false,
-                                },
-                                {
-                                    label: 'экскурсии Tripster',
-                                    data: number_requests_excursionsTripster,
-                                    borderColor: "#7cef8b",
-                                    fill: false
-                                },
-                                {
-                                    label: 'экскурсии Weatlas',
-                                    data: number_requests_excursionsWeatlas,
-                                    borderColor: "#ffcc00",
-                                    fill: false
-                                },
-                                {
-                                    label: 'билеты',
-                                    data: number_requests_ticket,
-                                    borderColor: "#fcfa7e",
-                                    fill: false
-                                },
-                                {
-                                    label: 'аренда авто',
-                                    data: number_requests_auto,
-                                    borderColor: "#7efcce",
-                                    fill: false
-                                },
-                                {
-                                    label: 'страны, города',
-                                    data: number_requests_country,
-                                    borderColor: "#3c4aba",
-                                    fill: false
-                                },
-                                {
-                                    label: 'стоимость жизни',
-                                    data: number_requests_coastLiving,
-                                    borderColor: "#5bb5bf",
-                                    fill: false
-                                },
-                            ]
-                        },
-                        options: {
-                            tooltips: {
-                                enabled: false
-                            },
-                            title: {
-                                display: true,
-                                fontSize: 20,
-                                padding: 20,
-                                text: 'Количество запросов по интеграциям'
-                            },
-                            legend: {
-                                display: true,
-                                position: 'top'
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    ticks: {
-                                        min: 0
-                                    },
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: "Запросов по интеграции в секунду"
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                })
-    }
-
-    exitMonitoring(){
+    exitMonitoring() {
         this.cookie.deleteAll();
         this.router.navigate(['/']);
     }
