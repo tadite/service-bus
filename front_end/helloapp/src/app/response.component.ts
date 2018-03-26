@@ -52,6 +52,9 @@ export class ResponseComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleDateString());
+                        if(typeof this.chart !== "undefined") {
+                            this.chart.destroy();
+                        }
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {

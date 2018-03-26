@@ -47,10 +47,10 @@
         </div>
 
         <div class="row">
-            <ngx-loading [show]="loading" [config]="{ backdropBackgroundColour: 'rgba(0,0,0,0)', backdropBorderRadius: '10px',
-                        primaryColour: 'rgb(161, 160, 160)', secondaryColour: 'rgb(161, 160, 160)', tertiaryColour: 'rgb(161, 160, 160)' }">
-            </ngx-loading>
             <div class="col-xs-12 col-md-12" *ngIf="chart" style="background: white;margin-left: 20px;margin-top: 20px">
+                <ngx-loading [show]="loading" [config]="{ backdropBackgroundColour: 'rgba(0,0,0,0)', backdropBorderRadius: '10px',
+                        primaryColour: 'rgb(161, 160, 160)', secondaryColour: 'rgb(161, 160, 160)', tertiaryColour: 'rgb(161, 160, 160)' }">
+                </ngx-loading>
                 <canvas id="canvas2">{{ chart }}</canvas>
             </div>
         </div>
