@@ -45,6 +45,7 @@ export class ShowErrorComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleDateString());
+
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {

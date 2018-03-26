@@ -51,6 +51,7 @@ export class RequestComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleDateString());
+
                         this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
@@ -120,6 +121,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Среднее время в секундах"}
@@ -196,6 +200,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Запросов по интеграции в день"}
@@ -292,6 +299,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Среднее время в секундах"}
@@ -368,6 +378,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Запросов по интеграции в день"}
@@ -478,6 +491,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Среднее время в секундах"}
@@ -554,6 +570,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Запросов по интеграции в час"}
@@ -650,6 +669,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Среднее время в секундах"}
@@ -726,6 +748,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Запросов по интеграции в час"}
@@ -836,6 +861,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Среднее время в секундах"}
@@ -912,6 +940,9 @@ export class RequestComponent implements OnInit {
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
                                             labelString: "Запросов по интеграции в минуту"}
@@ -1008,6 +1039,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Среднее время в секундах"}
@@ -1084,6 +1118,9 @@ export class RequestComponent implements OnInit {
                                 }],
                                 yAxes: [{
                                     display: true,
+                                    ticks: {
+                                        min: 0
+                                    },
                                     scaleLabel: {
                                         display: true,
                                         labelString: "Запросов по интеграции в минуту"}
