@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,25 +38,41 @@ public class ErrorStatsController {
     @Qualifier("error")
     private ObjectFactory<ErrorStatistic> errorStatistic;
 
-    @RequestMapping("/errorStats")
-    public ResponseEntity errorStats(){
-        return ResponseEntity.ok(getErrorDataList());
+    @RequestMapping("/errorPerDay")
+    public ResponseEntity errorPerDay(){
+        return ResponseEntity.ok(getErrorDataList(24, 60));
     }
 
-    private List<StatsData> getErrorDataList(){
+    @RequestMapping("/errorPerHour")
+    public ResponseEntity errorPerHour(){
+        return ResponseEntity.ok(getErrorDataList(1, 60));
+    }
+
+    @RequestMapping("/errorPerMinute")
+    public ResponseEntity errorPerMinute(){
+        return ResponseEntity.ok(getErrorDataList(1, 1));
+    }
+
+    private List<StatsData> getErrorDataList(int hour, int minute){
         List<Error> errors = errorDao.getErrorList();
         List<Content> contents = new ArrayList<>();
 
         Statistic stats = errorStatistic.getObject();
 
-        long converter = 1000 * 24 * 60 * 60;
+        long converter = 1000 * hour * minute * 60;
         long prevTime = errors.get(0).getTime().getTime() / converter;
         long time = 0;
 
         for (Error error : errors){
             time = error.getTime().getTime() / converter;
 
-            Request req = requestDao.findById(logDao.findByErrorId(error.getErrorId()).getRequestId());
+            Request req = null;
+            try {
+                req = requestDao.findById(logDao.findByErrorId(error.getErrorId()).getRequestId());
+            } catch (NullPointerException e){
+                continue;
+            }
+
             Content errorContent = new ErrorContent(req.getContent(), error.getReason());
 
             boolean last = error.getErrorId() == errors.get(errors.size() - 1).getErrorId();

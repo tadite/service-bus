@@ -1,30 +1,35 @@
 {
-  "beach":[
+  "hotel":[
     {
-      "name":"coast-of-living"
+      "name":"hotels-find-hotels"
     }
   ],
-  "sport":[
+  "tripster":[
     {
       "name":"tripster-excursion"
-    },
-    {
-      "name":"tripster-excursion-details"
     }
   ],
-  "excursion":[
+  "weatlas":[
     {
       "name":"weatlas-get-excursions"
-    },
+    }
+  ],
+  "ticket":[
     {
-      "name":"weatlas-get-excursion-details"
-    },
+      "name":"air-tickets-search"
+    }
+  ],
+  "auto":[
     {
-      "name":"tripster-excursion"
-    },
+      "name":"auto-tickets-find-cars"
+    }
+  ],
+  "country":[
     {
-      "name":"tripster-excursion-details"
-    },
+      "name":"vk-get-countries"
+    }
+  ],
+  "costOfLiving":[
     {
       "name":"coast-of-living"
     }

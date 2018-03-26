@@ -48,8 +48,6 @@ export class MonitoringService {
             .map(result => result);
     }
 
-
-
     getErrorDay() {
         return this._http.get<any>('/statistics/errorPerDay')
             .map(result => result);
