@@ -665,9 +665,12 @@ mvn clean install spring-boot:run.
     - in_date (дата заселения в формате yyyy-mm-dd) - обязательный параметр;
     - out_date_slash (дата отъезда в формате dd/mm/yyyy) - обязательный параметр;
     - out_date (дата отъезда в формате yyyy-mm-dd) - обязательный параметр;
-    - adults (количество человек, максимум - 8) - обязательный параметр.
+    - adults (количество человек, максимум - 8) - обязательный параметр;
+    - sorting (сортировка по цене) - необязательный параметр. Принимает два значения:
+        - PRICE - сортировка по возрастанию (эконом);
+        - PRICE_HIGHEST_FIRST - сортировка по убыванию (премиум).
 
-    Пример: /hotels-find-hotels?city=Воронеж&in_date_slash=27/03/2018&in_date=2018-03-27&out_date_slash=03/04/2018&out_date=2018-04-03&adults=3
+    Пример: /hotels-find-hotels?city=Воронеж&in_date_slash=27/03/2018&in_date=2018-03-27&out_date_slash=03/04/2018&out_date=2018-04-03&adults=3&sorting=PRICE
 
     Пример:
     {
