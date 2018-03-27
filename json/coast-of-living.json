@@ -1,6 +1,6 @@
 {
   "type":"http",
-  "url":"https://wrapapi.com/use/edu-nc/numbeo/cost-of-living/0.0.6",
+  "url":"https://wrapapi.com/use/edu-nc/numbeo/cost-of-living/0.0.9",
   "parameters": {
     "key":"&wrapAPIKey=2tyFAvn04iUHwACpomShUXgU2LXYaCwq"
   },
