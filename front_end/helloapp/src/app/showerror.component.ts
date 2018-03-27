@@ -27,7 +27,7 @@ export class ShowErrorComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
         this.condition = true;
-        this._monitoring.getErrorDay()
+        this._monitoring.getErrorMinute()
             .subscribe(res => {
                     this.loading = false;
                     let number_errors = res.map(res => res.errorCount);
@@ -44,7 +44,7 @@ export class ShowErrorComponent implements OnInit {
                     let monitoringTimes = [];
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
-                        monitoringTimes.push(jsdate.toLocaleDateString());
+                        monitoringTimes.push(jsdate.toLocaleTimeString());
 
                         this.chart = new Chart('canvas', {
                             type: 'line',
@@ -60,6 +60,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -93,43 +94,43 @@ export class ShowErrorComponent implements OnInit {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'отели',
-                                        data: number_errors_hotel,
+                                        label: 'hotels-find-hotels',
+                                        data:number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
-                                        label: 'экскурсии Tripster',
+                                        label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
-                                        label: 'экскурсии Weatlas',
+                                        label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
-                                        label: 'билеты',
+                                        label: 'air-tickets-search',
                                         data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
-                                        label: 'аренда авто',
+                                        label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
-                                        label: 'страны, города',
+                                        label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
-                                        label: 'стоимость жизни',
+                                        label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
@@ -137,6 +138,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -227,43 +229,43 @@ export class ShowErrorComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'отели',
-                                    data: number_errors_hotel,
+                                    label: 'hotels-find-hotels',
+                                    data:number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
-                                    label: 'экскурсии Tripster',
+                                    label: 'tripster-excursion',
                                     data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
-                                    label: 'экскурсии Weatlas',
+                                    label: 'weatlas-get-excursions',
                                     data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
-                                    label: 'билеты',
+                                    label: 'air-tickets-search',
                                     data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
-                                    label: 'аренда авто',
+                                    label: 'auto-tickets-find-cars',
                                     data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
-                                    label: 'страны, города',
+                                    label: 'vk-get-countries-city',
                                     data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
-                                    label: 'стоимость жизни',
+                                    label: 'coast-of-living',
                                     data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
@@ -303,6 +305,8 @@ export class ShowErrorComponent implements OnInit {
                     });
                 })
     }
+
+
 
     showOverviewHour() {
         this.loading = true;
@@ -342,6 +346,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -375,43 +380,43 @@ export class ShowErrorComponent implements OnInit {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'отели',
-                                        data: number_errors_hotel,
+                                        label: 'hotels-find-hotels',
+                                        data:number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
-                                        label: 'экскурсии Tripster',
+                                        label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
-                                        label: 'экскурсии Weatlas',
+                                        label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
-                                        label: 'билеты',
+                                        label: 'air-tickets-search',
                                         data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
-                                        label: 'аренда авто',
+                                        label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
-                                        label: 'страны, города',
+                                        label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
-                                        label: 'стоимость жизни',
+                                        label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
@@ -419,6 +424,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -509,43 +515,43 @@ export class ShowErrorComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'отели',
-                                    data: number_errors_hotel,
+                                    label: 'hotels-find-hotels',
+                                    data:number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
-                                    label: 'экскурсии Tripster',
+                                    label: 'tripster-excursion',
                                     data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
-                                    label: 'экскурсии Weatlas',
+                                    label: 'weatlas-get-excursions',
                                     data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
-                                    label: 'билеты',
+                                    label: 'air-tickets-search',
                                     data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
-                                    label: 'аренда авто',
+                                    label: 'auto-tickets-find-cars',
                                     data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
-                                    label: 'страны, города',
+                                    label: 'vk-get-countries-city',
                                     data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
-                                    label: 'стоимость жизни',
+                                    label: 'coast-of-living',
                                     data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
@@ -586,10 +592,10 @@ export class ShowErrorComponent implements OnInit {
                 })
     }
 
-    showOverviewMinute() {
+    showOverviewDay() {
         this.loading = true;
         this.condition = true;
-        this._monitoring.getErrorMinute()
+        this._monitoring.getErrorDay()
             .subscribe(res => {
                     this.loading = false;
                     let number_errors = res.map(res => res.errorCount);
@@ -606,7 +612,7 @@ export class ShowErrorComponent implements OnInit {
                     let monitoringTimes = [];
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
-                        monitoringTimes.push(jsdate.toLocaleTimeString());
+                        monitoringTimes.push(jsdate.toLocaleDateString());
                         if(typeof this.chart !== "undefined") {
                             this.chart.destroy();
                         }
@@ -624,6 +630,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -657,43 +664,43 @@ export class ShowErrorComponent implements OnInit {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
-                                        label: 'отели',
-                                        data: number_errors_hotel,
+                                        label: 'hotels-find-hotels',
+                                        data:number_errors_hotel,
                                         borderColor: "#3cba9f",
                                         fill: false,
                                     },
                                     {
-                                        label: 'экскурсии Tripster',
+                                        label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         fill: false
                                     },
                                     {
-                                        label: 'экскурсии Weatlas',
+                                        label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         fill: false
                                     },
                                     {
-                                        label: 'билеты',
+                                        label: 'air-tickets-search',
                                         data: number_errors_ticket,
                                         borderColor: "#fcfa7e",
                                         fill: false
                                     },
                                     {
-                                        label: 'аренда авто',
+                                        label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
                                         fill: false
                                     },
                                     {
-                                        label: 'страны, города',
+                                        label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
                                         fill: false
                                     },
                                     {
-                                        label: 'стоимость жизни',
+                                        label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
                                         fill: false
@@ -701,6 +708,7 @@ export class ShowErrorComponent implements OnInit {
                                 ]
                             },
                             options: {
+                                events: [],
                                 tooltips: {
                                     enabled: false
                                 },
@@ -791,43 +799,43 @@ export class ShowErrorComponent implements OnInit {
                             labels: monitoringTimes,
                             datasets: [
                                 {
-                                    label: 'отели',
-                                    data: number_errors_hotel,
+                                    label: 'hotels-find-hotels',
+                                    data:number_errors_hotel,
                                     borderColor: "#3cba9f",
                                     fill: false,
                                 },
                                 {
-                                    label: 'экскурсии Tripster',
+                                    label: 'tripster-excursion',
                                     data: number_errors_excursionsTripster,
                                     borderColor: "#7cef8b",
                                     fill: false
                                 },
                                 {
-                                    label: 'экскурсии Weatlas',
+                                    label: 'weatlas-get-excursions',
                                     data: number_errors_excursionsWeatlas,
                                     borderColor: "#ffcc00",
                                     fill: false
                                 },
                                 {
-                                    label: 'билеты',
+                                    label: 'air-tickets-search',
                                     data: number_errors_ticket,
                                     borderColor: "#fcfa7e",
                                     fill: false
                                 },
                                 {
-                                    label: 'аренда авто',
+                                    label: 'auto-tickets-find-cars',
                                     data: number_errors_auto,
                                     borderColor: "#7efcce",
                                     fill: false
                                 },
                                 {
-                                    label: 'страны, города',
+                                    label: 'vk-get-countries-city',
                                     data: number_errors_country,
                                     borderColor: "#3c4aba",
                                     fill: false
                                 },
                                 {
-                                    label: 'стоимость жизни',
+                                    label: 'coast-of-living',
                                     data: number_errors_coastLiving,
                                     borderColor: "#5bb5bf",
                                     fill: false
@@ -868,6 +876,11 @@ export class ShowErrorComponent implements OnInit {
                 })
     }
 
+    chartClear(){
+        if(typeof this.chart !== "undefined") {
+            this.chart.destroy();
+        }
+    }
 
     exitMonitoring() {
         this.cookie.deleteAll();
