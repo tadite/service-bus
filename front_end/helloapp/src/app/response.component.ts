@@ -52,8 +52,7 @@ export class ResponseComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleTimeString());
-
-                        this.chart = new Chart('canvas', {
+                        /*this.chart = new Chart('canvas', {
                             type: 'line',
                             data: {
                                 labels: monitoringTimes,
@@ -130,8 +129,89 @@ export class ResponseComponent implements OnInit {
                                     }],
                                 }
                             }
+                        });*/
+                        this.chart = new Chart('canvas', {
+                            type: 'bar',
+                            data: {
+                                labels: monitoringTimes,
+                                datasets: [
+                                    {
+                                        label: 'hotels-find-hotels',
+                                        data: time_responses_hotel,
+                                        backgroundColor: "#3cba9f",
+                                        borderColor: "#3cba9f",
+
+                                    },
+                                    {
+                                        label: 'tripster-excursion',
+                                        data: time_responses_excursionsTripster,
+                                        borderColor: "#7cef8b",
+                                        backgroundColor: "#7cef8b",
+                                    },
+                                    {
+                                        label: 'weatlas-get-excursions',
+                                        data: time_responses_excursionsWeatlas,
+                                        borderColor: "#ffcc00",
+                                        backgroundColor: "#ffcc00",
+                                    },
+                                    {
+                                        label: 'air-tickets-search',
+                                        data: time_responses_ticket,
+                                        borderColor: "#fcfa7e",
+                                        backgroundColor: "#fcfa7e",
+
+                                    },
+                                    {
+                                        label: 'auto-tickets-find-cars',
+                                        data: time_responses_auto,
+                                        borderColor: "#7efcce",
+                                        backgroundColor: "#3cba9f",
+                                    },
+                                    {
+                                        label: 'vk-get-countries-city',
+                                        data: time_responses_country,
+                                        borderColor: "#3c4aba",
+                                        backgroundColor: "#3c4aba",
+                                    },
+                                    {
+                                        label: 'coast-of-living',
+                                        data: time_responses_coastLiving,
+                                        borderColor: "#5bb5bf",
+                                        backgroundColor: "#5bb5bf",
+                                    },
+                                ]
+                            },
+                            options: {
+                                events: [],
+                                title: {
+                                    display: true,
+                                    fontSize: 20,
+                                    padding: 20,
+                                    text: 'Среднее время ответов по интеграциям'
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                },
+
+                                scales: {
+                                    xAxes: [{
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
+                                    }],
+                                    yAxes: [{
+                                        display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: "Среднее время"}
+                                    }],
+                                }
+                            }
                         });
-                        this.chart = new Chart('canvas2', {
+                        /*this.chart = new Chart('canvas2', {
                             type: 'line',
                             data: {
                                 labels: monitoringTimes,
@@ -205,6 +285,87 @@ export class ResponseComponent implements OnInit {
                                             display: true,
                                             labelString: "Количество знаков"
                                         }
+                                    }],
+                                }
+                            }
+                        });*/
+                        this.chart = new Chart('canvas2', {
+                            type: 'bar',
+                            data: {
+                                labels: monitoringTimes,
+                                datasets: [
+                                    {
+                                        label: 'hotels-find-hotels',
+                                        data: average_message_size_hotel,
+                                        backgroundColor: "#3cba9f",
+                                        borderColor: "#3cba9f",
+
+                                    },
+                                    {
+                                        label: 'tripster-excursion',
+                                        data: average_message_size_excursionsTripster,
+                                        borderColor: "#7cef8b",
+                                        backgroundColor: "#7cef8b",
+                                    },
+                                    {
+                                        label: 'weatlas-get-excursions',
+                                        data: average_message_size_excursionsWeatlas,
+                                        borderColor: "#ffcc00",
+                                        backgroundColor: "#ffcc00",
+                                    },
+                                    {
+                                        label: 'air-tickets-search',
+                                        data: average_message_size_ticket,
+                                        borderColor: "#fcfa7e",
+                                        backgroundColor: "#fcfa7e",
+
+                                    },
+                                    {
+                                        label: 'auto-tickets-find-cars',
+                                        data: average_message_size_auto,
+                                        borderColor: "#7efcce",
+                                        backgroundColor: "#3cba9f",
+                                    },
+                                    {
+                                        label: 'vk-get-countries-city',
+                                        data: average_message_size_country,
+                                        borderColor: "#3c4aba",
+                                        backgroundColor: "#3c4aba",
+                                    },
+                                    {
+                                        label: 'coast-of-living',
+                                        data: average_message_size_coastLiving,
+                                        borderColor: "#5bb5bf",
+                                        backgroundColor: "#5bb5bf",
+                                    },
+                                ]
+                            },
+                            options: {
+                                events: [],
+                                title: {
+                                    display: true,
+                                    fontSize: 20,
+                                    padding: 20,
+                                    text: 'Средний размер сообщений по интеграциям'
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                },
+
+                                scales: {
+                                    xAxes: [{
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
+                                    }],
+                                    yAxes: [{
+                                        display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: "Количество знаков"}
                                     }],
                                 }
                             }

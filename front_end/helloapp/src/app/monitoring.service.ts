@@ -62,4 +62,9 @@ export class MonitoringService {
             .map(result => result);
     }
 
+    getErrorLog(){
+        return this._http.get<any>('/statistics/errorLog')
+            .map(result => result);
+    }
+
 }

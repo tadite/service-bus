@@ -16,8 +16,10 @@
         <div class="row">
             <a *ngIf="condition">
                 <div class="btn-group">
-                    <ul id="main_nav">
-                        <li>
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2">
+                          <ul id="main_nav">
+                            <li>
                             <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenu" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-time"></span> Выбрать период
                                 <span class="caret"></span>
@@ -29,8 +31,43 @@
                                 <li class="divider"></li>
                                 <li><a (click)="showOverviewDay()" style="cursor: pointer; text-align: center">День</a></li>
                             </ul>
-                        </li>
-                    </ul>
+                            </li>
+                           </ul>
+                         </div>
+
+                    <div class="col-xs-7 col-md-7">
+                    <div class="form-group" style="margin-left: 130px; margin-top: 29px" >
+                        <button  type="button" class="btn btn-default" (click)="showErrorLog()">Лог ошибок</button>
+
+                        <app-dialog [(visible)]="showDialog">
+                            <h2>Лог ошибок</h2>
+                            <table class="table table-responsive table-hover table-condensed">
+                                <!--  <ngx-loading [show]="loading" [config]="{ backdropBackgroundColour: 'rgba(0,0,0,0)', backdropBorderRadius: '10px',
+                        primaryColour: 'rgb(161, 160, 160)', secondaryColour: 'rgb(161, 160, 160)', tertiaryColour: 'rgb(161, 160, 160)' }">
+                                </ngx-loading>-->
+
+                                <thead>
+                                <tr>
+                                    <td width="15%"> Name</td>
+                                    <td width="15%"> Date</td>
+                                    <td width="30%"> URL</td>
+                                    <td width="40%"> Description</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let error of errors">
+                                    <td>{{error.name}}</td>
+                                    <td>{{error.date}}</td>
+                                    <td>{{error.url}}</td>
+                                    <td>{{error.description}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button (click)="showDialog = !showDialog" class="btn" routerLinkActive="active" style="margin-left: 30%; margin-top:8px " >Вернуться к обзору</button>
+                        </app-dialog>
+                      </div>
+                     </div>
+                    </div>
                 </div>
             </a>
             <p *ngIf="!condition">

@@ -14,9 +14,10 @@ import {error} from "util";
 })
 
 export class ShowErrorComponent implements OnInit {
+    showDialog = false;
     public loading = false;
     condition: boolean = true;
-
+    errors: Array<Error>;
     chart: any = []; // This will hold our chart info
 
     constructor(private _monitoring: MonitoringService,
@@ -882,9 +883,33 @@ export class ShowErrorComponent implements OnInit {
         }
     }
 
-    exitMonitoring() {
+    showErrorLog(){
+    this.showDialog = true;
+        this.loading = true;
+        this._monitoring.getErrorLog().subscribe((data: Error[]) => {
+                        this.loading = false;
+                        this.errors = data;
+                        console.log(this.errors);
+                    },
+                    error => {console.log(error); }
+                );
+            }
+
+
+        exitMonitoring() {
         this.cookie.deleteAll();
         this.router.navigate(['/']);
     }
+
+}
+
+
+export class Error{
+    constructor(
+        public time: string,
+        public name: string,
+        public url: string,
+        public description: string,
+        ) { }
 
 }
