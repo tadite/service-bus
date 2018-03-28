@@ -17,16 +17,34 @@
   "ticket":[
     {
       "name":"air-tickets-search"
+    },
+    {
+      "name":"air-tickets-get-id"
     }
   ],
   "auto":[
     {
       "name":"auto-tickets-find-cars"
+    },
+    {
+      "name":"auto-tickets-get-id"
     }
   ],
   "country":[
     {
       "name":"vk-get-countries"
+    },
+    {
+      "name":"vk-get-cities-by-country"
+    },
+    {
+      "name":"vk-get-cities-by-country-and-query"
+    },
+    {
+      "name":"vk-get-cityName-by-cityId"
+    },
+    {
+      "name":"vk-get-countryName-by-countryId"
     }
   ],
   "costOfLiving":[

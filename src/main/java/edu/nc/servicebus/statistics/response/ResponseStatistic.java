@@ -54,37 +54,37 @@ public class ResponseStatistic implements Statistic{
         for (Content content : contents){
             if (jsonCategories.checkEndpoint("hotel", content.getEndpoint())){
                 hotelCount++;
-                hotelCount += content.getTime() / 1000;
+                hotelCount += content.getTime();
                 hotelSize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("tripster", content.getEndpoint())){
                 tripsterCount++;
-                tripsterTime += content.getTime() / 1000;
+                tripsterTime += content.getTime();
                 tripsterSize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("weatlas", content.getEndpoint())){
                 weatlasCount++;
-                weatlasTime += content.getTime() / 1000;
+                weatlasTime += content.getTime();
                 weatlasSize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("ticket", content.getEndpoint())){
                 ticketCount++;
-                ticketTime += content.getTime() / 1000;
+                ticketTime += content.getTime();
                 ticketSize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("auto", content.getEndpoint())){
                 autoCount++;
-                autoTime += content.getTime() / 1000;
+                autoTime += content.getTime();
                 autoSize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("country", content.getEndpoint())){
                 countryCount++;
-                countryTime += content.getTime() / 1000;
+                countryTime += content.getTime();
                 countrySize += content.getContent().length();
             }
             if (jsonCategories.checkEndpoint("costOfLiving", content.getEndpoint())){
                 costLivingCount++;
-                costLivingTime += content.getTime() / 1000;
+                costLivingTime += content.getTime();
                 costLivingSize += content.getContent().length();
             }
         }

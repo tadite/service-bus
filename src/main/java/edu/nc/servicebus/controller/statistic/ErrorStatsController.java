@@ -9,6 +9,7 @@ import edu.nc.servicebus.statistics.Content;
 import edu.nc.servicebus.statistics.Statistic;
 import edu.nc.servicebus.statistics.StatsData;
 import edu.nc.servicebus.statistics.error.ErrorContent;
+import edu.nc.servicebus.statistics.error.ErrorDto;
 import edu.nc.servicebus.statistics.error.ErrorStatistic;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,11 @@ public class ErrorStatsController {
         return ResponseEntity.ok(getErrorDataList(1, 1));
     }
 
+    @RequestMapping("/errorLog")
+    public ResponseEntity errorLog(){
+        return ResponseEntity.ok(getErrorLog());
+    }
+
     private List<StatsData> getErrorDataList(int hour, int minute){
         List<Error> errors = errorDao.getErrorList();
         List<Content> contents = new ArrayList<>();
@@ -91,5 +97,24 @@ public class ErrorStatsController {
         }
 
         return stats.getDataList();
+    }
+
+    private List<ErrorDto> getErrorLog(){
+        List<Error> errors = errorDao.getErrorList();
+        List<ErrorDto> errorLogs = new ArrayList<>();
+
+        for (Error error: errors){
+            Request req = null;
+            try {
+                req = requestDao.findById(logDao.findByErrorId(error.getErrorId()).getRequestId());
+            } catch (NullPointerException e){
+                continue;
+            }
+
+            String name = req.getContent().substring(0, req.getContent().indexOf('?'));
+            errorLogs.add(new ErrorDto(name, error.getTime().toString(), req.getContent(), error.getReason()));
+        }
+
+        return errorLogs;
     }
 }
