@@ -62,9 +62,6 @@ export class ShowErrorComponent implements OnInit {
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -98,51 +95,48 @@ export class ShowErrorComponent implements OnInit {
                                         label: 'hotels-find-hotels',
                                         data:number_errors_hotel,
                                         borderColor: "#3cba9f",
-                                        fill: false,
+                                        backgroundColor: "#3cba9f"
                                     },
                                     {
                                         label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b"
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00"
                                     },
                                     {
                                         label: 'air-tickets-search',
                                         data: number_errors_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce"
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba"
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf"
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -348,9 +342,6 @@ export class ShowErrorComponent implements OnInit {
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -384,51 +375,48 @@ export class ShowErrorComponent implements OnInit {
                                         label: 'hotels-find-hotels',
                                         data:number_errors_hotel,
                                         borderColor: "#3cba9f",
-                                        fill: false,
+                                        backgroundColor: "#3cba9f"
                                     },
                                     {
                                         label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b"
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00"
                                     },
                                     {
                                         label: 'air-tickets-search',
                                         data: number_errors_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce"
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba"
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf"
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -632,9 +620,6 @@ export class ShowErrorComponent implements OnInit {
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -668,51 +653,48 @@ export class ShowErrorComponent implements OnInit {
                                         label: 'hotels-find-hotels',
                                         data:number_errors_hotel,
                                         borderColor: "#3cba9f",
-                                        fill: false,
+                                        backgroundColor: "#3cba9f"
                                     },
                                     {
                                         label: 'tripster-excursion',
                                         data: number_errors_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b"
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
                                         data: number_errors_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00"
                                     },
                                     {
                                         label: 'air-tickets-search',
                                         data: number_errors_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: number_errors_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce"
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: number_errors_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba"
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: number_errors_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf"
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,

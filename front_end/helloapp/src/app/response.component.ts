@@ -157,15 +157,14 @@ export class ResponseComponent implements OnInit {
                                     {
                                         label: 'air-tickets-search',
                                         data: time_responses_ticket,
-                                        borderColor: "#fcfa7e",
-                                        backgroundColor: "#fcfa7e",
-
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: time_responses_auto,
                                         borderColor: "#7efcce",
-                                        backgroundColor: "#3cba9f",
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
@@ -206,7 +205,7 @@ export class ResponseComponent implements OnInit {
                                         },
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Среднее время"}
+                                            labelString: "Среднее время, мс"}
                                     }],
                                 }
                             }
@@ -303,28 +302,27 @@ export class ResponseComponent implements OnInit {
                                     },
                                     {
                                         label: 'tripster-excursion',
-                                        data: average_message_size_excursionsTripster,
+                                        data: time_responses_excursionsTripster,
                                         borderColor: "#7cef8b",
                                         backgroundColor: "#7cef8b",
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
-                                        data: average_message_size_excursionsWeatlas,
+                                        data: time_responses_excursionsWeatlas,
                                         borderColor: "#ffcc00",
                                         backgroundColor: "#ffcc00",
                                     },
                                     {
                                         label: 'air-tickets-search',
-                                        data: average_message_size_ticket,
-                                        borderColor: "#fcfa7e",
-                                        backgroundColor: "#fcfa7e",
-
+                                        data: time_responses_ticket,
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: average_message_size_auto,
                                         borderColor: "#7efcce",
-                                        backgroundColor: "#3cba9f",
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
@@ -464,7 +462,7 @@ export class ResponseComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Среднее время ответа в секундах"
+                                        labelString: "Среднее время ответа"
                                     }
                                 }],
                             }
@@ -588,59 +586,57 @@ export class ResponseComponent implements OnInit {
                             this.chart.destroy();
                         }
                         this.chart = new Chart('canvas', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'hotels-find-hotels',
                                         data: time_responses_hotel,
+                                        backgroundColor: "#3cba9f",
                                         borderColor: "#3cba9f",
-                                        fill: false,
+
                                     },
                                     {
                                         label: 'tripster-excursion',
                                         data: time_responses_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b",
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
                                         data: time_responses_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00",
                                     },
                                     {
                                         label: 'air-tickets-search',
                                         data: time_responses_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: time_responses_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: time_responses_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba",
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: time_responses_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf",
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -651,74 +647,76 @@ export class ResponseComponent implements OnInit {
                                     display: true,
                                     position: 'top'
                                 },
+
                                 scales: {
                                     xAxes: [{
-                                        display: true
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Среднее время ответа в секундах"
-                                        }
+                                            labelString: "Среднее время, мс"}
                                     }],
                                 }
                             }
                         });
                         this.chart = new Chart('canvas2', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'hotels-find-hotels',
                                         data: average_message_size_hotel,
+                                        backgroundColor: "#3cba9f",
                                         borderColor: "#3cba9f",
-                                        fill: false,
+
                                     },
                                     {
                                         label: 'tripster-excursion',
-                                        data: average_message_size_excursionsTripster,
+                                        data: time_responses_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b",
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
-                                        data: average_message_size_excursionsWeatlas,
+                                        data: time_responses_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00",
                                     },
                                     {
                                         label: 'air-tickets-search',
-                                        data: average_message_size_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        data: time_responses_ticket,
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: average_message_size_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: average_message_size_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba",
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: average_message_size_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf",
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -729,16 +727,20 @@ export class ResponseComponent implements OnInit {
                                     display: true,
                                     position: 'top'
                                 },
+
                                 scales: {
                                     xAxes: [{
-                                        display: true
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Количество знаков"
-                                        }
+                                            labelString: "Количество знаков"}
                                     }],
                                 }
                             }
@@ -837,7 +839,7 @@ export class ResponseComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Среднее время ответа в секундах"
+                                        labelString: "Среднее время ответа"
                                     }
                                 }],
                             }
@@ -959,59 +961,57 @@ export class ResponseComponent implements OnInit {
                             this.chart.destroy();
                         }
                         this.chart = new Chart('canvas', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'hotels-find-hotels',
                                         data: time_responses_hotel,
+                                        backgroundColor: "#3cba9f",
                                         borderColor: "#3cba9f",
-                                        fill: false,
+
                                     },
                                     {
                                         label: 'tripster-excursion',
                                         data: time_responses_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b",
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
                                         data: time_responses_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00",
                                     },
                                     {
                                         label: 'air-tickets-search',
                                         data: time_responses_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: time_responses_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: time_responses_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba",
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: time_responses_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf",
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -1022,74 +1022,76 @@ export class ResponseComponent implements OnInit {
                                     display: true,
                                     position: 'top'
                                 },
+
                                 scales: {
                                     xAxes: [{
-                                        display: true
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Среднее время ответа в секундах"
-                                        }
+                                            labelString: "Среднее время, мс"}
                                     }],
                                 }
                             }
                         });
                         this.chart = new Chart('canvas2', {
-                            type: 'line',
+                            type: 'bar',
                             data: {
                                 labels: monitoringTimes,
                                 datasets: [
                                     {
                                         label: 'hotels-find-hotels',
                                         data: average_message_size_hotel,
+                                        backgroundColor: "#3cba9f",
                                         borderColor: "#3cba9f",
-                                        fill: false,
+
                                     },
                                     {
                                         label: 'tripster-excursion',
-                                        data: average_message_size_excursionsTripster,
+                                        data: time_responses_excursionsTripster,
                                         borderColor: "#7cef8b",
-                                        fill: false
+                                        backgroundColor: "#7cef8b",
                                     },
                                     {
                                         label: 'weatlas-get-excursions',
-                                        data: average_message_size_excursionsWeatlas,
+                                        data: time_responses_excursionsWeatlas,
                                         borderColor: "#ffcc00",
-                                        fill: false
+                                        backgroundColor: "#ffcc00",
                                     },
                                     {
                                         label: 'air-tickets-search',
-                                        data: average_message_size_ticket,
-                                        borderColor: "#fcfa7e",
-                                        fill: false
+                                        data: time_responses_ticket,
+                                        borderColor: "#ef8426",
+                                        backgroundColor: "#ef8426"
                                     },
                                     {
                                         label: 'auto-tickets-find-cars',
                                         data: average_message_size_auto,
                                         borderColor: "#7efcce",
-                                        fill: false
+                                        backgroundColor: "#7efcce",
                                     },
                                     {
                                         label: 'vk-get-countries-city',
                                         data: average_message_size_country,
                                         borderColor: "#3c4aba",
-                                        fill: false
+                                        backgroundColor: "#3c4aba",
                                     },
                                     {
                                         label: 'coast-of-living',
                                         data: average_message_size_coastLiving,
                                         borderColor: "#5bb5bf",
-                                        fill: false
+                                        backgroundColor: "#5bb5bf",
                                     },
                                 ]
                             },
                             options: {
                                 events: [],
-                                tooltips: {
-                                    enabled: false
-                                },
                                 title: {
                                     display: true,
                                     fontSize: 20,
@@ -1100,16 +1102,20 @@ export class ResponseComponent implements OnInit {
                                     display: true,
                                     position: 'top'
                                 },
+
                                 scales: {
                                     xAxes: [{
-                                        display: true
+                                        barPercentage: 1,
+                                        categoryPercentage: 0.6
                                     }],
                                     yAxes: [{
                                         display: true,
+                                        ticks: {
+                                            min: 0
+                                        },
                                         scaleLabel: {
                                             display: true,
-                                            labelString: "Количество знаков"
-                                        }
+                                            labelString: "Количество знаков"}
                                     }],
                                 }
                             }
@@ -1208,7 +1214,7 @@ export class ResponseComponent implements OnInit {
                                     },
                                     scaleLabel: {
                                         display: true,
-                                        labelString: "Среднее время ответа в секундах"
+                                        labelString: "Среднее время ответа"
                                     }
                                 }],
                             }
