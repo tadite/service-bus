@@ -43,3 +43,9 @@
 #main_nav li:hover ul {
     display: block;
 }
+
+.span3 {
+    max-height: 450px !important;
+    overflow: scroll;
+    table-layout: fixed;
+}​
