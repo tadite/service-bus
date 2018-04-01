@@ -52,9 +52,7 @@ export class ResponseComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleTimeString());
-                        if(typeof this.chart !== "undefined") {
-                            this.chart.destroy();
-                        }
+
                         this.chart = new Chart('canvas', {
                             type: 'bar',
                             data: {
@@ -427,6 +425,9 @@ export class ResponseComponent implements OnInit {
                     alltimes.forEach((res) => {
                         let jsdate = new Date(res);
                         monitoringTimes.push(jsdate.toLocaleTimeString());
+                        if(typeof this.chart !== "undefined") {
+                            this.chart.destroy();
+                        }
                         this.chart = new Chart('canvas', {
                             type: 'bar',
                             data: {
