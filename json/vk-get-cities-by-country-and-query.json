@@ -2,7 +2,7 @@
   "type":"http",
   "url":"https://api.vk.com/method/database.getCities",
   "parameters":{
-    "method":"&v=3.0"
+    "method":"&v=3.0&access_token=29b41daf29b41daf29b41dafdb29ebeae4229b429b41daf739d55936c18ba3a66ffcb52"
   },
   "expression":"$.response[*]"
 }
